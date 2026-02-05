@@ -4,13 +4,13 @@ This is a repository to support the publication **An Automated Computational Wor
 
 ## Overview
 
-This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TS). The core class, `AtropRun` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
+This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs), allowing users to predict the associated rotational barrier and atropisomer class as per the [LaPlante class definitions](https://pubs.acs.org/doi/10.1021/jm200584g). The core class, `AtropRun` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
 
  - **Substructure detection**: Screens the input structure for predefined SMARTS motifs associated with atropisomerism to identify rotational bonds.
- - **Steric filtering**: Evaluates the local steric environment of rotational bonds to capture sufficiently hindered systems.
- - **GIC scan setup**: Constructs Generalized Internal Coordinate (GIC) dihedral scans to probe the rotational axis in both directions.
+ - **Steric filtering**: Evaluates the local steric environment of rotational bonds to capture hindered systems.
+ - **GIC scan setup**: Constructs dihedral scans to probe the rotational axis in both directions.
  - **Scan parsing**: Parses Gaussian scan logs to identify local maximum corresponding to TS candidates.
- - **TS validation**: Parses Gaussian TS optimization logs to confirms that dihedrals remain consistent with the intended rotational mode.
+ - **TS validation**: Parses Gaussian TS optimization logs to confirm that dihedrals remain consistent with the intended rotational mode.
  - **Barrier correction**: Applies linear corrections derived from experimental benchmark regressions.
  - **Visualization**: Visualizes identified atropisomeric bonds with the calculated barrier.
 

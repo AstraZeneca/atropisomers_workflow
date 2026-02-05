@@ -13,6 +13,7 @@ This repository contains an atropisomer risk assessment workflow that identifies
  - **TS validation**: Parses Gaussian TS optimization logs to confirm that dihedrals remain consistent with the intended rotational mode.
  - **Barrier correction**: Applies linear corrections derived from experimental benchmark regressions.
  - **Visualization**: Visualizes identified atropisomeric bonds with the calculated barrier.
+ - **Interpretation**: TBC.
 
 A full, step-by-step interactive demonstration of the code is available in `demo.ipynb`, including a worked example and illustrations of applicable substructures.
 
@@ -43,3 +44,7 @@ To build the conda environment for the interactive notebooks:
  - Activate environment: `conda activate atropisomers`
  - Install pip requirements: `pip install -r requirements.txt`
  - Install cclib with conda: `conda install -c conda-forge openbabel cclib`
+
+### Use Interactive Demo
+
+Follow the steps in the interactive demonstration of the code in `demo.ipynb`.

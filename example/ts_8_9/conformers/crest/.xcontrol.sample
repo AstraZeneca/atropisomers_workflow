@@ -1,0 +1,7 @@
+$constrain
+  atoms: 1,7-9,11,16
+  force constant=5.0
+  reference=coord.ref
+$metadyn
+  atoms: 2-6,10,12-15,17-26
+$end

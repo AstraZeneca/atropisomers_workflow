@@ -1,0 +1,7 @@
+goodvibes==3.2
+ipykernel==6.29.5
+matplotlib==3.9.2
+nbformat==5.9.2
+numpy==1.26.4
+plotly==5.24.1
+rdkit==2024.3.2

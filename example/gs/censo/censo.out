@@ -1,0 +1,884 @@
+
+         ______________________________________________________________
+        |                                                              |
+        |                                                              |
+        |                   CENSO - Commandline ENSO                   |
+        |                           v 1.2.0                            |
+        |    energetic sorting of CREST Conformer Rotamer Ensembles    |
+        |                    University of Bonn, MCTC                  |
+        |                           Feb 2021                           |
+        |                 based on ENSO version 2.0.1                  |
+        |                     F. Bohle and S. Grimme                   |
+        |                                                              |
+        |______________________________________________________________|
+
+        Please cite: 
+        S. Grimme, F. Bohle, A. Hansen, P. Pracht, S. Spicher, and M. Stahn 
+        J. Phys. Chem. A 2021, 125, 19, 4039-4054.
+        DOI: https://doi.org/10.1021/acs.jpca.1c00971
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+DEBUG
+None
+None
+14
+
+----------------------------------------------------------------------------------------------------
+                                             PARAMETERS                                             
+----------------------------------------------------------------------------------------------------
+
+program call: /path/to/censo -inprc /path/to/.censorc -inp /path/to/crest_conformers.xyz --charge 0 --unpaired 0 --temperature 298.15 -P 16 -O 2
+The configuration file .censorc is read from /path/to.censorc.
+Reading conformer rotamer ensemble from: /path/to/crest_conformers.xyz.
+Reading file: censo_solvents.json
+
+Reading file: censo_orca_editable.dat
+
+
+--------------------------------------------------
+               CRE SORTING SETTINGS               
+--------------------------------------------------
+
+number of atoms in system:                                     26
+number of considered conformers:                               14
+number of all conformers from input:                           14
+charge:                                                        0
+unpaired:                                                      0
+solvent:                                                       gas
+temperature:                                                   298.15
+calculate mRRHO contribution:                                  on
+consider symmetry for mRRHO contribution:                      on
+cautious checking for error and failed calculations:           on
+checking the DFT-ensemble using CREST:                         off
+maxthreads:                                                    16
+omp:                                                           2
+automatically balance maxthreads and omp:                      off
+
+--------------------------------------------------
+          CRE CHEAP-PRESCREENING - PART0          
+--------------------------------------------------
+part0:                                                         on
+starting number of considered conformers:                      14
+program for part0:                                             tm
+functional for fast single-point:                              b97-d3(0)
+basis set for fast single-point:                               def2-SV(P)
+threshold g_thr(0) for sorting in part0:                       5.0
+
+short-notation:
+b97-d3(0)/def2-SV(P) // GFNn-xTB (Input geometry)
+
+--------------------------------------------------
+             CRE PRESCREENING - PART1             
+--------------------------------------------------
+part1:                                                         on
+program for part1:                                             tm
+functional for initial evaluation:                             r2scan-3c
+basis set for initial evaluation:                              def2-mTZVPP
+calculate mRRHO contribution:                                  on
+program for mRRHO contribution:                                xtb
+GFN version for mRRHO and/or GBSA_Gsolv:                       gfn2
+Apply constraint to input geometry during mRRHO calculation:   on
+evaluate at different temperatures:                            off
+threshold g_thr(1) and G_thr(1) for sorting in part1:          4.0
+
+short-notation:
+r2scan-3c + GmRRHO(GFN2) // GFNn-xTB (Input geometry)
+
+--------------------------------------------------
+             CRE OPTIMIZATION - PART2             
+--------------------------------------------------
+part2:                                                         on
+program:                                                       tm
+QM program employed only in the geometry opt.:                 tm
+functional for part2:                                          r2scan-3c
+basis set for part2:                                           def2-mTZVPP
+using xTB-optimizer for optimization:                          on
+using the new ensemble optimizer:                              on
+optimize all conformers below this G_thr(opt,2) threshold:     3.0
+spearmanthr:                                                   0.935
+optimization level in part2:                                   normal
+evaluate at different temperatures:                            off
+Boltzmann sum threshold G_thr(2) for sorting in part2:         99.0
+calculate mRRHO contribution:                                  on
+program for mRRHO contribution:                                xtb
+GFN version for mRRHO and/or GBSA_Gsolv:                       gfn2
+Apply constraint to input geometry during mRRHO calculation:   on
+
+short-notation:
+r2scan-3c + GmRRHO(GFN2) // r2scan-3c
+END of parameters
+
+
+------------------------------------------------------------
+               PATHS of external QM programs                
+------------------------------------------------------------
+
+The following program paths are used:
+    xTB:          /path/to/xtb
+    TURBOMOLE:    /path/to/turbomole
+
+    Using cefine from /path/to/cefine
+    PARNODES for TM or COSMO-RS calculation was set to 2
+
+----------------------------------------------------------------------------------------------------
+                            Processing data from previous run (enso.json)                           
+----------------------------------------------------------------------------------------------------
+
+INFORMATION: No restart information exists and is created during this run!
+
+
+----------------------------------------------------------------------------------------------------
+                                   CRE CHEAP-PRESCREENING - PART0                                   
+----------------------------------------------------------------------------------------------------
+
+program:                                                       tm
+functional for part0:                                          b97-d3(0)
+basis set for part0:                                           def2-SV(P)
+threshold g_thr(0):                                            5.0
+starting number of considered conformers:                      14
+temperature:                                                   298.15
+
+Calculating efficient gas-phase single-point energies:
+The efficient gas-phase single-point is calculated for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+Constructed folders!
+
+Starting 14 single-point calculations.
+Running single-point in CONF1/part0_sp    
+Running single-point in CONF2/part0_sp    
+Running single-point in CONF3/part0_sp    
+Running single-point in CONF4/part0_sp    
+Running single-point in CONF5/part0_sp    
+Running single-point in CONF6/part0_sp    
+Running single-point in CONF8/part0_sp    
+Running single-point in CONF9/part0_sp    
+Running single-point in CONF7/part0_sp    
+Running single-point in CONF10/part0_sp   
+Running single-point in CONF12/part0_sp   
+Running single-point in CONF13/part0_sp   
+Running single-point in CONF11/part0_sp   
+Running single-point in CONF14/part0_sp   
+Tasks completed!
+
+The efficient gas-phase single-point calculation was successful for  CONF1/part0_sp: E(DFT) = -775.09748919
+The efficient gas-phase single-point calculation was successful for  CONF2/part0_sp: E(DFT) = -775.09989575
+The efficient gas-phase single-point calculation was successful for  CONF3/part0_sp: E(DFT) = -775.09999667
+The efficient gas-phase single-point calculation was successful for  CONF4/part0_sp: E(DFT) = -775.10034077
+The efficient gas-phase single-point calculation was successful for  CONF5/part0_sp: E(DFT) = -775.09890458
+The efficient gas-phase single-point calculation was successful for  CONF6/part0_sp: E(DFT) = -775.09487765
+The efficient gas-phase single-point calculation was successful for  CONF7/part0_sp: E(DFT) = -775.09809517
+The efficient gas-phase single-point calculation was successful for  CONF8/part0_sp: E(DFT) = -775.09805684
+The efficient gas-phase single-point calculation was successful for  CONF9/part0_sp: E(DFT) = -775.09790715
+The efficient gas-phase single-point calculation was successful for CONF10/part0_sp: E(DFT) = -775.09542909
+The efficient gas-phase single-point calculation was successful for CONF11/part0_sp: E(DFT) = -775.09595943
+The efficient gas-phase single-point calculation was successful for CONF12/part0_sp: E(DFT) = -775.09412881
+The efficient gas-phase single-point calculation was successful for CONF13/part0_sp: E(DFT) = -775.09431379
+The efficient gas-phase single-point calculation was successful for CONF14/part0_sp: E(DFT) = -775.09445056
+
+----------------------------------------------------------------------------------------------------
+                   Removing high lying conformers by improved energy description                    
+----------------------------------------------------------------------------------------------------
+
+ CONF#  G(GFNn-xTB) ΔG(GFNn-xTB)               E [Eh]   Gsolv [Eh]         gtot    ΔE(DFT)     ΔGsolv      Δgtot
+               [Eh]   [kcal/mol] b97-d3(0)/def2-SV(P)    gas-phase         [Eh] [kcal/mol] [kcal/mol] [kcal/mol]
+                                                                                                                
+CONF1   -46.4680957         0.00         -775.0974892    0.0000000 -775.0974892       1.79       0.00       1.79
+CONF2   -46.4676537         0.28         -775.0998957    0.0000000 -775.0998957       0.28       0.00       0.28
+CONF3   -46.4675928         0.32         -775.0999967    0.0000000 -775.0999967       0.22       0.00       0.22
+CONF4   -46.4675877         0.32         -775.1003408    0.0000000 -775.1003408       0.00       0.00       0.00     <------
+CONF5   -46.4674660         0.40         -775.0989046    0.0000000 -775.0989046       0.90       0.00       0.90
+CONF6   -46.4671401         0.60         -775.0948777    0.0000000 -775.0948777       3.43       0.00       3.43
+CONF7   -46.4670781         0.64         -775.0980952    0.0000000 -775.0980952       1.41       0.00       1.41
+CONF8   -46.4670508         0.66         -775.0980568    0.0000000 -775.0980568       1.43       0.00       1.43
+CONF9   -46.4668176         0.80         -775.0979072    0.0000000 -775.0979072       1.53       0.00       1.53
+CONF10  -46.4664752         1.02         -775.0954291    0.0000000 -775.0954291       3.08       0.00       3.08
+CONF11  -46.4664512         1.03         -775.0959594    0.0000000 -775.0959594       2.75       0.00       2.75
+CONF12  -46.4658971         1.38         -775.0941288    0.0000000 -775.0941288       3.90       0.00       3.90
+CONF13  -46.4657750         1.46         -775.0943138    0.0000000 -775.0943138       3.78       0.00       3.78
+CONF14  -46.4656130         1.56         -775.0944506    0.0000000 -775.0944506       3.70       0.00       3.70
+----------------------------------------------------------------------------------------------------
+
+Number of conformers observed within the following Δg windows:
+Δg [kcal/mol]  #CONF   sum(Boltzmann_weights)
+---------------------------------------------
+   0 - 0.5         3          0.81
+   0 - 1.0         4          0.88
+   0 - 1.5         6          0.95
+   0 - 2.0         8          0.99
+   0 - 2.5         8          0.99
+   0 - 3.0         9          1.00
+   0 - 3.5        11          1.00
+   0 - 4.0        14          1.00
+---------------------------------------------
+
+All relative (free) energies are below the initial g_thr(0) threshold of 5.0 kcal/mol.
+All conformers are considered further.
+
+Calculating Boltzmann averaged (free) energy of ensemble on input geometries (not DFT optimized)!
+
+temperature /K:   avE(T) /a.u.   avG(T) /a.u. 
+----------------------------------------------------------------------------------------------------
+    298.15        -775.0997539    -775.0997539     <<==part0==
+----------------------------------------------------------------------------------------------------
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END of Part0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Ran part0 in 6.2089 seconds
+
+----------------------------------------------------------------------------------------------------
+                                      CRE PRESCREENING - PART1                                      
+----------------------------------------------------------------------------------------------------
+
+program:                                                       tm
+functional for part1 and 2:                                    r2scan-3c
+basis set for part1 and 2:                                     def2-mTZVPP
+threshold g_thr(1) and G_thr(1):                               4.0
+starting number of considered conformers:                      14
+calculate mRRHO contribution:                                  on
+program for mRRHO contribution:                                xtb
+GFN version for mRRHO and/or GBSA_Gsolv:                       gfn2
+Apply constraint to input geometry during mRRHO calculation:   on
+temperature:                                                   298.15
+
+Calculating single-point energies:
+The prescreening_single-point is calculated for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+Constructed folders!
+
+Starting 14 single-point calculations.
+Running single-point in CONF1/r2scan-3c   
+Running single-point in CONF2/r2scan-3c   
+Running single-point in CONF3/r2scan-3c   
+Running single-point in CONF5/r2scan-3c   
+Running single-point in CONF4/r2scan-3c   
+Running single-point in CONF6/r2scan-3c   
+Running single-point in CONF7/r2scan-3c   
+Running single-point in CONF8/r2scan-3c   
+Running single-point in CONF9/r2scan-3c   
+Running single-point in CONF10/r2scan-3c  
+Running single-point in CONF12/r2scan-3c  
+Running single-point in CONF11/r2scan-3c  
+Running single-point in CONF14/r2scan-3c  
+Running single-point in CONF13/r2scan-3c  
+Tasks completed!
+
+prescreening_single-point calculation was successful for  CONF1/r2scan-3c: -776.20198348
+prescreening_single-point calculation was successful for  CONF2/r2scan-3c: -776.20187805
+prescreening_single-point calculation was successful for  CONF3/r2scan-3c: -776.20188936
+prescreening_single-point calculation was successful for  CONF4/r2scan-3c: -776.20212800
+prescreening_single-point calculation was successful for  CONF5/r2scan-3c: -776.20192009
+prescreening_single-point calculation was successful for  CONF6/r2scan-3c: -776.19832482
+prescreening_single-point calculation was successful for  CONF7/r2scan-3c: -776.20120142
+prescreening_single-point calculation was successful for  CONF8/r2scan-3c: -776.20121102
+prescreening_single-point calculation was successful for  CONF9/r2scan-3c: -776.20062242
+prescreening_single-point calculation was successful for CONF10/r2scan-3c: -776.19803057
+prescreening_single-point calculation was successful for CONF11/r2scan-3c: -776.19777146
+prescreening_single-point calculation was successful for CONF12/r2scan-3c: -776.19675967
+prescreening_single-point calculation was successful for CONF13/r2scan-3c: -776.19651045
+prescreening_single-point calculation was successful for CONF14/r2scan-3c: -776.19648888
+
+--------------------------------------------------
+          Removing high lying conformers          
+--------------------------------------------------
+
+ CONF#  E(GFNn-xTB) ΔE(GFNn-xTB)       E [Eh]         Etot      ΔEtot
+             [a.u.]   [kcal/mol]    r2scan-3c         [Eh] [kcal/mol]
+                                                                     
+CONF1   -46.4680957         0.00 -776.2019835 -776.2019835       0.09
+CONF2   -46.4676537         0.28 -776.2018780 -776.2018780       0.16
+CONF3   -46.4675928         0.32 -776.2018894 -776.2018894       0.15
+CONF4   -46.4675877         0.32 -776.2021280 -776.2021280       0.00     <------
+CONF5   -46.4674660         0.40 -776.2019201 -776.2019201       0.13
+CONF6   -46.4671401         0.60 -776.1983248 -776.1983248       2.39
+CONF7   -46.4670781         0.64 -776.2012014 -776.2012014       0.58
+CONF8   -46.4670508         0.66 -776.2012110 -776.2012110       0.58
+CONF9   -46.4668176         0.80 -776.2006224 -776.2006224       0.94
+CONF10  -46.4664752         1.02 -776.1980306 -776.1980306       2.57
+CONF11  -46.4664512         1.03 -776.1977715 -776.1977715       2.73
+CONF12  -46.4658971         1.38 -776.1967597 -776.1967597       3.37
+CONF13  -46.4657750         1.46 -776.1965105 -776.1965105       3.53
+CONF14  -46.4656130         1.56 -776.1964889 -776.1964889       3.54
+
+All relative (free) energies are below the g_thr(1) threshold of 4.0 kcal/mol.
+All conformers are considered further.
+--------------------------------------------------
+
+Calculating prescreening G_mRRHO!
+The prescreening G_mRRHO calculation is now performed for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+Constructed folders!
+
+Starting 14 G_RRHO calculations.
+Running GFN2-xTB mRRHO in CONF1/rrho_part1
+Running GFN2-xTB mRRHO in CONF2/rrho_part1
+Running GFN2-xTB mRRHO in CONF3/rrho_part1
+Running GFN2-xTB mRRHO in CONF4/rrho_part1
+Running GFN2-xTB mRRHO in CONF5/rrho_part1
+Running GFN2-xTB mRRHO in CONF6/rrho_part1
+Running GFN2-xTB mRRHO in CONF7/rrho_part1
+Running GFN2-xTB mRRHO in CONF8/rrho_part1
+Running GFN2-xTB mRRHO in CONF9/rrho_part1
+Running GFN2-xTB mRRHO in CONF10/rrho_part1
+Running GFN2-xTB mRRHO in CONF11/rrho_part1
+Running GFN2-xTB mRRHO in CONF12/rrho_part1
+Running GFN2-xTB mRRHO in CONF13/rrho_part1
+Running GFN2-xTB mRRHO in CONF14/rrho_part1
+Tasks completed!
+
+The prescreening G_mRRHO run @ c1 was successful for  CONF1/rrho_part1: 0.15051386 S_rot(sym)= 0.0000000 using= 0.1505139
+The prescreening G_mRRHO run @ c1 was successful for  CONF2/rrho_part1: 0.15009948 S_rot(sym)= 0.0000000 using= 0.1500995
+The prescreening G_mRRHO run @ c1 was successful for  CONF3/rrho_part1: 0.14997695 S_rot(sym)= 0.0000000 using= 0.1499770
+The prescreening G_mRRHO run @ c1 was successful for  CONF4/rrho_part1: 0.15004439 S_rot(sym)= 0.0000000 using= 0.1500444
+The prescreening G_mRRHO run @ c1 was successful for  CONF5/rrho_part1: 0.15018908 S_rot(sym)= 0.0000000 using= 0.1501891
+The prescreening G_mRRHO run @ c1 was successful for  CONF6/rrho_part1: 0.15062753 S_rot(sym)= 0.0000000 using= 0.1506275
+The prescreening G_mRRHO run @ c1 was successful for  CONF7/rrho_part1: 0.14987931 S_rot(sym)= 0.0000000 using= 0.1498793
+The prescreening G_mRRHO run @ c1 was successful for  CONF8/rrho_part1: 0.14981111 S_rot(sym)= 0.0000000 using= 0.1498111
+The prescreening G_mRRHO run @ c1 was successful for  CONF9/rrho_part1: 0.15038080 S_rot(sym)= 0.0000000 using= 0.1503808
+The prescreening G_mRRHO run @ c1 was successful for CONF10/rrho_part1: 0.15027499 S_rot(sym)= 0.0000000 using= 0.1502750
+The prescreening G_mRRHO run @ c1 was successful for CONF11/rrho_part1: 0.14958797 S_rot(sym)= 0.0000000 using= 0.1495880
+The prescreening G_mRRHO run @ c1 was successful for CONF12/rrho_part1: 0.14974730 S_rot(sym)= 0.0000000 using= 0.1497473
+The prescreening G_mRRHO run @ c1 was successful for CONF13/rrho_part1: 0.14970127 S_rot(sym)= 0.0000000 using= 0.1497013
+The prescreening G_mRRHO run @ c1 was successful for CONF14/rrho_part1: 0.14962368 S_rot(sym)= 0.0000000 using= 0.1496237
+
+--------------------------------------------------
+         * Gibbs free energies of part1 *         
+--------------------------------------------------
+
+ CONF#  G(GFNn-xTB) ΔG(GFNn-xTB)       E [Eh]  GmRRHO [Eh]         Gtot      ΔGtot
+             [a.u.]   [kcal/mol]    r2scan-3c   GFN2-bhess         [Eh] [kcal/mol]
+                                                                                  
+CONF1   -46.3175818         0.02 -776.2019835    0.1505139 -776.0514696       0.39
+CONF2   -46.3175542         0.04 -776.2018780    0.1500995 -776.0517786       0.19
+CONF3   -46.3176158         0.00 -776.2018894    0.1499770 -776.0519124       0.11
+CONF4   -46.3175433         0.05 -776.2021280    0.1500444 -776.0520836       0.00     <------
+CONF5   -46.3172769         0.21 -776.2019201    0.1501891 -776.0517310       0.22
+CONF6   -46.3165125         0.69 -776.1983248    0.1506275 -776.0476973       2.75
+CONF7   -46.3171988         0.26 -776.2012014    0.1498793 -776.0513221       0.48
+CONF8   -46.3172397         0.24 -776.2012110    0.1498111 -776.0513999       0.43
+CONF9   -46.3164368         0.74 -776.2006224    0.1503808 -776.0502416       1.16
+CONF10  -46.3162002         0.89 -776.1980306    0.1502750 -776.0477556       2.72
+CONF11  -46.3168632         0.47 -776.1977715    0.1495880 -776.0481835       2.45
+CONF12  -46.3161498         0.92 -776.1967597    0.1497473 -776.0470124       3.18
+CONF13  -46.3160737         0.97 -776.1965105    0.1497013 -776.0468092       3.31
+CONF14  -46.3159893         1.02 -776.1964889    0.1496237 -776.0468652       3.27
+
+Number of conformers observed within the following ΔG windows:
+ΔG [kcal/mol]  #CONF   sum(Boltzmann_weights)
+---------------------------------------------
+   0 - 0.5         7          0.96
+   0 - 1.0         7          0.96
+   0 - 1.5         8          0.99
+   0 - 2.0         8          0.99
+   0 - 2.5         9          0.99
+   0 - 3.0        11          1.00
+   0 - 3.5        14          1.00
+---------------------------------------------
+
+Additional global 'fuzzy-threshold' based on the standard deviation of (G_mRRHO):
+Std_dev(G_mRRHO) = 0.208 kcal/mol
+Fuzzythreshold   = 0.194 kcal/mol
+Final sorting threshold G_thr(1) = 4.000 + 0.194 = 4.194 kcal/mol
+Spearman correlation coefficient between (E) and (E + mRRHO) = 0.938
+
+All relative (free) energies are below the initial G_thr(1) threshold of 4.0 kcal/mol.
+All conformers are considered further.
+
+Calculating Boltzmann averaged free energy of ensemble on input geometries (not DFT optimized)!
+
+temperature /K:   avE(T) /a.u. avGmRRHO(T) /a.u.   avG(T) /a.u. 
+----------------------------------------------------------------------------------------------------
+    298.15        -776.2017420        0.1500823   -776.0516596      <<==part1==
+----------------------------------------------------------------------------------------------------
+
+
+Calculating unbiased GFNn-xTB energy
+Constructed folders!
+
+Starting 14 xTB - single-point calculations.
+gfn2-xTB energy for CONF1/GFN_unbiased = -46.4680957
+gfn2-xTB energy for CONF2/GFN_unbiased = -46.4676537
+gfn2-xTB energy for CONF3/GFN_unbiased = -46.4675928
+gfn2-xTB energy for CONF4/GFN_unbiased = -46.4675877
+gfn2-xTB energy for CONF5/GFN_unbiased = -46.4674660
+gfn2-xTB energy for CONF6/GFN_unbiased = -46.4671401
+gfn2-xTB energy for CONF8/GFN_unbiased = -46.4670508
+gfn2-xTB energy for CONF7/GFN_unbiased = -46.4670781
+gfn2-xTB energy for CONF10/GFN_unbiased = -46.4664752
+gfn2-xTB energy for CONF9/GFN_unbiased = -46.4668176
+gfn2-xTB energy for CONF11/GFN_unbiased = -46.4664512
+gfn2-xTB energy for CONF13/GFN_unbiased = -46.4657750
+gfn2-xTB energy for CONF12/GFN_unbiased = -46.4658971
+gfn2-xTB energy for CONF14/GFN_unbiased = -46.4656130
+Tasks completed!
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END of Part1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Ran part1 in 35.1527 seconds
+
+----------------------------------------------------------------------------------------------------
+                                      CRE OPTIMIZATION - PART2                                      
+----------------------------------------------------------------------------------------------------
+
+program:                                                       tm
+QM program employed only in the geometry opt.:                 tm
+functional for part2:                                          r2scan-3c
+basis set for part2:                                           def2-mTZVPP
+using the xTB-optimizer for optimization:                      on
+using the new ensemble optimizer:                              on
+optimize all conformers below this G_thr(opt,2) threshold:     3.0
+Spearman threshold:                                            0.935
+number of optimization iterations:                             8
+radsize:                                                       10
+optimization level in part2:                                   normal
+temperature:                                                   298.15
+Boltzmann sum threshold G_thr(2) for sorting in part2:         99.0
+calculate mRRHO contribution:                                  on
+program for mRRHO contribution:                                xtb
+GFN version for mRRHO and/or GBSA_Gsolv:                       gfn2
+Apply constraint to input geometry during mRRHO calculation:   on
+
+Optimizing geometries at DFT level!
+The optimization is calculated for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+Constructed folders!
+
+Preparing 14 calculations.
+Tasks completed!
+
+************************Starting optimizations************************
+
+Starting threshold is set to 3.0 + 60.0 % = 4.8 kcal/mol
+
+Lower limit is set to G_thr(opt,2) = 3.0 kcal/mol
+
+*******************************CYCLE 1********************************
+
+Starting 14 optimizations.
+Running optimization in CONF1/r2scan-3c   
+Running optimization in CONF2/r2scan-3c   
+Running optimization in CONF3/r2scan-3c   
+Running optimization in CONF4/r2scan-3c   
+Running optimization in CONF5/r2scan-3c   
+Running optimization in CONF6/r2scan-3c   
+Running optimization in CONF7/r2scan-3c   
+Running optimization in CONF8/r2scan-3c   
+Running optimization in CONF9/r2scan-3c   
+Running optimization in CONF10/r2scan-3c  
+Running optimization in CONF11/r2scan-3c  
+Running optimization in CONF12/r2scan-3c  
+Running optimization in CONF13/r2scan-3c  
+Running optimization in CONF14/r2scan-3c  
+Tasks completed!
+
+Geometry optimization converged for: CONF1  within   7 cycles
+Geometry optimization converged for: CONF2  within   6 cycles
+Geometry optimization converged for: CONF3  within   6 cycles
+Geometry optimization converged for: CONF4  within   8 cycles
+Geometry optimization converged for: CONF6  within   7 cycles
+Geometry optimization converged for: CONF9  within   8 cycles
+Geometry optimization converged for: CONF10 within   8 cycles
+Constructed folders!
+
+Starting 14 G_RRHO calculations.
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Running GFN2-xTB mRRHO in r2scan-3c/rrho_crude
+Tasks completed!
+
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF1/r2scan-3c/rrho_crude: 0.1505190 S_rot(sym)= 0.0000000 using= 0.1505190
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF2/r2scan-3c/rrho_crude: 0.1501244 S_rot(sym)= 0.0000000 using= 0.1501244
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF3/r2scan-3c/rrho_crude: 0.1503245 S_rot(sym)= 0.0000000 using= 0.1503245
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF4/r2scan-3c/rrho_crude: 0.1501422 S_rot(sym)= 0.0000000 using= 0.1501422
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF5/r2scan-3c/rrho_crude: 0.1503685 S_rot(sym)= 0.0000000 using= 0.1503685
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF6/r2scan-3c/rrho_crude: 0.1506211 S_rot(sym)= 0.0000000 using= 0.1506211
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF7/r2scan-3c/rrho_crude: 0.1499710 S_rot(sym)= 0.0000000 using= 0.1499710
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF8/r2scan-3c/rrho_crude: 0.1498882 S_rot(sym)= 0.0000000 using= 0.1498882
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF9/r2scan-3c/rrho_crude: 0.1495405 S_rot(sym)= 0.0000000 using= 0.1495405
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF10/r2scan-3c/rrho_crude: 0.1502950 S_rot(sym)= 0.0000000 using= 0.1502950
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF11/r2scan-3c/rrho_crude: 0.1502441 S_rot(sym)= 0.0000000 using= 0.1502441
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF12/r2scan-3c/rrho_crude: 0.1498359 S_rot(sym)= 0.0000000 using= 0.1498359
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF13/r2scan-3c/rrho_crude: 0.1497578 S_rot(sym)= 0.0000000 using= 0.1497578
+The G_mRRHO calculation on crudely optimized DFT geometry @ c1 was successful for CONF14/r2scan-3c/rrho_crude: 0.1497838 S_rot(sym)= 0.0000000 using= 0.1497838
+Max number of performed iterations: 8
+Spearman rank evaluation is performed in the next cycle.
+
+CONF1  initial ΔG =  0.32  kcal/mol and current ΔG =  0.30  kcal/mol. (converged)
+CONF2  initial ΔG =  0.16  kcal/mol and current ΔG =  0.19  kcal/mol. (converged)
+CONF3  initial ΔG =  0.28  kcal/mol and current ΔG =  0.32  kcal/mol. (converged)
+CONF4  initial ΔG =  0.00  kcal/mol and current ΔG =  0.00  kcal/mol. (converged)
+CONF5  initial ΔG =  0.25  kcal/mol and current ΔG =  0.20  kcal/mol. (not_converged)
+CONF6  initial ΔG =  2.67  kcal/mol and current ΔG =  2.71  kcal/mol. (converged)
+CONF7  initial ΔG =  0.47  kcal/mol and current ΔG =  0.43  kcal/mol. (not_converged)
+CONF8  initial ΔG =  0.42  kcal/mol and current ΔG =  0.34  kcal/mol. (not_converged)
+CONF9  initial ΔG =  0.58  kcal/mol and current ΔG =  0.60  kcal/mol. (converged)
+CONF10 initial ΔG =  2.64  kcal/mol and current ΔG =  2.65  kcal/mol. (converged)
+CONF11 initial ΔG =  2.79  kcal/mol and current ΔG =  2.69  kcal/mol. (not_converged)
+CONF12 initial ΔG =  3.17  kcal/mol and current ΔG =  3.10  kcal/mol. (not_converged)
+CONF13 initial ΔG =  3.28  kcal/mol and current ΔG =  3.18  kcal/mol. (not_converged)
+CONF14 initial ΔG =  3.31  kcal/mol and current ΔG =  3.19  kcal/mol. (not_converged)
+
+
+CYCLE 1 performed in 298.4776 seconds
+INFORMATION: Saving enso.json to update optimization information.
+*******************************CYCLE 2********************************
+
+Starting 7 optimizations.
+Running optimization in CONF5/r2scan-3c   
+Running optimization in CONF7/r2scan-3c   
+Running optimization in CONF8/r2scan-3c   
+Running optimization in CONF11/r2scan-3c  
+Running optimization in CONF12/r2scan-3c  
+Running optimization in CONF13/r2scan-3c  
+Running optimization in CONF14/r2scan-3c  
+Tasks completed!
+
+Geometry optimization converged for: CONF12 within  12 cycles
+Geometry optimization converged for: CONF14 within  14 cycles
+Max number of performed iterations: 16
+
+CONF1  previous ΔG =  0.30  kcal/mol and current ΔG =  0.30  kcal/mol. (converged)
+CONF2  previous ΔG =  0.19  kcal/mol and current ΔG =  0.19  kcal/mol. (converged)
+CONF3  previous ΔG =  0.32  kcal/mol and current ΔG =  0.32  kcal/mol. (converged)
+CONF4  previous ΔG =  0.00  kcal/mol and current ΔG =  0.00  kcal/mol. (converged)
+CONF5  previous ΔG =  0.20  kcal/mol and current ΔG =  0.14  kcal/mol. (not_converged)
+CONF6  previous ΔG =  2.71  kcal/mol and current ΔG =  2.71  kcal/mol. (converged)
+CONF7  previous ΔG =  0.43  kcal/mol and current ΔG =  0.27  kcal/mol. (not_converged)
+CONF8  previous ΔG =  0.34  kcal/mol and current ΔG =  0.23  kcal/mol. (not_converged)
+CONF9  previous ΔG =  0.60  kcal/mol and current ΔG =  0.60  kcal/mol. (converged)
+CONF10 previous ΔG =  2.65  kcal/mol and current ΔG =  2.65  kcal/mol. (converged)
+CONF11 previous ΔG =  2.69  kcal/mol and current ΔG =  2.63  kcal/mol. (not_converged)
+CONF12 previous ΔG =  3.10  kcal/mol and current ΔG =  3.08  kcal/mol. (converged)
+CONF13 previous ΔG =  3.18  kcal/mol and current ΔG =  2.99  kcal/mol. (not_converged)
+CONF14 previous ΔG =  3.19  kcal/mol and current ΔG =  3.10  kcal/mol. (converged)
+
+           Spearman coeff. from    8 -->   11 =  0.9912
+           Spearman coeff. from    9 -->   12 =  0.9604
+           Spearman coeff. from   10 -->   13 =  0.9648
+           Spearman coeff. from   11 -->   14 =  0.9868
+Evaluating Spearman coeff. from   12 -->   15 =  0.9692
+Evaluating Spearman coeff. from   13 -->   16 =  0.9385
+Final averaged Spearman correlation coefficient: 0.9538
+
+PES is assumed to be parallel
+Updated optimization threshold to: 4.20 kcal/mol
+
+CYCLE 2 performed in 219.6724 seconds
+INFORMATION: Saving enso.json to update optimization information.
+*******************************CYCLE 3********************************
+
+Starting 5 optimizations.
+Running optimization in CONF5/r2scan-3c   
+Running optimization in CONF7/r2scan-3c   
+Running optimization in CONF8/r2scan-3c   
+Running optimization in CONF11/r2scan-3c  
+Running optimization in CONF13/r2scan-3c  
+Tasks completed!
+
+Geometry optimization converged for: CONF5  within  17 cycles
+Geometry optimization converged for: CONF11 within  17 cycles
+Max number of performed iterations: 24
+
+CONF1  previous ΔG =  0.30  kcal/mol and current ΔG =  0.30  kcal/mol. (converged)
+CONF2  previous ΔG =  0.19  kcal/mol and current ΔG =  0.19  kcal/mol. (converged)
+CONF3  previous ΔG =  0.32  kcal/mol and current ΔG =  0.32  kcal/mol. (converged)
+CONF4  previous ΔG =  0.00  kcal/mol and current ΔG =  0.00  kcal/mol. (converged)
+CONF5  previous ΔG =  0.14  kcal/mol and current ΔG =  0.14  kcal/mol. (converged)
+CONF6  previous ΔG =  2.71  kcal/mol and current ΔG =  2.71  kcal/mol. (converged)
+CONF7  previous ΔG =  0.27  kcal/mol and current ΔG =  0.09  kcal/mol. (not_converged)
+CONF8  previous ΔG =  0.23  kcal/mol and current ΔG =  0.06  kcal/mol. (not_converged)
+CONF9  previous ΔG =  0.60  kcal/mol and current ΔG =  0.60  kcal/mol. (converged)
+CONF10 previous ΔG =  2.65  kcal/mol and current ΔG =  2.65  kcal/mol. (converged)
+CONF11 previous ΔG =  2.63  kcal/mol and current ΔG =  2.63  kcal/mol. (converged)
+CONF12 previous ΔG =  3.08  kcal/mol and current ΔG =  3.08  kcal/mol. (converged)
+CONF13 previous ΔG =  2.99  kcal/mol and current ΔG =  2.63  kcal/mol. (not_converged)
+CONF14 previous ΔG =  3.10  kcal/mol and current ΔG =  3.10  kcal/mol. (converged)
+
+           Spearman coeff. from   16 -->   19 =  0.9868
+           Spearman coeff. from   17 -->   20 =  0.7451
+           Spearman coeff. from   18 -->   21 =  0.9780
+           Spearman coeff. from   19 -->   22 =  0.9912
+Evaluating Spearman coeff. from   20 -->   23 =  0.6308
+Evaluating Spearman coeff. from   21 -->   24 =  0.9692
+Final averaged Spearman correlation coefficient: 0.8000
+
+CYCLE 3 performed in 206.1175 seconds
+INFORMATION: Saving enso.json to update optimization information.
+*******************************CYCLE 4********************************
+
+Starting 3 optimizations.
+Running optimization in CONF7/r2scan-3c   
+Running optimization in CONF8/r2scan-3c   
+Running optimization in CONF13/r2scan-3c  
+Tasks completed!
+
+Max number of performed iterations: 32
+
+CONF1  previous ΔG =  0.30  kcal/mol and current ΔG =  0.36  kcal/mol. (converged)
+CONF2  previous ΔG =  0.19  kcal/mol and current ΔG =  0.25  kcal/mol. (converged)
+CONF3  previous ΔG =  0.32  kcal/mol and current ΔG =  0.38  kcal/mol. (converged)
+CONF4  previous ΔG =  0.00  kcal/mol and current ΔG =  0.06  kcal/mol. (converged)
+CONF5  previous ΔG =  0.14  kcal/mol and current ΔG =  0.20  kcal/mol. (converged)
+CONF6  previous ΔG =  2.71  kcal/mol and current ΔG =  2.77  kcal/mol. (converged)
+CONF7  previous ΔG =  0.09  kcal/mol and current ΔG =  0.00  kcal/mol. (not_converged)
+CONF8  previous ΔG =  0.06  kcal/mol and current ΔG =  0.00  kcal/mol. (not_converged)
+CONF9  previous ΔG =  0.60  kcal/mol and current ΔG =  0.66  kcal/mol. (converged)
+CONF10 previous ΔG =  2.65  kcal/mol and current ΔG =  2.72  kcal/mol. (converged)
+CONF11 previous ΔG =  2.63  kcal/mol and current ΔG =  2.69  kcal/mol. (converged)
+CONF12 previous ΔG =  3.08  kcal/mol and current ΔG =  3.15  kcal/mol. (converged)
+CONF13 previous ΔG =  2.63  kcal/mol and current ΔG =  2.29  kcal/mol. (not_converged)
+CONF14 previous ΔG =  3.10  kcal/mol and current ΔG =  3.16  kcal/mol. (converged)
+
+           Spearman coeff. from   24 -->   27 =  0.9956
+           Spearman coeff. from   25 -->   28 =  0.9077
+           Spearman coeff. from   26 -->   29 =  0.9868
+           Spearman coeff. from   27 -->   30 =  0.9868
+Evaluating Spearman coeff. from   28 -->   31 =  0.9956
+Evaluating Spearman coeff. from   29 -->   32 =  0.9956
+Final averaged Spearman correlation coefficient: 0.9956
+
+PES is assumed to be parallel
+Updated optimization threshold to: 3.60 kcal/mol
+
+CYCLE 4 performed in 194.9978 seconds
+INFORMATION: Saving enso.json to update optimization information.
+*******************************CYCLE 5********************************
+
+Starting 3 optimizations.
+Running optimization in CONF7/r2scan-3c   
+Running optimization in CONF8/r2scan-3c   
+Running optimization in CONF13/r2scan-3c  
+Tasks completed!
+
+Geometry optimization converged for: CONF7  within  36 cycles
+Geometry optimization converged for: CONF13 within  40 cycles
+Max number of performed iterations: 40
+
+CONF1  previous ΔG =  0.36  kcal/mol and current ΔG =  0.46  kcal/mol. (converged)
+CONF2  previous ΔG =  0.25  kcal/mol and current ΔG =  0.35  kcal/mol. (converged)
+CONF3  previous ΔG =  0.38  kcal/mol and current ΔG =  0.48  kcal/mol. (converged)
+CONF4  previous ΔG =  0.06  kcal/mol and current ΔG =  0.16  kcal/mol. (converged)
+CONF5  previous ΔG =  0.20  kcal/mol and current ΔG =  0.29  kcal/mol. (converged)
+CONF6  previous ΔG =  2.77  kcal/mol and current ΔG =  2.86  kcal/mol. (converged)
+CONF7  previous ΔG =  0.00  kcal/mol and current ΔG =  0.07  kcal/mol. (converged)
+CONF8  previous ΔG =  0.00  kcal/mol and current ΔG =  0.00  kcal/mol. (not_converged)
+CONF9  previous ΔG =  0.66  kcal/mol and current ΔG =  0.76  kcal/mol. (converged)
+CONF10 previous ΔG =  2.72  kcal/mol and current ΔG =  2.81  kcal/mol. (converged)
+CONF11 previous ΔG =  2.69  kcal/mol and current ΔG =  2.79  kcal/mol. (converged)
+CONF12 previous ΔG =  3.15  kcal/mol and current ΔG =  3.24  kcal/mol. (converged)
+CONF13 previous ΔG =  2.29  kcal/mol and current ΔG =  2.32  kcal/mol. (converged)
+CONF14 previous ΔG =  3.16  kcal/mol and current ΔG =  3.25  kcal/mol. (converged)
+
+           Spearman coeff. from   32 -->   35 =  0.9956
+           Spearman coeff. from   33 -->   36 =  0.9956
+           Spearman coeff. from   34 -->   37 =  1.0000
+           Spearman coeff. from   35 -->   38 =  1.0000
+Evaluating Spearman coeff. from   36 -->   39 =  0.9956
+Evaluating Spearman coeff. from   37 -->   40 =  1.0000
+Final averaged Spearman correlation coefficient: 0.9978
+
+PES is assumed to be parallel
+Updated optimization threshold to: 3.00 kcal/mol
+
+CYCLE 5 performed in 172.1530 seconds
+INFORMATION: Saving enso.json to update optimization information.
+*******************************CYCLE 6********************************
+
+Starting 1 optimizations.
+Running optimization in CONF8/r2scan-3c   
+Tasks completed!
+
+Geometry optimization converged for: CONF8  within  41 cycles
+***********************Finished optimizations!************************
+Timings:
+Cycle:  [s]  #nconfs  Spearman coeff.
+   1   298.48    14     
+   2   219.67    14     0.954
+   3   206.12    14     0.800
+   4   195.00    14     0.996
+   5   172.15    14     0.998
+   6    17.23    14     
+sum:   1108.64
+
+CONVERGED optimizations for the following remaining conformers:
+Converged optimization for CONF1  after   7 cycles: -776.2042499
+Converged optimization for CONF2  after   6 cycles: -776.2040297
+Converged optimization for CONF3  after   6 cycles: -776.2040210
+Converged optimization for CONF4  after   8 cycles: -776.2043524
+Converged optimization for CONF5  after  17 cycles: -776.2043619
+Converged optimization for CONF6  after   7 cycles: -776.2005156
+Converged optimization for CONF7  after  36 cycles: -776.2043153
+Converged optimization for CONF8  after  41 cycles: -776.2043498
+Converged optimization for CONF9  after   8 cycles: -776.2027940
+Converged optimization for CONF10 after   8 cycles: -776.2002757
+Converged optimization for CONF11 after  17 cycles: -776.2002629
+Converged optimization for CONF12 after  12 cycles: -776.1991334
+Converged optimization for CONF13 after  40 cycles: -776.2005167
+Converged optimization for CONF14 after  14 cycles: -776.1990551
+
+Calculating single-point energies!
+The low level single-point is now calculated for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+
+Starting 14 single-point calculations.
+Running single-point in CONF1/r2scan-3c   
+Running single-point in CONF2/r2scan-3c   
+Running single-point in CONF3/r2scan-3c   
+Running single-point in CONF4/r2scan-3c   
+Running single-point in CONF5/r2scan-3c   
+Running single-point in CONF6/r2scan-3c   
+Running single-point in CONF7/r2scan-3c   
+Running single-point in CONF9/r2scan-3c   
+Running single-point in CONF10/r2scan-3c  
+Running single-point in CONF11/r2scan-3c  
+Running single-point in CONF12/r2scan-3c  
+Running single-point in CONF13/r2scan-3c  
+Running single-point in CONF14/r2scan-3c  
+Running single-point in CONF8/r2scan-3c   
+Tasks completed!
+
+lowlevel single-point calculation was successful for  CONF1/r2scan-3c: -776.20321139
+lowlevel single-point calculation was successful for  CONF2/r2scan-3c: -776.20298865
+lowlevel single-point calculation was successful for  CONF3/r2scan-3c: -776.20297819
+lowlevel single-point calculation was successful for  CONF4/r2scan-3c: -776.20331686
+lowlevel single-point calculation was successful for  CONF5/r2scan-3c: -776.20332288
+lowlevel single-point calculation was successful for  CONF6/r2scan-3c: -776.19947764
+lowlevel single-point calculation was successful for  CONF7/r2scan-3c: -776.20327973
+lowlevel single-point calculation was successful for  CONF8/r2scan-3c: -776.20331143
+lowlevel single-point calculation was successful for  CONF9/r2scan-3c: -776.20174746
+lowlevel single-point calculation was successful for CONF10/r2scan-3c: -776.19923814
+lowlevel single-point calculation was successful for CONF11/r2scan-3c: -776.19922448
+lowlevel single-point calculation was successful for CONF12/r2scan-3c: -776.19809661
+lowlevel single-point calculation was successful for CONF13/r2scan-3c: -776.19947868
+lowlevel single-point calculation was successful for CONF14/r2scan-3c: -776.19801680
+
+Calculating lowlevel G_mRRHO on DFT geometry!
+The lowlevel G_mRRHO calculation is now performed for:
+ CONF1,  CONF2,  CONF3,  CONF4,  CONF5,  CONF6,  CONF7,  CONF8,  CONF9, CONF10, CONF11
+CONF12, CONF13, CONF14
+
+Constructed folders!
+
+Starting 14 G_RRHO calculations.
+Running GFN2-xTB mRRHO in CONF1/rrho_part2
+Running GFN2-xTB mRRHO in CONF2/rrho_part2
+Running GFN2-xTB mRRHO in CONF3/rrho_part2
+Running GFN2-xTB mRRHO in CONF4/rrho_part2
+Running GFN2-xTB mRRHO in CONF5/rrho_part2
+Running GFN2-xTB mRRHO in CONF6/rrho_part2
+Running GFN2-xTB mRRHO in CONF7/rrho_part2
+Running GFN2-xTB mRRHO in CONF8/rrho_part2
+Running GFN2-xTB mRRHO in CONF9/rrho_part2
+Running GFN2-xTB mRRHO in CONF10/rrho_part2
+Running GFN2-xTB mRRHO in CONF11/rrho_part2
+Running GFN2-xTB mRRHO in CONF12/rrho_part2
+Running GFN2-xTB mRRHO in CONF13/rrho_part2
+Running GFN2-xTB mRRHO in CONF14/rrho_part2
+Tasks completed!
+
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF1/rrho_part2: 0.15051902 S_rot(sym)= 0.0000000 using= 0.1505190
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF2/rrho_part2: 0.15012443 S_rot(sym)= 0.0000000 using= 0.1501244
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF3/rrho_part2: 0.15032448 S_rot(sym)= 0.0000000 using= 0.1503245
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF4/rrho_part2: 0.15014221 S_rot(sym)= 0.0000000 using= 0.1501422
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF5/rrho_part2: 0.15008645 S_rot(sym)= 0.0000000 using= 0.1500865
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF6/rrho_part2: 0.15062114 S_rot(sym)= 0.0000000 using= 0.1506211
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF7/rrho_part2: 0.15009939 S_rot(sym)= 0.0000000 using= 0.1500994
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF8/rrho_part2: 0.15011620 S_rot(sym)= 0.0000000 using= 0.1501162
+The lowlevel G_mRRHO calculation @ c1 was successful for  CONF9/rrho_part2: 0.14954046 S_rot(sym)= 0.0000000 using= 0.1495405
+The lowlevel G_mRRHO calculation @ c1 was successful for CONF10/rrho_part2: 0.15029496 S_rot(sym)= 0.0000000 using= 0.1502950
+The lowlevel G_mRRHO calculation @ c1 was successful for CONF11/rrho_part2: 0.15032866 S_rot(sym)= 0.0000000 using= 0.1503287
+The lowlevel G_mRRHO calculation @ c1 was successful for CONF12/rrho_part2: 0.14983559 S_rot(sym)= 0.0000000 using= 0.1498356
+The lowlevel G_mRRHO calculation @ c1 was successful for CONF13/rrho_part2: 0.15062366 S_rot(sym)= 0.0000000 using= 0.1506237
+The lowlevel G_mRRHO calculation @ c1 was successful for CONF14/rrho_part2: 0.14980542 S_rot(sym)= 0.0000000 using= 0.1498054
+
+--------------------------------------------------
+         * Gibbs free energies of part2 *         
+--------------------------------------------------
+
+ CONF#  E(GFNn-xTB) ΔE(GFNn-xTB)       E [Eh]  GmRRHO [Eh]         Gtot      ΔGtot Boltzmannweight
+             [a.u.]   [kcal/mol]    r2scan-3c   GFN2-bhess         [Eh] [kcal/mol]   % at 298.15 K
+                                                                                                  
+CONF1   -46.4680957         0.00 -776.2032114    0.1505190 -776.0526924       0.34            9.37
+CONF2   -46.4676537         0.28 -776.2029886    0.1501244 -776.0528642       0.23           11.24
+CONF3   -46.4675928         0.32 -776.2029782    0.1503245 -776.0526537       0.37            8.99
+CONF4   -46.4675877         0.32 -776.2033169    0.1501422 -776.0531747       0.04           15.62
+CONF5   -46.4674660         0.40 -776.2033229    0.1500865 -776.0532364       0.00           16.67     <------
+CONF6   -46.4671401         0.60 -776.1994776    0.1506211 -776.0488565       2.75            0.16
+CONF7   -46.4670781         0.64 -776.2032797    0.1500994 -776.0531803       0.04           15.71
+CONF8   -46.4670508         0.66 -776.2033114    0.1501162 -776.0531952       0.03           15.96
+CONF9   -46.4668176         0.80 -776.2017475    0.1495405 -776.0522070       0.65            5.60
+CONF10  -46.4664752         1.02 -776.1992381    0.1502950 -776.0489432       2.69            0.18
+CONF11  -46.4664512         1.03 -776.1992245    0.1503287 -776.0488958       2.72            0.17
+CONF12  -46.4658971         1.38 -776.1980966    0.1498356 -776.0482610       3.12            0.09
+CONF13  -46.4657750         1.46 -776.1994787    0.1506237 -776.0488550       2.75            0.16
+CONF14  -46.4656130         1.56 -776.1980168    0.1498054 -776.0482114       3.15            0.08
+
+Number of conformers observed within the following ΔG windows:
+ΔG [kcal/mol]  #CONF   sum(Boltzmann_weights)
+---------------------------------------------
+   0 - 0.5         7          0.94
+   0 - 1.0         8          0.99
+   0 - 1.5         8          0.99
+   0 - 2.0         8          0.99
+   0 - 2.5         8          0.99
+   0 - 3.0        12          1.00
+   0 - 3.5        14          1.00
+---------------------------------------------
+
+Calculating Boltzmann averaged free energy of ensemble!
+
+temperature /K:   avE(T) /a.u. avGmRRHO(T) /a.u.   avG(T) /a.u. 
+----------------------------------------------------------------------------------------------------
+    298.15        -776.2031107        0.1501396   -776.0529711      <<==part2==
+----------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------
+          Conformers considered further           
+--------------------------------------------------
+
+
+Conformers that are below the Boltzmann threshold G_thr(2) of 99.0%:
+CONF5, CONF8, CONF7, CONF4, CONF2, CONF1, CONF3, CONF9
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END of Part2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Ran part2 in 1148.3054 seconds
+
+
+Part                : #conf         time      time (including restarts)
+-----------------------------------------------------------------------
+Input               :    14         -              -     
+Part0_all           :    14         6.21 s       6.21 s
+Part1_initial_sort  :    14        27.04 s      27.04 s
+Part1_all           :    14        35.15 s      35.15 s
+Part2_opt           :    14      1108.68 s    1108.68 s
+Part2_all           :     8      1148.31 s    1148.31 s
+-----------------------------------------------------------------------
+All parts           :     -      1189.67 s    1189.67 s
+
+CENSO all done!

@@ -1,0 +1,405 @@
+Index,Substructure,Drug-like,SMILES,Charge,Literature barrier (kcal/mol),Literature class,Literature source,Computation solvent,Computed barrier (kcal/mol),Computed class
+1,Biaryl (6-6),FALSE,COC1=C(C)N(C=CC1=O)c2ccccc2OC,0,22.6,2,https://www.sciencedirect.com/science/article/pii/S004040200183492X,Gas,23.64,2
+2,Biaryl (6-6),FALSE,COC1=C(C)N(C=CC1=O)c2ccccc2C,0,26.6,2,https://www.sciencedirect.com/science/article/pii/S004040200183492X,Gas,26.42,2
+3,Biaryl (6-6),FALSE,COC1=C(C)N(C=CC1=O)c2ccccc2Cl,0,26.2,2,https://www.sciencedirect.com/science/article/pii/S004040200183492X,Gas,32.63,3
+4,Biaryl (6-6),FALSE,COC1=C(C)N(C=CC1=O)c2ccccc2C#N,0,22.3,2,https://www.sciencedirect.com/science/article/pii/S004040200183492X,Gas,19.28,1
+5,Biaryl (6-6),FALSE,Clc1ccc(Cl)c(c1)c2c(Cl)ccc(Cl)c2Cl,0,44,3,https://doi.org/10.1016/j.tetasy.2017.09.006,Gas,42.93,3
+6,Biaryl (6-6),FALSE,Clc1cc(Cl)c(cc1Cl)c2c(Cl)ccc(Cl)c2Cl,0,44,3,https://doi.org/10.1016/j.tetasy.2017.09.006,Gas,42.42,3
+7,Biaryl (6-6),FALSE,Clc1ccc(c(Cl)c1Cl)c2c(Cl)ccc(Cl)c2Cl,0,45.2,3,https://doi.org/10.1016/j.tetasy.2017.09.006,Gas,44.29,3
+8,Biaryl (6-6),FALSE,c1ccc2c(cccc2c1)c3cccc4ccccc34,0,24.1,2,https://pubs.acs.org/doi/10.1021/jo034344u,Gas,25.04,2
+9,Biaryl (6-6),FALSE,Oc1ccc2ccccc2c1c3c(O)ccc4ccccc34,0,39.53,3,https://www.sciencedirect.com/science/article/abs/pii/S0957416617302471,Gas,46.18,3
+10,Biaryl (6-6),FALSE,Nc1ccc2ccccc2c1c3c(O)ccc4ccccc34,0,40.87,3,https://www.sciencedirect.com/science/article/abs/pii/S0957416617302471,Gas,46.49,3
+11,Biaryl (6-6),FALSE,Nc1ccc2ccccc2c1c3c(N)ccc4ccccc34,0,42.64,3,https://www.sciencedirect.com/science/article/abs/pii/S0957416617302471,Gas,44.59,3
+12,Biaryl (6-6),FALSE,c1ccc2ccc(N)c(c3ccccc3N)c2c1,0,29.95,2,https://www.sciencedirect.com/science/article/abs/pii/S0957416617302471,Gas,32.36,3
+13,Biaryl (6-6),FALSE,Nc1c(Cl)c(Cl)c(Cl)cc1c2cccc3ccc(O)cc23,0,26.46,2,https://www.sciencedirect.com/science/article/abs/pii/S0957416617302471,Gas,23.35,2
+14,Biaryl (6-6),FALSE,Cc1ccccc1N2C(=Nc3cccc(C)c3C2=O)Cn4cnc5c(N)ncnc45,0,28.5,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.7b00247,Gas,28.66,2
+15,Biaryl (6-6),FALSE,CN1CCc2cncc(c3cccc4ccccc34)c12,0,20.54,2,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,20.74,2
+16,Biaryl (6-6),FALSE,CN1CCc2cncc(c12)c3c(ccc4ccccc34)c5ccccc5,0,31.09,3,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,32.49,3
+17,Biaryl (6-6),FALSE,CCN(CC)c1ccncc1c2c(ccc3ccccc23)c4ccccc4,0,33,3,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,33.5,3
+18,Biaryl (6-6),FALSE,COc1ccc(c2cncc3CCN(C)c23)c4ccccc14,0,20.44,2,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,20.79,2
+19,Biaryl (6-6),FALSE,CN1CCc2cncc(c12)c3c(C)ccc4ccccc34,0,32.04,3,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,34.02,3
+20,Biaryl (6-6),FALSE,CN(C)c1ccncc1c2cccc3ccccc23,0,21.35,2,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,21.91,2
+21,Biaryl (6-6),FALSE,COc1cc(c2cncc3CCN(C)c23)c4ccccc4c1,0,20.95,2,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,20.56,2
+22,Biaryl (6-6),FALSE,CN(C)c1ccncc1c2c(C)ccc3ccccc23,0,33.48,3,https://pubs.acs.org/doi/10.1021/jo015593q,Gas,33.73,3
+23,Biaryl (6-6),FALSE,CCN(CC)Cc1cccc(\C=C\C2=Nc3ccc(F)cc3C(=O)N2c4ccccc4Cl)n1,0,29.9,2,https://pubs.acs.org/doi/10.1021/ml2003108,Gas,30.19,3
+24,Biaryl (6-6),FALSE,Cc1ccccc1c2ccccc2,0,7.4,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,8.69,1
+25,Biaryl (6-6),FALSE,C[N+](C)(C)c1ccccc1c2ccccc2,1,18.1,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,18.2,1
+26,Biaryl (6-6),FALSE,Fc1ccccc1c2ccccc2,0,4.4,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,2.35,1
+27,Biaryl (6-6),FALSE,CC(C)(C)c1ccccc1c2ccccc2,0,15.4,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,15.6,1
+28,Biaryl (6-6),FALSE,Clc1ccccc1c2ccccc2,0,7.7,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,8.25,1
+29,Biaryl (6-6),FALSE,OC(c1ccccc1c2ccccc2)(C(F)(F)F)C(F)(F)F,0,16.5,1,https://pubs.rsc.org/en/content/articlelanding/2012/ob/c1ob06688a,Gas,19.04,1
+30,Biaryl (6-6),FALSE,COc1ccccc1c2ccccc2C(C)C,0,19.2,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,20.43,2
+31,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3S,0,19.4,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,22.25,2
+32,Biaryl (6-6),FALSE,CCc1ccccc1c2cccc(c2)C(C)C,0,8.7,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,9.38,1
+33,Biaryl (6-6),FALSE,CC(C)c1cccc(c1)c2ccccc2Cl,0,7.7,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,8.17,1
+34,Biaryl (6-6),FALSE,CC(C)c1ccccc1c2ccccc2C(F)(F)F,0,26.8,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,26.81,2
+35,Biaryl (6-6),FALSE,CC(C)c1ccccc1c2ccccc2C(C)(C)C,0,32.7,3,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,33.01,3
+36,Biaryl (6-6),FALSE,COc1cccc(C(=O)N)c1c2c(OC)cccc2C(=O)N,0,32.2,3,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,30.79,3
+37,Biaryl (6-6),FALSE,CC(C)c1ccccc1c2cc3c(CCC3(C)C)cc2C,0,24.1,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,24.23,2
+38,Biaryl (6-6),FALSE,FC(F)(F)c1ccccc1c2ccccc2C(F)(F)F,0,26.2,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,25.58,2
+39,Biaryl (6-6),FALSE,CC(C)c1cccc(c1)c2ccccc2Br,0,8.8,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,9.28,1
+40,Biaryl (6-6),FALSE,CN(C)c1ccccc1c2ccccc2[N+](C)(C)C,1,28.9,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,28.76,2
+41,Biaryl (6-6),FALSE,CC(C)c1ccccc1c2ccccc2C(C)C,0,27.4,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,29.8,2
+42,Biaryl (6-6),FALSE,OC(=O)c1ccc(c(Br)c1)c2ccc(cc2Br)C(=O)O,0,19.9,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,21.27,2
+43,Biaryl (6-6),FALSE,COc1ccccc1c2cc3c(CCC3(C)C)cc2C,0,14.7,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,15.47,1
+44,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3[Si](C)(C)C,0,22,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,21.05,2
+45,Biaryl (6-6),FALSE,CC(C)c1cccc(c1)c2ccccc2C,0,7.4,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,8.66,1
+46,Biaryl (6-6),FALSE,CC(C)c1cccc(c1)c2ccccc2C(C)C,0,11.1,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,11.99,1
+47,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3F,0,12.4,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,12.76,1
+48,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccc(cc3F)[N+](=O)[O-],0,11.6,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,12.49,1
+49,Biaryl (6-6),FALSE,CN(C)c1ccccc1c2cccc([SiH3])c2,0,6.9,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,8.1,1
+50,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3c4ccccc4,0,16.9,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,17.82,1
+51,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3[N+](=O)[O-],0,16.4,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,16.78,1
+52,Biaryl (6-6),FALSE,CC(=O)c1ccccc1c2cc3c(CCC3(C)C)cc2C,0,15.5,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,16.77,1
+53,Biaryl (6-6),FALSE,Cc1ccccc1c2cc3c(CCC3(C)C)cc2Br,0,20,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,21.07,2
+54,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccccc3N,0,19.3,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,19.71,1
+55,Biaryl (6-6),FALSE,[SiH3]c1cccc(c1)c2ccccc2C#C,0,6,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,6.4,1
+56,Biaryl (6-6),FALSE,Cc1ccccc1c2cc3c(CCC3(C)C)cc2Cl,0,18.7,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,19.6,1
+57,Biaryl (6-6),FALSE,CC(C)c1cccc(c1)c2ccccc2C(C)(C)C,0,15.4,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,15.33,1
+58,Biaryl (6-6),FALSE,Cc1ccccc1c2cc3c(CCC3(C)C)cc2C(F)(F)F,0,23.3,2,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,22.72,2
+59,Biaryl (6-6),FALSE,Cc1ccccc1c2cc3c(CCC3(C)C)cc2C#N,0,14.1,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,14.68,1
+60,Biaryl (6-6),FALSE,CN(C)c1ccccc1c2cc3c(CCC3(C)C)cc2C,0,17.1,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,17.6,1
+61,Biaryl (6-6),FALSE,COc1ccc(c(OC)c1)c2ccc(OC)cc2C(C)C,0,17.9,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,19.08,1
+62,Biaryl (6-6),FALSE,Cc1cc2CCC(C)(C)c2cc1c3ccc(cc3Cl)[N+](=O)[O-],0,18.3,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,18.96,1
+63,Biaryl (6-6),FALSE,O=C1N(C(=Nc2ccccc12)Cc3ccccc3)c4ccc5ccccc5c4,0,19.8,1,https://doi.org/10.1139/v75-491,Gas,19.75,1
+64,Biaryl (6-6),FALSE,O=c3c1ccccc1nc(Cc2ccccc2)n3c4cccc(Br)c4,0,18.9,1,https://doi.org/10.1139/v75-491,Gas,19.49,1
+65,Biaryl (6-6),FALSE,O=c3c1ccccc1nc(Cc2ccccc2)n3c4cccc(C(=O)C)c4,0,19.2,1,https://doi.org/10.1139/v75-491,Gas,18.99,1
+66,Biaryl (6-6),FALSE,Cc1c(Cl)cccc1c2ccccc2c3c(C)c(Cl)ccc3,0,17.6,1,https://cdnsciencepub.com/doi/abs/10.1139/v80-412,Gas,19.71,1
+67,Biaryl (6-6),FALSE,Cc1c(C=O)cccc1c2ccccc2c3c(C)c(C=O)ccc3,0,16.7,1,https://cdnsciencepub.com/doi/abs/10.1139/v80-412,Gas,20.89,2
+68,Biaryl (6-6),FALSE,Cc1ccccc1c2ccccc2c3c(C)cccc3,0,14.8,1,https://cdnsciencepub.com/doi/abs/10.1139/v80-412,Gas,16.35,1
+69,Biaryl (6-6),FALSE,Cc1c(Cl)cccc1c2ccccc2c3c(C)c(C#N)ccc3,0,16.7,1,https://cdnsciencepub.com/doi/abs/10.1139/v80-412,Gas,18.41,1
+70,Biaryl (6-6),FALSE,CC1=NC(=O)N(C(=C1)C)c2ccccc2C,0,27.9,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,27.1,2
+71,Biaryl (6-6),FALSE,CC1=NC(=O)N(C(=C1)C)c2ccc(Cl)cc2C,0,27.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.91,2
+72,Biaryl (6-6),FALSE,CC1=NC(=O)N(C(=C1)C)c2ccc(Cl)cc2Cl,0,27.4,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.02,2
+73,Biaryl (6-6),FALSE,CC1=NC(=O)N(C(=C1)C)c2cccc3ccccc23,0,29.5,2,https://pubs.rsc.org/en/content/articlelanding/2010/ob/c0ob00262c,Gas,28.84,2
+74,Biaryl (6-6),FALSE,C[C@H](NC(=O)OC(C)(C)C)C1=Nc2ccccc2C(=O)N1c3cccnc3Cl,0,31.6,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.83,2
+75,Biaryl (6-6),TRUE,Clc1cccc(c1)N2C3=C(CCCC3)C(=O)c4cccnc24,0,21.6,2,https://onlinelibrary.wiley.com/doi/10.1002/(SICI)1520-636X(1996)8:5%3C364::AID-CHIR2%3E3.0.CO;2-E,Gas,20.05,2
+76,Biaryl (6-6),FALSE,CN1C(=O)Cc2ccccc2c3c(C)cccc13,0,29.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.42,2
+77,Biaryl (6-6),FALSE,CN1C(=O)Cc2ccccc2c3ccccc13,0,23.4,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24,2
+78,Biaryl (6-6),FALSE,CC(C)N1C(=O)Cc2ccccc2c3ccccc13,0,32.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.08,2
+79,Biaryl (6-6),FALSE,COc1cc(ccc1c2ccc(cc2C(C)C)[N+](=O)[O-])[N+](=O)[O-],0,19,1,,Gas,19.78,1
+80,Biaryl (6-6),FALSE,c1(c2ccccc2CSC3=CC=CC=C3)ccccc1c4c(CSC5=CC=CC=C5)cccc4,0,19.3,1,,Gas,18.21,1
+81,Biaryl (6-6),FALSE,COc1ccc(c(OC)c1)c2ccccc2C(C)C,0,18.3,1,,Gas,19.75,1
+82,Biaryl (6-6),FALSE,C1SCc2ccccc2c3ccccc13,0,16.1,1,https://pubs.rsc.org/en/content/articlelanding/2013/ob/c3ob26704k,Gas,18.55,1
+83,Reverse benzamide,FALSE,C[C@H](NC(=O)c1cccc(C)c1N2C(=O)c3ccc4C(=O)N(C(=O)c5ccc(C2=O)c3c45)c6c(C)cccc6C(=O)N[C@H](C)c7ccccc7)c8ccccc8,0,34,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,33.83,3
+84,Reverse benzamide,FALSE,C[C@H](NC(=O)c1cccc(C)c1N2C(=O)c3cc4C(=O)N(C(=O)c4cc3C2=O)c5c(C)cccc5C(=O)N[C@H](C)c6ccccc6)c7ccccc7,0,29.4,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.92,2
+85,Biaryl (6-5),FALSE,CC1=CSC(=O)N1c2ccccc2C,0,29.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.98,2
+86,Biaryl (6-5),FALSE,CC1=CSC(=O)N1c2ccccc2Cl,0,30.3,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32.11,3
+87,Biaryl (6-5),FALSE,CC1=CSC(=O)N1c2cccc(C)c2C,0,31.3,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.93,3
+88,Biaryl (6-5),FALSE,CC1=CSC(=O)N1c2cccc(Cl)c2C,0,30.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.58,3
+89,Diaryl ether,FALSE,COCc1ccc(C)c(c1Oc2ccccc2C(C)(C)C)S(=O)(=O)C(C)(C)C,0,27.15,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200705660,Gas,26.8,2
+90,Diaryl ether,FALSE,COCc1ccc(C)c(c1Oc2ccccc2C(C)(C)C)S(=O)(=O)C3(C)CCCCC3,0,26.72,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200705660,Gas,26.98,2
+91,Diaryl ether,FALSE,Cc1cc(C)c(Oc2c(C)cc(C)cc2P(c3ccccc3)c4ccccc4)c(c1)P(c5ccccc5)c6ccccc6,0,27,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.47,3
+92,Diaryl thioether,FALSE,Cc1cc(cc(c1Sc2c(C)cc(cc2C(C)(C)C)C(C)(C)C)C(C)(C)C)C(C)(C)C,0,24.09,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200901718,Gas,25.85,2
+93,Diaryl ether,FALSE,OCc1cccc(CO)c1Oc2ccccc2I,0,18.83,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,19.22,1
+94,Diaryl ether,FALSE,CC(C)(O)c1cccc(CO)c1Oc2ccccc2I,0,22.87,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,26.44,2
+95,Diaryl ether,FALSE,CC(C)(O)c1cccc(C(=O))c1Oc2ccccc2I,0,18.36,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,19.23,1
+96,Diaryl ether,FALSE,CC(C)c1ccccc1Oc2c(CO)cccc2CO,0,17.09,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,16.09,1
+97,Diaryl ether,FALSE,CC(C)c1ccccc1Oc2c(CO)cccc2C(C)(C)O,0,21.73,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,21.82,2
+98,Diaryl ether,FALSE,CC(C)c1ccccc1Oc2c(C(=O))cccc2C(C)(C)O,0,18.76,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,17.65,1
+99,Diaryl ether,FALSE,CC(C)(C)c1ccccc1Oc2c(CO)cccc2CO,0,21.03,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,23.44,2
+100,Diaryl ether,FALSE,CC(C)(C)c1ccccc1Oc2c(CO)cccc2C(C)O,0,24.38,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,21.61,2
+101,Diaryl ether,FALSE,CC(C)(C)c1ccccc1Oc2c(CO)cccc2C(C)(C)O,0,27.13,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,29.18,2
+102,Diaryl ether,FALSE,Cc1ccc(Oc2ccc(C)cc2C(C)(C)O)c(c1)C(C)(C)O,0,16.97,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,14.61,1
+103,Diaryl ether,FALSE,Cc1ccc(Oc2c(C)cc(C)cc2C(C)(C)O)c(c1)C(C)(C)O,0,27.25,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,29.3,2
+104,Diaryl ether,FALSE,CC(C)(O)c1ccccc1Oc2c(CO)cccc2C(C)(C)O,0,25.98,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200601866,Gas,29.09,2
+105,Diaryl ether,FALSE,OC(c1ccccc1)(c2ccccc2)c3cccc4cccc(Oc5cccc6cccc(c56)C(O)(c7ccccc7)c8ccccc8)c34,0,30.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,33.7,3
+106,Diaryl amine,FALSE,CC(C)\N=C\c1cc(cc(c1Nc2c(C)ccc3ccccc23)),0,19.3,1,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,21.3,2
+107,Diaryl amine,FALSE,CC(C)\N=C\c1cc(cc(c1Nc2c(C)ccc3ccccc23))[N+](=O)[O-],0,23.6,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,22.51,2
+108,Diaryl amine,FALSE,COc1ccc(cc1)\N=C\c2cc(C)cc(C)c2Nc3c(C)ccc4cccc(C)c34,0,24.9,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,27.22,2
+109,Diaryl amine,FALSE,Brc1ccc(cc1)\N=C\c2cc(cc(c2Nc3c(C)ccc4cccc(C)c34)[N+](=O)[O-])[N+](=O)[O-],0,27,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,26.81,2
+110,Diaryl amine,FALSE,COc1ccc(cc1)\N=C\c2cc(cc(c2Nc3c(C)ccc4cccc(C)c34)[N+](=O)[O-])[N+](=O)[O-],0,27.2,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,36.44,3
+111,Diaryl amine,FALSE,Cc1ccc2cccc(C)c2c1Nc3c(\C=N\C(c4ccccc4)c5ccccc5)cc(cc3[N+](=O)[O-])[N+](=O)[O-],0,27.4,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,33.45,3
+112,Diaryl amine,FALSE,CC(C)\N=C\c1cc(cc(c1Nc2c(C)ccc3cccc(C)c23)[N+](=O)[O-])[N+](=O)[O-],0,28.2,2,https://pubs.acs.org/doi/10.1021/ja808213r,Gas,35.6,3
+113,Diaryl amine,FALSE,CCc1cccc(C)c1Nc2ccccc2C(C)C,0,15.7,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,17.32,1
+114,Diaryl amine,FALSE,CC(C)c1cccc(C)c1Nc2ccccc2C,0,15,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,16.49,1
+115,Diaryl amine,FALSE,CC(C)c1cccc(C)c1Nc2ccccc2C(C)C,0,15.7,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,17.29,1
+116,Diaryl amine,FALSE,CC(C)c1cccc(C(C)C)c1Nc2ccccc2C,0,16.1,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,16.64,1
+117,Diaryl amine,FALSE,CC(C)c1cccc(C(C)C)c1Nc2ccccc2C(C)C,0,16.9,1,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,16.77,1
+118,Diaryl amine,FALSE,CCc1cccc(C)c1Nc2ccccc2C(C)(C)C,0,20.5,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,21.4,2
+119,Diaryl amine,FALSE,CC(C)c1cccc(C)c1Nc2ccccc2C(C)(C)C,0,21,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,20.58,2
+120,Diaryl amine,FALSE,CC(C)(C)c1cc(C(C)(C)C)cc(C)c1Nc2ccccc2C,0,20.9,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,25.24,2
+121,Diaryl amine,FALSE,CC(C)(C)c1cc(C(C)(C)C)cc(C)c1Nc2ccccc2C(C)C,0,21.5,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,25.43,2
+122,Diaryl amine,FALSE,Cc1cc(cc(c1Nc2ccccc2c3ccccc3)C(C)(C)C)C(C)(C)C,0,21.6,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,24.02,2
+123,Diaryl amine,FALSE,CC(C)c1cccc(C)c1Nc2c(C)ccc3ccccc23,0,22.4,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,24.45,2
+124,Diaryl amine,FALSE,CC(C)(C)c1cc(C(C)(C)C)cc(C)c1Nc2c(C)ccc3ccccc23,0,31.1,3,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.202007595,Gas,33.37,3
+125,Diaryl sulfoxide,FALSE,Cc1cc(cc(c1S(=O)c2c(C)cc(cc2C(C)(C)C)C(C)(C)C)C(C)(C)C)C(C)(C)C,0,20.63,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200901718,Gas,20.46,2
+126,Diaryl sulfone,FALSE,Cc1cc(cc(c1S(=O)(=O)c2c(C)cc(cc2C(C)(C)C)C(C)(C)C)C(C)(C)C)C(C)(C)C,0,25.45,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200901718,Gas,29.88,2
+127,Diaryl sulfone,FALSE,COC(C)(C)c1cccc(C(C)C)c1S(=O)(=O)c2c(cccc2S(=O)(=O)c3ccc(C)cc3)C(C)C,0,21.96,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200901718,Gas,28.45,2
+128,Diaryl sulfone,FALSE,COC(C)(C)c1cccc(C(C)C)c1S(=O)(=O)c2c(cccc2S(=O)(=O)C)C(C)C,0,22.42,2,https://onlinelibrary.wiley.com/doi/full/10.1002/anie.200901718,Gas,29.11,2
+129,Benzamide,FALSE,CN(C)C(=O)c1ccccc1C(C)(C)C,0,20.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,20.18,2
+130,Benzamide,FALSE,CN(C)C(=S)c1ccccc1C(C)(C)C,0,30.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.41,2
+131,Benzamide,FALSE,CN(C)C(=O)c1c(OC)ccc(Br)c1OC,0,22.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,22.09,2
+132,Benzamide,FALSE,CN(C)C(=S)c1c(OC)ccc(Br)c1OC,0,29.9,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.36,2
+133,Benzamide,FALSE,CN(C)C(=O)c1c(C)cc(C)c(C)c1C,0,24.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24.69,2
+134,Benzthioamide,FALSE,CN(C)C(=S)c1c(C)cc(C)c(C)c1C,0,32.9,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32.1,3
+135,Benzthioamide,FALSE,CN(C)C(=S)c1c(C)ccc2ccccc12,0,33.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32,3
+136,Benzamide,FALSE,C(C)(C)(OC)c1cccc(CC)c1C(=O)N(C(C)C)C(C)C,0,29.92,2,https://pubs.acs.org/doi/10.1021/jo0007074,Gas,34.2,3
+137,Benzamide,FALSE,Cc1cccc(CC)c1C(=O)N(C(C)C)C(C)C,0,25.69,2,https://pubs.acs.org/doi/10.1021/jo0007074,Gas,26.77,2
+138,Benzamide,FALSE,CCc1cccc(c1C(=O)N(C(C)C)C(C)C)P(=O)(c2ccccc2)c3ccccc3,0,25.05,2,https://pubs.acs.org/doi/10.1021/jo0007074,Gas,29.83,2
+139,Benzamide,FALSE,OCc1cccc(C=C)c1C(=O)N(C(C)C)C(C)C,0,24.1,2,https://pubs.acs.org/doi/full/10.1021/ja026436r,Gas,28.93,2
+140,Benzamide,FALSE,CN(C)c1cccc(C=C)c1C(=O)N(C(C)C)C(C)C,0,27.3,2,https://pubs.acs.org/doi/full/10.1021/ja026436r,Gas,27.09,2
+141,Benzamide,FALSE,CCOC(=O)/C=C/c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,24,2,https://pubs.acs.org/doi/full/10.1021/ja026436r,Gas,27.24,2
+142,Benzamide,FALSE,CCOC(=O)/C=C/c1ccc2ccccc2c1C(=O)N(CC)CC,0,23.7,2,https://pubs.acs.org/doi/full/10.1021/ja026436r,Gas,25,2
+143,Benzamide,FALSE,COc1ccc2ccccc2c1C(=O)N3CCCC3,0,21.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,21.38,2
+144,Benzamide,FALSE,COc1ccc2ccccc2c1C(=O)N3CCCCC3,0,21.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,22.6,2
+145,Benzamide,FALSE,CCCCc1ccc2ccccc2c1C(=O)N3CCCC3,0,24.4,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,27.39,2
+146,Benzamide,FALSE,C(C)(C)(C)c1ccc2ccccc2c1C(=O)N3CCCCC3,0,28.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.46,2
+147,Benzamide,FALSE,CC(C)N(C(=O)c1cccc2ccccc12)C(C)C,0,17.88,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,15.84,1
+148,Benzamide,FALSE,CCN(CC)C(=O)c1cccc2ccccc12,0,15.08,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,14.06,1
+149,Benzamide,FALSE,CCCN(CCC)C(=O)c1cccc2ccccc12,0,15.06,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,21.16,2
+150,Benzamide,FALSE,O=C(N(Cc1ccccc1)Cc2ccccc2)c3cccc4ccccc34,0,15.3,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,14.44,1
+151,Benzamide,FALSE,CC(C)(C)N(Cc1ccccc1)C(=O)c2cccc3ccccc23,0,14.66,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,13.6,1
+152,Benzamide,FALSE,CC(C)(C)N(Cc1occc1)C(=O)c2cccc3ccccc23,0,16.24,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,15.82,1
+153,Benzamide,FALSE,CC(C)N(Cc1ccccc1)C(=O)c2cccc3ccccc23,0,17.21,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,23.05,2
+154,Benzamide,FALSE,CCN(CC)C(=O)c1ccccc1C(C)C,0,15.61,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,14.97,1
+155,Benzamide,FALSE,CCN(CC)C(=O)c1cc(OC)cc(OC)c1CC,0,15.61,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,15.83,1
+156,Benzamide,FALSE,CCc1ccccc1C(=O)N(CC)CC,0,14.2,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,13.38,1
+157,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1ccccc1C(=O)N(C(C)C)C(C)C,0,15.73,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,15.41,1
+158,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1ccccc1C=O,0,13.46,1,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,15.06,1
+159,Benzamide,FALSE,CCc1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,25.16,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,28.85,2
+160,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(CO)ccc2ccccc12,0,25.25,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,27.74,2
+161,Benzamide,FALSE,Cc2ccc1ccccc1c2C(=O)N(C(C)C)C(C)C,0,25.1,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,27,2
+162,Benzamide,FALSE,COc1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,24.27,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,24.6,2
+163,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(C=O)ccc2ccccc12,0,21.6,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,24.31,2
+164,Benzamide,FALSE,CCC(=O)c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,22.24,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,25.14,2
+165,Benzamide,FALSE,CCN(C(=O)c1c(C)ccc2ccccc12)CC,0,24.64,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,25.25,2
+166,Benzamide,FALSE,CN(C)C(=O)c1c(C)ccc2ccccc12,0,24.53,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,24.15,2
+167,Benzamide,FALSE,CN(C(=O)c1c(C)ccc2ccccc12)C(C)(C)C,0,24.06,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,20.33,2
+168,Benzamide,FALSE,Cc1ccc2ccccc2c1C(=O)N(C3CCCCC3)C4CCCCC4,0,24.01,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,27.45,2
+169,Benzamide,FALSE,CCOc1ccc2ccccc2c1C(=O)N(CC)CC,0,23.79,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,23.42,2
+170,Benzamide,FALSE,CCOc1ccc2ccccc2c1C(=O)N3CCCCC3,0,22.36,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,21.02,2
+171,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(C(=O))ccc2cccc(CN(C)C)c12,0,25.38,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,26.01,2
+172,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1cccc2cccc(CN(C)C)c12,0,20.99,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,21.95,2
+173,Benzamide,FALSE,c(C)1cc(C)cc(C[Si](C)(C)C)c1C(=O)N(C3CCCCC3)C4CCCCC4,0,23.88,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,26.75,2
+174,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(ccc2ccccc12)[C@H](C)O,0,25.91,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,31.57,3
+175,Benzamide,FALSE,CC[C@H](O)c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,25.98,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,28.7,2
+176,Benzamide,FALSE,CCCC[C@H](O)c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,25.88,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,28.78,2
+177,Benzamide,FALSE,c4ccccc4[C@@H](O)c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,25.96,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,30.91,3
+178,Benzamide,FALSE,CCN(CC)C(=O)c1c(ccc2ccccc12)[C@H](C)O,0,25.6,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,29.01,2
+179,Benzamide,FALSE,CCCC[C@H](O)c1ccc2ccccc2c1C(=O)N(CC)CC,0,25.72,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,27.83,2
+180,Benzamide,FALSE,c4ccccc4[C@H](O)c1ccc2ccccc2c1C(=O)N(CC)CC,0,25.76,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,29.76,2
+181,Benzamide,FALSE,CC(C)[C@H](C)c1ccc2ccccc2c1C(=O)N(C(C)C)C(C)C,0,26.31,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,30.89,3
+182,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(ccc2ccccc12)[C@@H](C)[Si](C)(C)C,0,25.02,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,30.88,3
+183,Benzamide,FALSE,CC(C)N(C(C)C)C(=O)c1c(ccc2ccccc12)C(=O)C(C)C(C)C,0,23.14,2,https://www.sciencedirect.com/science/article/abs/pii/S004040209800814X,Gas,26.88,2
+184,Benzamide,FALSE,CC(C)c1cccc(c1N(C)C(=O)Nc2ccccc2)S(=O)C,0,27.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,25.47,2
+185,Benzamide,FALSE,CSc1cccc(c1N(C)C(=O)Nc2ccccc2)C(C)(C)C,0,31.5,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32.67,3
+186,Benzamide,FALSE,CSc1cccc(C([Si](C)(C)C)[Si](C)(C)C)c1N(C)C(=O)Nc2ccccc2,0,26.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,27.06,2
+187,Biaryl (6-6),FALSE,CCN(CC)C(=O)c1c(C)cc(OC)cc1c2ccccc2C,0,15.5,1,https://pubs.acs.org/doi/10.1021/acs.joc.7b00890,Gas,16.84,1
+188,Benzamide,FALSE,CCc1cccc(Sc2ccccc2)c1C(=O)N(C(C)C)C(C)C,0,23.63,2,https://pubs.acs.org/doi/10.1021/jo0007074,Gas,25.01,2
+189,Benzamide,FALSE,CCc1cccc(P(c2ccccc2)c3ccccc3)c1C(=O)N(C(C)C)C(C)C,0,24.87,2,https://pubs.acs.org/doi/10.1021/jo0007074,Gas,26.45,2
+190,Reverse benzamide,FALSE,Ic1ccccc1N(Cc2ccccc2)C(=O)Nc3ccccc3,0,16.2,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,17,1
+191,Reverse benzamide,FALSE,Cc1ccccc1N(Cc2ccccc2)C(=O)Nc3ccccc3,0,15.4,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,17.49,1
+192,Reverse benzamide,FALSE,C(C)(C)(C)c1ccccc1N(Cc2ccccc2)C(=O)Nc3ccccc3,0,16.7,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.21,2
+193,Reverse benzamide,FALSE,Ic1ccccc1N(Cc2ccccc2)C(=O)N(C)c3ccccc3,0,13.6,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,14.81,1
+194,Reverse benzamide,FALSE,C(C)(C)(C)c1ccccc1N(Cc2ccccc2)C(=O)N(C)c3ccccc3,0,19.1,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,21.52,2
+195,Reverse benzamide,FALSE,CC(C)(C)c1ccccc1N2C=CC=CC2=O,0,29.9,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.07,2
+196,Reverse benzamide,FALSE,CC(O)(C)c1ccccc1N2C=CCCC2=O,0,26.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,25.73,2
+197,Reverse benzamide,FALSE,OC(c1ccccc1)(c1ccccc1)c1ccccc1N2C=CCCC2=O,0,24.7,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24.59,2
+198,Reverse benzamide,FALSE,Cc1cccc(CC=C)c1N2C=CCCC2=O,0,30.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.79,2
+199,Reverse benzamide,FALSE,CC(C)(C)c1ccccc1N2C=CCCC2=O,0,26.95,2,https://www.sciencedirect.com/science/article/pii/S0040402004002108,Gas,27.1,2
+200,Reverse benzamide,FALSE,CC(C)(C)c1ccc(c(c1)N2C(=O)NCc3ccccc23)C(C)(C)C,0,30.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.48,2
+201,Reverse benzamide,FALSE,CC(C)(C)c1ccc(c(c1)N2C(=O)CCc3ccccc23)C(C)(C)C,0,33.1,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,31.2,3
+202,Reverse benzamide,FALSE,COCC1CCCC(=O)N1c2ccccc2C(C)(C)C,0,28.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.33,3
+203,Reverse benzamide,FALSE,CC(=C)C(=O)N(C(=O)C(=O)c1ccccc1)c2cc(ccc2C(C)(C)C)C(C)(C)C,0,27.7,2,https://pubs.rsc.org/en/content/articlelanding/2013/cc/c3cc44281k,Gas,32.15,3
+204,Reverse benzamide,FALSE,CCC(=C)C(=O)N(C(=O)C(=O)c1ccccc1)c2cc(ccc2C(C)(C)C),0,27.3,2,https://pubs.rsc.org/en/content/articlelanding/2013/cc/c3cc44281k,Gas,29.17,2
+205,Reverse benzamide,FALSE,CC(C)(C)c1ccccc1N(C2CCCCC2)C(=O)C(=O)c3ccccc3,0,31.3,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.87,3
+206,Reverse benzamide,FALSE,CN(C(=O)C(=O)c1ccccc1)c2ccccc2C(C)(C)C,0,30.5,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.67,2
+207,Reverse benzamide,FALSE,C\C=C\C(=O)N(C)c1cc(ccc1C(C)(C)C)C(C)(C)C,0,28.9,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,28.37,2
+208,Reverse benzamide,FALSE,CN(C(=O)c1ccccc1)c2cc(ccc2C(C)(C)C)C(C)(C)C,0,26.3,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,25.52,2
+209,Reverse benzamide,FALSE,C\C=C\C(=O)N(CCCCC)c1cc(ccc1C(C)(C)C)C(C)(C)C,0,29.3,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,33.9,3
+210,Reverse benzamide,FALSE,CCC(=O)N(C)c1cc(ccc1C(C)(C)C),0,29,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,30.97,3
+211,Reverse benzamide,FALSE,CCC(=O)N(C)c1cc(ccc1C(C)(C)C)C(C)(C)C,0,29.6,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,31.08,3
+212,Reverse benzamide,FALSE,CN(C(=O)C1CCCCC1)c2cc(ccc2C(C)(C)C)C(C)(C)C,0,28.7,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,31.25,3
+213,Reverse benzamide,FALSE,CN(C(=O)C=C)c1c(C)cc(C)cc1I,0,30.8,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32.53,3
+214,Reverse benzamide,FALSE,CC(C)\C=C\N(C(=O)c1ccc(Br)cc1)c2c(C)cc(C)cc2I,0,29.7,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.36,2
+215,Reverse benzamide,FALSE,Cc1cc(C)c(N(CC=C)C(=O)c2ccccc2)c(I)c1,0,30.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.11,2
+216,Reverse benzamide,FALSE,Cc1cc(C)c(N(CC=C)C(=O)CCc2ccccc2)c(I)c1,0,32.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,36.13,3
+217,Reverse benzamide,FALSE,CC(N(C(=O)C=C)c1ccc(C)cc1I)c2ccccc2,0,22.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,25.24,2
+218,Reverse benzamide,FALSE,C\C=C(/C)\C(=O)N(C)c1c(C)cc(C)cc1I,0,26,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,27.92,2
+219,Reverse benzamide,FALSE,COC(=O)\C=C\N(C(=O)OCC=C)c1c(C)cc(C)cc1I,0,32.4,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,31.89,3
+220,Reverse benzamide,FALSE,COC(=O)\C=C\N(C(=O)OC(C)(C)C)c1c(C)cc(C)cc1I,0,32.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,32.52,3
+221,Reverse benzamide,FALSE,COC(=O)\C=C\N(C(=O)OCc1ccccc1)c2c(C)cc(C)cc2I,0,32.1,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.55,3
+222,Reverse benzamide,FALSE,COc1ccc(CN(C(=O)CI)c2c(C)cc(C)cc2\C=C\C(=O)OC(C)(C)C)cc1,0,34.3,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,31.42,3
+223,Reverse benzamide,FALSE,COc1ccc(CN(C(=O)CI)c2c(Br)cc(C)cc2\C=C\C(=O)OC(C)(C)C)cc1,0,34.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,33.52,3
+224,Reverse benzamide,FALSE,COc1ccc(CN(C(=O)CI)c2c(OC)cccc2\C=C\C(=O)OC(C)(C)C)cc1,0,26.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,27.13,2
+225,Reverse benzamide,FALSE,CC(=O)N(C1CCCC=C1)c2ccccc2I,0,22.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24,2
+226,Reverse benzamide,FALSE,CC(=O)N(C1CCCC=C1)c2c(C)cc(C)cc2I,0,36,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,34.45,3
+227,Reverse benzamide,FALSE,c1cc(C)c(N2C(=O)CC(C2=O)c3ccccc3)c(C(=O)O)c1,0,28,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24.93,2
+228,Reverse benzamide,FALSE,Cc1ccc2cccnc2c1N3C(=O)CC(C3=O)c4ccccc4,0,33.2,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Water,29.43,2
+229,Reverse benzamide,FALSE,Cc1cccc(NC(=O)NCc2ccccc2)c1N3C(=O)CC(C3=O)(c4ccccc4)c5ccccc5,0,31.7,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,33.89,3
+230,Reverse benzamide,FALSE,CCC(C)(C)c1ccc(C)c(c1)N2C(=O)c3ccc4C(=O)N(C(=O)c5ccc(C2=O)c3c45)c6cc(ccc6C)C(C)(C)CC,0,25.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.93,2
+231,Reverse benzamide,FALSE,COC(=O)c1cccc(C)c1N2C(=O)c3cccc(C(=O)OC)c3C2=O,0,29.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.79,2
+232,Reverse benzamide,FALSE,O=C1CSC(=O)N1c2cccc3ccccc23,0,25.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,24.99,2
+233,Reverse benzamide,FALSE,O=C1CSC(=S)N1c2cccc3ccccc23,0,26.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.02,2
+234,Reverse benzamide,FALSE,CC1(C)SC(=O)N(C1=O)c2ccccc2Cl,0,26.9,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,23.87,2
+235,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)C3C([C@@H]4C5C=CC=CC5[C@H]3c6ccccc46)C2=O,0,20.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,20.84,2
+236,Reverse benzamide,FALSE,COc1ccccc1N2C(=O)C3C([C@@H]4C5C=CC=CC5[C@H]3c6ccccc46)C2=O,0,19.6,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,20.07,2
+237,Reverse benzamide,FALSE,Cc1c(Cl)cccc1N2C(=O)C3C([C@@H]4C5C=CC=CC5[C@H]3c6ccccc46)C2=O,0,23.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,23.72,2
+238,Reverse benzamide,FALSE,CC(=O)N(C(=O)C(C)C)c1ccccc1C(C)(C)C,0,27,2,https://www.sciencedirect.com/science/article/pii/S0040402000008528,Gas,38.01,3
+239,Reverse benzamide,FALSE,CC(=O)N(C(=O)CC(C)C)c1ccccc1C(C)(C)C,0,30.5,2,https://www.sciencedirect.com/science/article/pii/S0040402000008528,Gas,32.86,3
+240,Reverse benzamide,FALSE,CC(=O)N(C(=O)CC)c1ccccc1C(C)(C)C,0,28.6,2,https://www.sciencedirect.com/science/article/pii/S0040402000008528,Gas,36.13,3
+241,Reverse benzamide,FALSE,CC(=O)N(C(=O)c1ccccc1)c1ccccc1C(C)(C)C,0,26.3,2,https://www.sciencedirect.com/science/article/pii/S0040402000008528,Gas,27.86,2
+242,Reverse benzamide,FALSE,CN(C)c1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,25.4,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.03,2
+243,Reverse benzamide,FALSE,COc1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,25.9,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.16,2
+244,Reverse benzamide,FALSE,Cc1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,26.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.38,2
+245,Reverse benzamide,FALSE,Fc1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,26.3,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.66,2
+246,Reverse benzamide,FALSE,Clc1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,26.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.56,2
+247,Reverse benzamide,FALSE,C(F)(F)(F)c1ccc(cc1)C(=O)N(C(=O)C)c2ccccc2C(C)(C)C,0,26.8,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,29.34,2
+248,Reverse benzamide,FALSE,CCCN1C(=O)C=C(N)N(C1=O)c2ccccc2OC,0,27.8,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,27.71,2
+249,Reverse benzamide,FALSE,CCCN1C(=O)C=C(N)N(C1=O)c2ccccc2O,0,26.5,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,23.77,2
+250,Reverse benzamide,FALSE,CCCN1C(=O)C=C(N)N(C1=O)c2ccccc2N,0,28.6,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,27.21,2
+251,Reverse benzamide,FALSE,CCCN1C(=O)C=C(N)N(C1=O)c2ccccc2F,0,25.1,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,23.64,2
+252,Reverse benzamide,FALSE,CCCN1C(=O)C=C(N)N(C1=O)c2ccccc2[N+](=O)[O-],0,26,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,25.22,2
+253,Reverse benzamide,FALSE,CN(C(=O)\C=C\c1ccccc1)c2ccccc2C(C)(C)O[Si](C)(C)C,0,25.4,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,30.63,3
+254,Reverse benzamide,FALSE,CC(C)[Si](OC(C)(C)c1ccccc1N(C)C(=O)\C=C\c2ccccc2)(C(C)C)C(C)C,0,26.1,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,30.68,3
+255,Reverse benzamide,FALSE,CC(C)C(O[Si](C)(C)C)(C(C)C)c1ccccc1N(C)C(=O)\C=C\c2ccccc2,0,29.6,2,https://www.sciencedirect.com/science/article/pii/S0957416697005995,Gas,29.08,2
+256,Reverse benzamide,FALSE,CN(C(=O)C=C)c1c(I)cccc1[Si](C)(C)C,0,30.8,3,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,31.6,3
+257,Reverse benzamide,FALSE,CN(C(=O)C=C)c1c(Br)cccc1[Si](C)(C)C,0,28.2,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,28.32,2
+258,Reverse benzamide,FALSE,Clc1ccccc1N(C)C(=O)N(C)c1ccccc1Cl,0,12.41,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,13.48,1
+259,Reverse benzamide,FALSE,Brc1ccccc1N(C)C(=O)N(C)c1ccccc1Br,0,14.39,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,14.36,1
+260,Reverse benzamide,FALSE,Cc1ccccc1N(C)C(=O)N(C)c1ccccc1C,0,12.29,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,15.67,1
+261,Reverse benzamide,FALSE,CCc1ccccc1N(C)C(=O)N(C)c1ccccc1CC,0,14.29,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,13.03,1
+262,Reverse benzamide,FALSE,CCc1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C),0,14.29,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,14.95,1
+263,Reverse benzamide,FALSE,C(C)(C)c1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C),0,14.94,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,16.1,1
+264,Reverse benzamide,FALSE,Cc1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C)C,0,14.47,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,14.18,1
+265,Reverse benzamide,FALSE,CCc1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C)C,0,14.56,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,17.69,1
+266,Reverse benzamide,FALSE,C(C)(C)c1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C)C,0,15.32,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,17.41,1
+267,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1F,0,9.08,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,13.2,1
+268,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1Cl,0,12.17,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,11.45,1
+269,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1Br,0,13.46,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,16.86,1
+270,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1I,0,14.97,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,17.89,1
+271,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1C,0,12.65,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,16.32,1
+272,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1CC,0,13.58,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,16.71,1
+273,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1C(C)(C),0,14.75,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,17.54,1
+274,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1OC,0,11.69,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,9.32,1
+275,Reverse benzamide,FALSE,Cc1cccc(C)c1N(C)C(=O)N(C)c1ccccc1OC(F)(F)F,0,9.42,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,13.17,1
+276,Reverse benzamide,FALSE,c1ccccc1N(C)C(=O)N(C)c1ccccc1C(C)(C)C,0,14.08,1,https://pubs.rsc.org/en/content/articlelanding/2008/ob/b802673d,Gas,20.04,2
+277,Reverse benzamide,FALSE,CC3(C)CC(=O)N(c1cccc2cccnc12)C3=O,0,22.19,2,https://doi.org/10.1002/ejoc.201800078,Gas,21.4,2
+278,Reverse benzamide,FALSE,CC1(C)CC(=O)N(C1=O)c2cccc3ccc[nH+]c23,1,9.3,1,https://doi.org/10.1002/ejoc.201800078,Gas,6.01,1
+279,Reverse thiobenzamide,FALSE,Cc2ccc1ccccc1c2n3ccsc3=S,0,35.99,3,https://doi.org/10.1002/ejoc.201800078,Gas,38.26,3
+280,Reverse benzamide,FALSE,CC(NC2CC(=O)N(c1ccccc1C(C)(C)C)C2=O)c3ccccc3,0,28.46,2,https://doi.org/10.1002/ejoc.201800078,Gas,30.55,3
+281,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)COC2=S,0,24.81,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,24.6,2
+282,Reverse benzamide,FALSE,Clc1ccccc1N2C(=O)COC2=S,0,26.36,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,26.76,2
+283,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)C(C)(C)OC2=S,0,24.93,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,24.64,2
+284,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)CSC2=S,0,27.34,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,27.23,2
+285,Reverse benzamide,FALSE,Clc1ccccc1N2C(=O)CSC2=S,0,28.97,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,28.34,2
+286,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)C(C)(C)SC2=S,0,26.91,2,https://pubs.rsc.org/en/content/articlelanding/1993/p2/p29930001557,Gas,26.65,2
+287,Reverse benzamide,FALSE,CC1(C)OC(=S)N(C1=O)c2ccccc2F,0,19.61,1,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,19.38,1
+288,Reverse benzamide,FALSE,CC1(C)OC(=S)N(C1=O)c2ccccc2Cl,0,26.92,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,26.73,2
+289,Reverse benzamide,FALSE,CC1(C)OC(=S)N(C1=O)c2ccccc2Br,0,28.03,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,28.36,2
+290,Reverse benzamide,FALSE,CC1(C)OC(=S)N(C1=O)c2ccccc2I,0,29.65,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,29.15,2
+291,Reverse benzamide,FALSE,CC1(C)SC(=S)N(C1=O)c2ccccc2F,0,21.47,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,21.35,2
+292,Reverse benzamide,FALSE,CC1(C)SC(=S)N(C1=O)c2ccccc2Cl,0,27.81,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,27.39,2
+293,Reverse benzamide,FALSE,CC1(C)SC(=S)N(C1=O)c2ccccc2Br,0,29.08,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,28.97,2
+294,Reverse benzamide,FALSE,CC1(C)SC(=S)N(C1=O)c2ccccc2I,0,30.65,3,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,30.17,3
+295,Reverse benzamide,FALSE,Fc1ccccc1N2C(=O)CSC2=S,0,21.76,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,22.06,2
+296,Reverse benzamide,FALSE,Brc1ccccc1N2C(=O)CSC2=S,0,29.55,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,29.87,2
+297,Reverse benzamide,FALSE,Ic1ccccc1N2C(=O)CSC2=S,0,30.85,3,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,30.99,3
+298,Reverse benzamide,FALSE,Fc1ccccc1N2C(=O)C(C)(C)OC2=O,0,13.7,1,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,13.06,1
+299,Reverse benzamide,FALSE,Clc1ccccc1N2C(=O)C(C)(C)OC2=O,0,19.89,1,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,20.29,2
+300,Reverse benzamide,FALSE,Brc1ccccc1N2C(=O)C(C)(C)OC2=O,0,20.71,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,22.11,2
+301,Reverse benzamide,FALSE,Ic1ccccc1N2C(=O)C(C)(C)OC2=O,0,22.52,2,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,23.06,2
+302,Reverse benzamide,FALSE,Cc1ccccc1N2C(=O)C(C)(C)OC2=O,0,17.56,1,https://www.sciencedirect.com/science/article/pii/S0957416608006137,Gas,17.85,1
+303,Reverse benzamide,FALSE,C[C@@H]1S\C(=N/c2c(OC)cccc2)\N(C1=O)c3c(OC)cccc3,0,22.99,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,22.41,2
+304,Reverse benzamide,FALSE,C[C@@H]1S\C(=N/c2cccc3ccccc23)\N(C1=O)c4cccc5ccccc45,0,25.38,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,26.35,2
+305,Reverse benzamide,FALSE,C[C@@H]1S\C(=N/c2c(Cl)cccc2)\N(C1=O)c3c(Cl)cccc3,0,24.98,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,27.78,2
+306,Reverse benzamide,FALSE,C[C@@H]1S\C(=N/c2c(Br)cccc2)\N(C1=O)c3c(Br)cccc3,0,27.28,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,28.23,2
+307,Reverse benzamide,FALSE,C1S\C(=N/c2c(OC)cccc2)\N(C1=O)c3c(OC)cccc3,0,23.45,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,23.6,2
+308,Reverse benzamide,FALSE,C1S\C(=N/c2cccc3ccccc23)\N(C1=O)c4cccc5ccccc45,0,26.58,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,28.07,2
+309,Reverse benzamide,FALSE,C1S\C(=N/c2c(Cl)cccc2)\N(C1=O)c3c(Cl)cccc3,0,26.46,2,https://onlinelibrary.wiley.com/doi/10.1002/chir.22007,Gas,25.81,2
+310,Reverse benzamide,FALSE,Clc1ccccc1N2C(O)CSC2=S,0,17.9,1,https://pubs.rsc.org/en/content/articlelanding/2016/ob/c6ob02145j,Gas,16.78,1
+311,Reverse benzamide,FALSE,Cc1ccccc1N2C(O)CSC2=S,0,18.4,1,https://pubs.rsc.org/en/content/articlelanding/2016/ob/c6ob02145j,Gas,17,1
+312,Reverse benzamide,FALSE,c1ccc2ccccc2c1N3C(O)CSC3=S,0,21.2,2,https://pubs.rsc.org/en/content/articlelanding/2016/ob/c6ob02145j,Gas,21.39,2
+313,Reverse benzamide,FALSE,S=C1SC=CN1c2cccc3ccccc23,0,21.6,2,https://pubs.rsc.org/en/content/articlelanding/2016/ob/c6ob02145j,Gas,21.92,2
+314,Reverse benzamide,FALSE,Cc1ccccc1\N=C\2/SCC(=O)N2c3ccccc3C,0,25.4,2,https://pubs.acs.org/doi/10.1021/jo0625554,Gas,24.84,2
+315,Reverse benzamide,FALSE,Cc1ccccc1\N=C\2/S\C(=C/c3ccccc3)\C(=O)N2c4ccccc4C,0,25.7,2,https://pubs.acs.org/doi/10.1021/jo0625554,Gas,25.75,2
+316,Reverse benzamide,FALSE,O=C1N(\C(=N\c2cccc3ccccc23)\S/C/1=C\c4ccccc4)c5cccc6ccccc56,0,27.2,2,https://pubs.acs.org/doi/10.1021/jo0625554,Gas,27.24,2
+317,Reverse benzamide,FALSE,COc1ccccc1\N=C\2/S\C(=C/c3ccccc3)\C(=O)N2c4ccccc4OC,0,24.1,2,https://pubs.acs.org/doi/10.1021/jo0625554,Gas,23.6,2
+318,Reverse benzamide,FALSE,Cc1cc(C=O)c(C)n1c2cccc3cccnc23,0,31.09,3,https://doi.org/10.1002/jhet.5570290209,Gas,30.8,3
+319,Reverse benzamide,FALSE,Cc1cc(C=O)c(C)n1c2ncnc3c2ncn3C,0,12.43,1,https://doi.org/10.1002/jhet.5570290209,Gas,10.61,1
+320,Reverse benzamide,FALSE,COc1ccccc1N2C(=CSC2=S)C,0,32.47,3,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,33.02,3
+321,Reverse benzamide,FALSE,CC1=CSC(=O)N1c2ccccc2O,0,20.88,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,19.21,1
+322,Reverse benzamide,FALSE,CC1=CSC(=S)N1c2ccccc2O,0,30.54,3,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,29.74,2
+323,Reverse benzamide,FALSE,COc1ccccc1\N=C\2/SC=C(C)N2c3ccccc3OC,0,25.63,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,25.14,2
+324,Reverse benzamide,FALSE,COc1ccccc1N2C(=CS/C/2=N\c3ccccc3C)C,0,26.23,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,27.54,2
+325,Reverse benzamide,FALSE,CC1=CS\C(=N/c2ccccc2O)\N1c3ccccc3C,0,26.88,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,29.84,2
+326,Reverse benzamide,FALSE,CC1=CS\C(=N/c2ccccc2O)\N1c3ccccc3OCC=C,0,26.35,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,29.72,2
+327,Reverse benzamide,FALSE,CC1=CS\C(=N/c2ccccc2C)\N1c3ccccc3O,0,20.23,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,21.75,2
+328,Reverse benzamide,FALSE,COc1ccccc1\N=C\2/SC=C(C)N2c3ccccc3C,0,29.12,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,28.66,2
+329,Reverse benzamide,FALSE,CC1=CS\C(=N/c2ccccc2O)\N1c3ccccc3O,0,20.68,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,21.61,2
+330,Reverse benzamide,FALSE,COc1ccccc1\N=C\2/SC=C(C)N2c3ccccc3O,0,20.99,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,23.24,2
+331,Reverse benzamide,FALSE,COc1ccccc1N2C(=CS/C/2=N\c3ccccc3O)C,0,26.21,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,28.94,2
+332,Reverse benzamide,FALSE,COc1ccccc1N2C(=CSC2=O)C,0,26.42,2,https://pubs.acs.org/doi/10.1021/jo701756u,Gas,25.84,2
+333,Reverse benzamide,FALSE,CC(C)(C)c1ccccc1N2C(=O)C[C@H](NCc3ccccc3)C2=O,0,28.2,2,https://doi.org/10.1002/ejoc.201800078,Gas,30.35,3
+334,Reverse benzamide,FALSE,CC(N[C@H]1CC(=O)N(C1=O)c2ccccc2C(C)(C)C)c3ccccc3,0,28.44,2,https://doi.org/10.1002/ejoc.201800078,Gas,30.55,3
+335,Reverse benzamide,FALSE,COc1ccccc1\N=C\2/S\C(=C/c3ccccc3)\C(=S)N2c4ccccc4OC,0,27.7,2,https://doi.org/10.1002/ejoc.201800078,Gas,30.8,3
+336,Reverse benzamide,FALSE,Brc1ccccc1\N=C/2\SC3=C(S[C@@H]4[C@H]5CC[C@H](C5)[C@@H]4[C@H]3c6ccccc6)N2c7ccccc7Br,0,23.21,2,https://doi.org/10.1002/ejoc.201800078,Gas,26.42,2
+337,Reverse benzamide,FALSE,COC(C)(C)c2cc(OCc1ccccc1)ccc2n4c(=O)c(=O)c3ccccc34,0,31.1,3,https://www.sciencedirect.com/science/article/pii/S0040403912018722,Gas,32.55,3
+338,Reverse benzamide,FALSE,Cc1cccc(C(=O)O)c1N2C(=O)c3cc4C(=O)N(C(=O)c4cc3C2=O)c5c(C)cccc5C(=O)O,0,29.4,2,https://pubs.acs.org/doi/10.1021/ol051325t,Gas,27.73,2
+339,Biaryl (5-5),FALSE,CCOC(=O)c1c(C)[nH]c(c2ccccc2)c1c3c([nH]c(C)c3C(=O)OCC)c4ccccc4,0,25.84,2,https://pubs.rsc.org/en/content/articlelanding/2016/ra/c6ra07585a,Gas,26,2
+340,Biaryl (5-5),FALSE,COC(=O)c1c(C)[nH]c(c2ccccc2)c1c3c([nH]c(C)c3C(=O)OC)c4ccccc4,0,26.05,2,https://pubs.rsc.org/en/content/articlelanding/2016/ra/c6ra07585a,Gas,26.18,2
+341,Biaryl (5-5),FALSE,CC(C)(C)OC(=O)c1c(C)[nH]c(c2ccccc2)c1c3c([nH]c(C)c3C(=O)OC(C)(C)C)c4ccccc4,0,26.26,2,https://pubs.rsc.org/en/content/articlelanding/2016/ra/c6ra07585a,Water,29.98,2
+342,Reverse benzamide,FALSE,c1ccc2c(c(sc2c1)c3ccc(s3)c4cccs4)c5c(sc6ccccc56)c7ccc(s7)c8cccs8,0,39.91,3,https://doi.org/10.1002/ange.201309585,Water,35.13,3
+343,Sulfoxide,FALSE,CS(=O)c1c2ccccc2cc3ccccc13,0,10.9,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Water,13.05,1
+344,Sulfoxide,FALSE,CC(C)(C)S(=O)c1c2ccccc2cc3ccccc13,0,18.7,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,20,2
+345,Sulfoxide,FALSE,O=S(Cc1ccccc1)c2c3ccccc3cc4ccccc24,0,13.7,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,17.92,1
+346,Sulfoxide,FALSE,CC(C)S(=O)c1c2ccccc2cc3ccccc13,0,14,1,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,15,1
+347,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(OC)ccc3ccccc23)C,0,17.42,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,17.87,1
+348,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@@]2(C)O[C@H]2[C@@H]1c3c(OC(=O)c4cc(cc(c4)[N+](=O)[O-])[N+](=O)[O-])ccc5ccccc35,0,22.66,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,23.18,2
+349,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(C)cc(C)cc2O)C,0,13.29,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,19.14,1
+350,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@H](C)C[C@@H]1c2c(C)cc(C)cc2OC(=O)c3cc(cc(c3)[N+](=O)[O-])[N+](=O)[O-],0,21.73,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,27.15,2
+351,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(O)ccc3ccccc23)C,0,16.16,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,18.52,1
+352,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(C)cc(C)cc2OC)C,0,15.06,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,15.23,1
+353,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@@]2(C)O[C@H]2[C@@H]1c3c(C)cc(C)cc3OC(=O)c4cc(cc(c4)[N+](=O)[O-])[N+](=O)[O-],0,21.85,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,21.93,2
+354,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@H](C)C[C@@H]1c2c(O)ccc3ccccc23,0,22.42,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,23.55,2
+355,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@H](C)C[C@@H]1c2c(C)cc(C)cc2O,0,21.96,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,24.68,2
+356,Aryl-aliphatic (6-6),FALSE,COc1cc(C)cc(C)c1[C@@H]2[C@H](CC[C@@]3(C)O[C@@H]23)C(C)C,0,22.32,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,24.35,2
+357,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(OC(=O)c3cc(cc(c3)[N+](=O)[O-])[N+](=O)[O-])ccc4ccccc24)C,0,17.07,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,17.29,1
+358,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CCC(=C[C@@H]1c2c(C)cc(C)cc2OC(=O)c3cc(cc(c3)[N+](=O)[O-])[N+](=O)[O-])C,0,15.32,1,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,16.98,1
+359,Aryl-aliphatic (6-6),FALSE,CC(C)[C@H]1CC[C@H](C)C[C@@H]1c2c(OC(=O)c3cc(cc(c3)[N+](=O)[O-])[N+](=O)[O-])ccc4ccccc24,0,22.73,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,24.94,2
+360,Aryl-aliphatic (6-6),FALSE,COc1cc(C)cc(C)c1[C@H]2C[C@@H](C)CC[C@@H]2C(C)C,0,21.77,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,23.78,2
+361,Aryl-aliphatic (6-6),FALSE,COc1ccc2ccccc2c1[C@@H]3[C@H](CC[C@@]4(C)O[C@@H]34)C(C)C,0,22.68,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,23.69,2
+362,Aryl-aliphatic (6-6),FALSE,COc1ccc2ccccc2c1[C@H]3C[C@@H](C)CC[C@@H]3C(C)C,0,21.77,2,https://pubs.rsc.org/en/content/articlepdf/2023/ob/d3ob01617j,Gas,23.91,2
+363,Aryl-aliphatic (6-5),FALSE,CC1=CC(=C(C)N1c2ccccc2Cc3ccccc3)C=O,0,30.59,3,https://doi.org/10.1002/ejoc.201800078,Gas,41.62,3
+364,Aryl-aliphatic (6-5),FALSE,C1Cc2ccccc2N1c3c(ccc4ccccc34)P(c5ccccc5)c6ccccc6,0,27.6,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,30.27,3
+365,Aryl-aliphatic (6-5),FALSE,COc1cccc(P(c2ccccc2)c3ccccc3)c1N4CCc5ccccc45,0,24.5,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,26.41,2
+366,Aryl-aliphatic (6-5),FALSE,Cc1cccc(P(c2ccccc2)c3ccccc3)c1N4CCc5ccccc45,0,28.5,2,https://pubs.acs.org/doi/10.1021/acs.chemrev.5b00136,Gas,31.03,3
+367,Aryl-aliphatic (6-5),FALSE,Cc1ccc2ccccc2c1N3CC[N+](=C3)c4c(C)ccc5ccccc45,1,17.8,1,https://doi.org/10.1002/ejic.200900010,Gas,18.37,1
+368,Aryl-aliphatic (6-5),FALSE,Cc1ccc2ccc(C)c(N3CC[N+](=C3)c4c(C)ccc5ccc(C)cc45)c2c1,1,18,1,https://doi.org/10.1002/ejic.200900010,Gas,18.29,1
+369,Aryl-aliphatic (6-5),FALSE,c1ccc2ccc(C)c(N3CCN([C]3)c4c(C)ccc5ccccc45)c2c1,0,13.6,1,https://doi.org/10.1002/ejic.200900010,Gas,15.55,1
+370,Aryl-aliphatic (6-5),FALSE,Cc1ccc2ccc(C)c(N3CCN([C]3)c4c(C)ccc5ccc(C)cc45)c2c1,0,14.3,1,https://doi.org/10.1002/ejic.200900010,Gas,15.64,1
+371,Aryl-aliphatic (6-5),FALSE,c1ccc2ccc(C(C)C)c(N3CCN([C]3)c4c(C(C)C)ccc5ccccc45)c2c1,0,19.2,1,https://doi.org/10.1002/ejic.200900010,Gas,17.29,1
+372,Aryl-aliphatic (6-5),FALSE,CC(C)c1ccc2c(N3CCN([C]3)c4c(ccc5cc(ccc45)C(C)C)C(C)C)c(ccc2c1)C(C)C,0,19.2,1,https://doi.org/10.1002/ejic.200900010,Gas,17.28,1
+373,Aryl-aliphatic (6-5),FALSE,CC(C)c1ccc2ccc(C(C)C)c(N3CCN([C]3)c4c(ccc5ccc(cc45)C(C)C)C(C)C)c2c1,0,19.7,1,https://doi.org/10.1002/ejic.200900010,Gas,17.47,1
+374,Aryl-aliphatic (6-5),FALSE,C1CCC(CC1)c2ccc3ccccc3c2N4CCN([C]4)c5c(ccc6ccccc56)C7CCCCC7,0,19.2,1,https://doi.org/10.1002/ejic.200900010,Gas,17.28,1
+375,Amide,FALSE,ClN(C)C(C)=O,0,15.38,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,16.36,1
+376,Amide,FALSE,FN(C)C(C)=O,0,17.1,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,16.44,1
+377,Amide,FALSE,CN(C(F)(F)F)C(C)=O,0,16.52,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,12.86,1
+378,Amide,FALSE,CN(C(C)(C))C(C)=O,0,14.35,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,18.03,1
+379,Amide,FALSE,CCNC(C)=O,0,18.72,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,19.59,1
+380,Amide,FALSE,CN(C)C=O,0,19.25,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,22.24,2
+381,Amide,FALSE,CN(C)C(C)=O,0,15.33,1,https://pubs.acs.org/doi/pdf/10.1021/ja00120a006,Gas,17.31,1
+382,Biaryl (6-6),TRUE,CC(C)c1ccccc1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,26,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,27.99,2
+383,Biaryl (6-6),TRUE,CC1CN(CCN1C2=NC(=O)N(c3ccccc3C4CC4)c5nc(c(Cl)cc25)c6c(O)cccc6F)C(=O)C=C,0,25,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,23.16,2
+384,Biaryl (6-6),TRUE,CCc1cccc(C)c1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,29,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,36.27,3
+385,Biaryl (6-6),TRUE,CC(C)c1cccnc1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,23.5,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,24.47,2
+386,Biaryl (6-5),TRUE,CC(C)n1nccc1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,21.5,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,18.37,1
+387,Biaryl (6-5),TRUE,CC(C)c1ncsc1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,17.5,1,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,17.5,1
+388,Biaryl (6-5),TRUE,CC(C)n1ncc(C)c1N2C(=O)N=C(N3CCN(CC3C)C(=O)C=C)c4cc(Cl)c(nc24)c5c(O)cccc5F,0,25.8,2,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,23.94,2
+389,Biaryl (6-6),TRUE,C[C@H](Nc1nc(N)nc(N)c(C#N)1)C2=Nc3cccc(Cl)c3C(=O)N2c4cncc(F)c4,0,<20,1,https://doi.org/10.1016/j.bmcl.2017.11.050,Gas,19.12,1
+390,Biaryl (6-6),TRUE,C[C@H](Nc1nc(N)nc(N)c(C#N)1)C2=Nc3cccc(Cl)c3C(=O)N2c4cncc(F)c(C)4,0,28.3,2,https://doi.org/10.1016/j.bmcl.2017.11.050,Gas,28.88,2
+391,Biaryl (6-6),TRUE,COc1cccc(C2=C(C)N(Cc3c(F)cccc3F)C(=O)N(C[C@H](N)c4ccccc4)C2=O)c1F,0,23.3,2,https://doi.org/10.1016/j.bmcl.2017.11.050,Gas,22.22,2
+392,Biaryl (6-6),TRUE,Cc4onc(NS(=O)(=O)c1ccccc1c3ccc(c2ncco2)cc3CN(C)C(=O)CC(C)(C)C)c4C,0,25.1,2,https://doi.org/10.1016/j.bmcl.2017.11.050,Gas,27.19,2
+393,Biaryl (6-5),TRUE,Cc1nc2c(cc(cc2n1c3ccnc4c(F)ccc(F)c34)c5ccnc(N)c5F)c6nnc[nH]6,0,35,3,https://pubs.acs.org/doi/10.1021/acs.jmedchem.8b00797,Gas,33.15,3
+394,Biaryl (6-5),TRUE,CCc1nnc(c2ccc(nc2)c3ccccc3)n1c4cccc(C#N)c4C,0,30.35,3,https://doi.org/10.1002/ejoc.201800078,Gas,33.02,3
+395,Reverse benzamide (6),TRUE,COc1ccc(N(C(C)C)C(=O)C2CCC(C)CC2)c(c1)C(=O)O,0,23,2,https://doi.org/10.1016/j.bmcl.2017.11.050,Gas,26.86,2
+396,Biaryl (6-6),TRUE,CCCN1C(=O)N(c2cc(OC)ccc2OC)c3nc(N)ccc3C1=O,0,27.7,2,https://www.sciencedirect.com/science/article/pii/S0968089617311276,Gas,27.74,2
+397,Biaryl (6-6),TRUE,CC(C)(C)c1cc(-c2cc(-c3ccc(C(=O)O)cc3)ccc2OCCO)ccc1N1CCCC1,0,<20,1,https://pubs.acs.org/doi/10.1021/acs.accounts.2c00500,Gas,6.1,1
+398,Biaryl (6-6),TRUE,COc1cccc(-c2c(C)n(Cc3c(F)cccc3C(F)(F)F)c(=O)n(C[C@H](NCCCC(=O)O)c3ccccc3)c2=O)c1F,0,23.3,2,https://pubs.acs.org/doi/10.1021/acs.accounts.2c00500,Gas,21.41,2
+399,Biaryl (6-6),TRUE,COc1c(C)ccc(C2=C(C)N(Cc3c(F)cccc3F)C(=O)N(C[C@H](N)c4ccccc4)C2=O)c1F,0,23.02,2,https://onlinelibrary.wiley.com/doi/abs/10.1002/chir.20198,Gas,23.71,2
+400,Biaryl (6-5),TRUE,CN1C(=C(C=N1)C2=CC3=C(C=C2)C(=O)NN=C3CN)C4=C(C(=CC(=C4F)Cl)OC5CC5)C#N,0,31.5,3,https://pubs.acs.org/doi/full/10.1021/acsomega.2c03316,Gas,29.85,2
+401,Biaryl (6-6),TRUE,CC(C)c1nccc(C)c1N2C(=O)N=C(N3CCN(C[C@@H]3C)C(=O)C=C)c4cc(F)c(nc24)c5c(O)cccc5F,0,>31,3,https://pubs.acs.org/doi/10.1021/acs.jmedchem.9b01180,Gas,35.59,3
+402,Biaryl (7-6),TRUE,CC(=O)N[C@H]1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC,0,22,2,https://chemrxiv.org/engage/chemrxiv/article-details/653e383648dad23120a2c1bf,Gas,24.76,2
+403,Biaryl (6-5),TRUE,c1ccc2c(c1)c(ccc2n3c(nnc3Br)SCC(=O)O)C4CC4,0,>30,3,https://pubs.acs.org/doi/10.1021/acsmedchemlett.6b00465,Gas,34.73,3
+404,Benzamide (5),TRUE,CC(C)CN1C(=O)N(C)C(=O)c2c1sc(Cc3ccnc4ccc(F)cc34)c2C(=O)N5CC[C@@H](O)C5,0,25.1,2,https://pubs.acs.org/doi/10.1021/jm060995h,Gas,27.81,2

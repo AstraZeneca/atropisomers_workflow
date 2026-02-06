@@ -2,6 +2,11 @@
 
 This is a repository to support the publication **An Automated Computational Workflow for Quantifying Atropisomer Risk in Pharmaceutical Development** by *Elliot H. E. Farrar, Carlo Alberto Gaggioli, David Buttar and Simone Tomasi*. For queries, contact the corresponding author at *elliot.farrar@astrazeneca.com*.
 
+[Python](https://img.shields.io/badge/python-%3E=3.11-blue?logo=python)
+[Maturity level-0](https://img.shields.io/badge/Maturity%20Level-ML--0-red) 
+[Apache](https://img.shields.io/badge/license-Apache%20License%202.0-blue)
+
+
 ## Overview
 
 This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs). This allows users to predict the rotational barrier and [LaPlante atropisomer class](https://pubs.acs.org/doi/10.1021/jm200584g) of the identified bonds using quantum mechanics and probe the temperature- and solvent-dependence of the racemization kinetics. The core class, `Atropisomers` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:

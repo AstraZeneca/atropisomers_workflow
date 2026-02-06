@@ -4,18 +4,19 @@ This is a repository to support the publication **An Automated Computational Wor
 
 ## Overview
 
-This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs), allowing users to predict the associated rotational barrier and atropisomer class as per the [LaPlante class definitions](https://pubs.acs.org/doi/10.1021/jm200584g). The core class, `AtropRun` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
+This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs), allowing users to predict the rotational barrier and [LaPlante atropisomer class](https://pubs.acs.org/doi/10.1021/jm200584g) of identified rotatable bonds and probe temperature- and solvent-dependance of the racemization kinetics. The core class, `Atropisomers` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
 
  - **Substructure detection**: Screens the input structure for predefined SMARTS motifs associated with atropisomerism to identify rotational bonds.
  - **Steric filtering**: Evaluates the local steric environment of rotational bonds to capture hindered systems.
  - **GIC scan setup**: Constructs dihedral scans to probe the rotational axis in both directions.
  - **Scan parsing**: Parses Gaussian scan logs to identify local maximum corresponding to TS candidates.
- - **TS validation**: Parses Gaussian TS optimization logs to confirm that dihedrals remain consistent with the intended rotational mode.
+ - **TS validation**: Parses Gaussian TS optimization logs to confirm dihedrals remain consistent with the intended rotational mode.
  - **Barrier correction**: Applies linear corrections derived from experimental benchmark regressions.
- - **Visualization**: Visualizes identified atropisomeric bonds with the calculated barrier.
- - **Interpretation**: TBC.
+ - **Class assignment**: Assigns the LaPlante atropisomer class of the computed barrier.
+ - **Visualization**: Visualizes identified atropisomeric bonds with the computed barrier.
+ - **Interpretation**: Visualizes temperature-dependance of the interconversion half-life.
 
-A full, step-by-step interactive demonstration of the code is available in `demo.ipynb`, including a worked example and illustrations of applicable substructures.
+A full, step-by-step interactive demonstration of the code, including a worked example, is available in `demo.ipynb`.
 
 ## Contents
 
@@ -28,6 +29,7 @@ A full, step-by-step interactive demonstration of the code is available in `demo
  - `literature_benchmark.csv`: Structures, barriers and sources for all compounds in the literature benchmark.
  - `literature_benchmark.ipynb`: Interactive notebook summarizing the data in the literature benchmark.
  - `requirements.txt`: Pip requirements for the atropisomers conda environment.
+ - `substructures.ipynb`: Interactive notebook demonstrating substructure breadth.
 
 ## Setup
 
@@ -45,6 +47,6 @@ To build the conda environment for the interactive notebooks:
  - Install pip requirements: `pip install -r requirements.txt`
  - Install cclib with conda: `conda install -c conda-forge openbabel cclib`
 
-### Use Interactive Demo
+### Execute the demo notebook
 
 Follow the steps in the interactive demonstration of the code in `demo.ipynb`.

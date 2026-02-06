@@ -1,14 +1,16 @@
+import math
 import cclib
 import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 from IPython.display import SVG
 from itertools import combinations
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem import AllChem as Chem
 from rdkit.Chem import Draw
 
-class AtropRun():
+class Atropisomers():
     """
     A class to run the atropisomers workflow. 
     
@@ -1662,3 +1664,398 @@ class AtropRun():
 
         # Display molecule
         display(SVG(image))
+
+    def assign_class(self, barrier):
+        """
+        Assigns the LaPlante atropisomer class based on the value of the barrier.
+
+        Parameters:
+            barrier (float): The barrier value to classify.
+
+        Returns:
+            int: The assigned class.
+        """
+        return 3 if barrier > 30 else 1 if updated_barrier < 20 else 2
+        
+    # Plotting functions
+
+    def calculate_half_life(self, T, G):
+        """
+        Calculates the half life of an atropisomer at a given temperature and activation barrier:
+         - The Eyring equation relates the rate constant to the activation free energy barrier (ΔG‡) and temperature (T)
+         - The half-life of interconversion (t₁/₂) is related to the rate constant (k) by: t₁/₂ = ln(2) / k
+         - Combining these equations allows calculation of t₁/₂ from ΔG‡ and T.
+
+        Parameters:
+            T (float): The temperature (°C).
+            G (float): The activation free energy barrier (kcal/mol).
+
+        Returns:
+            float: The computed half-life (seconds).
+
+        """
+
+        # Define constants
+        kB = 1.3806488E-23  #  Boltzmann constant
+        h = 6.62606957E-34  # Planck's constant
+
+        # Calculate half-life
+        return math.log(2) / (2 * (kB * (273.15 + T) / h) * math.exp(-G * 1000 / (1.987 * (273.15 + T))))
+
+    def convert_units(self, array):
+        """
+        Converts the input array from seconds to the unit specified by self.half_life_units.
+
+        Supported units are:
+            - 'seconds' (no conversion)
+            - 'minutes'
+            - 'hours'
+            - 'days'
+            - 'years'
+
+        Parameters:
+            array (numpy.ndarray): A numpy array containing half-life values in seconds.
+
+        Returns:
+            numpy.ndarray: A numpy array containing half-life values in the specified units.
+        """
+
+        if self.half_life_units == 'seconds':
+            return array # default
+        elif self.half_life_units == 'minutes':
+            return array / self.seconds_in_minute
+        elif self.half_life_units == 'hours':
+            return array / self.seconds_in_hour
+        elif self.half_life_units == 'days':
+            return array / self.seconds_in_day
+        elif self.half_life_units == 'years':
+            return array / self.seconds_in_year
+
+    def format_number(self, num):
+        """
+        Formats a number as a string, using scientific notation for very large or very small values.
+        Scientific notation is used if the absolute value of the number is greater than or equal to
+        1e4, or less than 1e-3 (excluding zero). Otherwise, returns the number with two decimal places.
+
+        Args:
+            num (float): The number to format.
+
+        Returns:
+            str: The formatted number as a string.
+        """
+
+        # Use scientific notation
+        if abs(num) >= 1e4 or (abs(num) < 1e-3 and num != 0):
+            return f"{num:.2e}"
+
+        # Use standard float representation
+        else:
+            return f"{num:.2f}"
+
+    def proportion_through_range(self, min_value, max_value, value):
+        """
+        Given a minimum and maximum value defining a range, and a value within that range, this method
+        returns the proportion (between 0 and 1) that the value represents within the range.
+
+        Parameters:
+            min_value (float): The minimum value of the range.
+            max_value (float): The maximum value of the range.
+            value (float): The value for which to calculate the proportion. Must satisfy min_value <= value <= max_value.
+
+        Returns:
+            float: The proportion of the value within the range [min_value, max_value].
+
+        Raises:
+            ValueError: If the value is not within the specified range.
+        """
+
+        # Ensure that the value is within the range
+        if not (min_value <= value <= max_value):
+            raise ValueError("The value must be within the range [min_value, max_value].")
+
+        # Calculate the range
+        range_value = max_value - min_value
+
+        # Calculate the distance from the minimum value
+        distance_from_min = value - min_value
+
+        return (distance_from_min / range_value)
+
+    def add_constant_half_life_line(self, fig, half_life):
+        """
+        Adds a contour line representing a constant half-life to a Plotly figure and calculates the angle of the line.
+
+        Parameters:
+            fig (plotly figure): The Plotly figure to annotate.
+            half_life (float): The value of the half-life to be represented as a contour line.
+
+        Returns:
+            plotly figure: The updated Plotly figure.
+            angle (float): The angle (in degrees) of the contour line.
+        """
+
+        # Add a contour line at the specified half-life value
+        fig.add_trace(go.Contour(
+            z=self.Z,
+            x=self.T[0],
+            y=self.G[:, 0],
+            contours=dict(
+                type='constraint',
+                operation='=',
+                value=half_life
+            ),
+            line=dict(
+                color='RGB(100,100,100)',
+                dash='dash',
+                width=1,
+            ),
+            showlegend=False, # hide legend
+            hoverinfo='skip', # don't change the hover info
+            ),
+        )
+
+        # Determine the angle of the line assuming it can be represented by y = mx + c
+        x0, x1 = self.T[0][0], self.T[0][-1]
+        y0, y1 = self.G[0, 0], self.G[-1, 0]
+
+        # Calculate the slope (m) of the line
+        slope = (y1 - y0) / (x1 - x0) if x1 != x0 else float('inf')
+
+        # Calculate the angle (in degrees) using the arctangent function
+        angle = np.degrees(np.arctan(slope)) if x1 != x0 else 90.0
+
+        return fig, angle
+
+    def annotate_constant_half_life_line(self, fig, text, x, y, angle):
+        """
+        Annotates a constant half-life line on a Plotly figure with a custom text label.
+
+        Parameters:
+            fig (plotly figure): The Plotly figure to annotate.
+            text (str): The text to display as the annotation.
+            x (float): The x-coordinate for the annotation.
+            y (float): The y-coordinate for the annotation.
+            angle (float): The angle (in degrees) to rotate the annotation text.
+
+        Returns:
+            plotly figure: The updated Plotly figure.
+        """
+
+        # Add text at the specified coordinates
+        fig.add_annotation(
+            x=x, # x-coordinate of text
+            y=y, # y-coordinate of text
+            text=text, # the text to display
+            showarrow=False, # whether to show an arrow pointing to the text
+            font=dict(color='RGB(240,240,240)', size=13), # font settings
+            xanchor='center', # horizontal alignment of the text
+            yanchor='middle', # vertical alignment of the text
+            textangle=angle  # angle of the text
+        )
+        return fig
+
+    def add_class_boundary_line(self, fig, boundary):
+        """
+        Adds a horizontal boundary line to the given Plotly figure at the specified y-value.
+
+        Parameters:
+            fig (plotly figure): The Plotly figure to annotate.
+            boundary (float): The y-value at which to draw the horizontal boundary line.
+
+        Returns:
+            plotly figure: The updated Plotly figure.
+        """
+
+        # Add a horizontal line at the specified boundary value
+        fig.add_shape(
+            type='line',
+            x0=np.min(self.T), x1=np.max(self.T),
+            y0=boundary, y1=boundary,
+            line=dict(
+                color='black',
+                dash='dot',
+                width=1
+                ),
+            showlegend=False, # hide legend
+            )
+
+        return fig
+
+    def annotate_class_boundary_line(self, fig, text, subtext, x, y):
+        """
+        Adds two text annotations to a Plotly figure at specified coordinates to label a class boundary line.
+
+        Parameters:
+            fig (plotly figure): The Plotly figure to annotate.
+            text (str): The main annotation text to display at the specified (x, y) coordinates.
+            subtext (str): The secondary annotation text to display slightly below the main text.
+            x (float): The x-coordinate for both annotations.
+            y (float): The y-coordinate for the main annotation text. The secondary text is placed at (x, y-3).
+
+        Returns:
+            plotly figure: The updated Plotly figure.
+        """
+
+        # Add the main annotation text at the specified coordinates
+        fig.add_annotation(
+            x=x, # x-coordinate of the text
+            y=y, # y-coordinate of the text
+            text=text, # the text to display
+            showarrow=False,  # whether to show an arrow pointing to the text
+            font=dict(color='black', size=13.5), # font settings
+            xanchor='center',  # horizontal alignment of the text
+            yanchor='middle',  # vertical alignment of the text
+        )
+
+        # Add the secondary annotation text slightly below the main text
+        fig.add_annotation(
+            x=x,  # x-coordinate of the text
+            y=y-3,  # y-coordinate of the text
+            text=subtext, # the text to display
+            showarrow=False, # whether to show an arrow pointing to the text
+            font=dict(color='black', size=11), # font settings
+            xanchor='center', # horizontal alignment of the text
+            yanchor='middle', # vertical alignment of the text
+        )
+
+        return fig
+
+    def add_prediction(self, fig, T, G):
+        """
+        Adds a prediction marker to the given Plotly figure.
+
+        Parameters:
+            fig (plotly figure): The Plotly figure to annotate.
+            T (float or int): The x-coordinate (temperature) for the prediction marker.
+            G (float or int): The y-coordinate (Gibbs free energy barrier) for the prediction marker.
+
+        Returns:
+            plotly figure: The updated Plotly figure.
+        """
+
+        # Add a marker at the specified coordinates
+        fig.add_trace(go.Scatter(
+            x=[T],
+            y=[G],
+            mode='markers',
+            marker=dict(size=11, color='black', symbol='star'),
+            showlegend=False, # hide legend
+            name="Prediction",
+        ))
+
+        return fig
+
+    def generate_half_life_plot(self, barrier, temperature, half_life_units):
+        """
+        Calculates half-life and atropisomer class information. Creates a contour plot of the half-life of interconversion.
+
+        Params:
+            results: a dataframe containing the bond indexes and rotational barriers.
+            temperature: a float indicating the temperature specified by the user.
+            half_life_units: a string indicating the units for the half-life.
+        """
+
+        # Define parameters
+        self.temperature = temperature
+        self.half_life_units = half_life_units
+
+        # Define regions of interest for plotting
+        self.seconds_in_minute = 60
+        self.seconds_in_hour = 3600
+        self.seconds_in_day = 86400
+        self.seconds_in_year = 3.154e+7
+
+        # Generate a grid of values for T and G
+        T = np.linspace(0, 250, 100) # range for temperature
+        G = np.linspace(0, 55, 100) # range for barriers
+        self.T, self.G = np.meshgrid(T, G)
+
+        # Vectorize the half-life equation function for array inputs
+        self.Z = np.vectorize(self.calculate_half_life)(self.T, self.G)
+
+        # Convert the time units if necessary
+        self.Z_format = self.convert_units(self.Z)
+
+        # Convert self.Z to scientific notation (for hover template)
+        format_vectorized = np.vectorize(self.format_number)
+        self.Z_format = format_vectorized(self.Z_format)
+
+        # Get the min and max values in self.Z (for color scale)
+        self.min, self.max = np.min(self.Z), np.max(self.Z)
+
+        # Define colors for the scale
+        green = "green" # green for free interconversion
+        red = "RGB(185,0,0)" # red in the problematic region
+        yellow = "RGB(255,255,0)" # yellow close to boundaries
+        blue = "RGB(60,110,170)" # blue for limited interconversion
+
+        # Define a custom colorscale based on the custom regions
+        # The first value is a float between 0 and 1 that represents
+        # the proportion of the colour scale to be a particular colour
+        colorscale = [
+            [0.0, green],
+            [self.proportion_through_range(self.min, self.max, 25), yellow],
+            [self.proportion_through_range(self.min, self.max, 1000), red],
+            [self.proportion_through_range(self.min, self.max, 2*self.seconds_in_year), yellow],
+            [self.proportion_through_range(self.min, self.max, 100*self.seconds_in_year), blue],
+            [self.proportion_through_range(self.min, self.max, self.max), blue]
+        ]
+
+        # Create the contour plot
+        fig = go.Figure(go.Contour(
+            z=self.Z, # half-life
+            x=self.T[0], # temperature
+            y=self.G[:, 0], # barrier
+            colorscale=colorscale, # colour scale
+            showscale=False, # hide the legend
+            contours=dict(coloring='heatmap'),
+            line=dict(color='rgba(0,0,0,0)'), # make contour lines transparent
+            customdata=self.Z_format, # pass Z to the hover template
+            hovertemplate=(
+                'Temperature: %{x:.1f} °C<br>' +
+                'Barrier: %{y:.1f} kcal.mol<sup>-1</sup><br> ' +
+                'Half-life: %{customdata}<extra></extra> ' + self.half_life_units
+            )
+        ))
+
+        # Identify critical regions
+        fig, angle_a = self.add_constant_half_life_line(fig, 1000)
+        fig, angle_b = self.add_constant_half_life_line(fig, self.seconds_in_day)
+        fig, angle_c = self.add_constant_half_life_line(fig, self.seconds_in_year)
+
+        # Annotate critical regions
+        fig = self.annotate_constant_half_life_line(fig, "1 year", 74.2, 31.9, -angle_a-5)
+        fig = self.annotate_constant_half_life_line(fig, "24 hours", 106.8, 33.2, -angle_b-5)
+        fig = self.annotate_constant_half_life_line(fig, "1000 seconds", 142.8, 32.5, -angle_c-2.5)
+
+        # Add atropisomer class boundaries
+        fig = self.add_class_boundary_line(fig, 20) # class 1-2 boundary
+        fig = self.add_class_boundary_line(fig, 30) # class 2-3 boundary
+
+        # Annotate critical regions
+        fig = self.annotate_class_boundary_line(fig, "<b>Class 3</b>", "Atropisomer - limited<br>interconversion (at RT)", 223, 35)
+        fig = self.annotate_class_boundary_line(fig, "<b>Class 2</b>", "Atropisomer - interconverts<br>at problematic timescale", 223, 27.5)
+        fig = self.annotate_class_boundary_line(fig, "<b>Class 1</b>", "Rapid interconversion - exists<br>as equilibrating mixture", 223, 17.5)
+    
+        # Plot the computed barrier
+        if barrier is not None:
+            fig = self.add_prediction(fig, self.temperature, barrier)
+
+        # Update figure layout
+        fig.update_layout(
+            xaxis=dict(
+                title_text='Temperature (°C)',
+                tickcolor='white',
+                linecolor='white',
+            ),
+            yaxis=dict(
+                title_text='Rotational barrier (kcal.mol<sup>-1</sup>)',
+                tickcolor='white',
+                linecolor='white',
+            ),
+            width=1000, # set the width in pixels
+            height=700,  # set the height in pixels
+        )
+
+        # Display figure
+        fig.show()

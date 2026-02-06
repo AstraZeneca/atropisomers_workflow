@@ -1,10 +1,10 @@
-# Atropisomers Risk Assessment Workflow
+# Atropisomers risk assessment workflow
 
 This is a repository to support the publication **An Automated Computational Workflow for Quantifying Atropisomer Risk in Pharmaceutical Development** by *Elliot H. E. Farrar, Carlo Alberto Gaggioli, David Buttar and Simone Tomasi*. For queries, contact the corresponding author at *elliot.farrar@astrazeneca.com*.
 
 ## Overview
 
-This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs), allowing users to predict the rotational barrier and [LaPlante atropisomer class](https://pubs.acs.org/doi/10.1021/jm200584g) of identified rotatable bonds and probe temperature- and solvent-dependance of the racemization kinetics. The core class, `Atropisomers` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
+This repository contains an atropisomer risk assessment workflow that identifies hindered rotatable bonds likely to exhibit atropisomerism, prepares and analyzes rotational scans, and validates rotational transition states (TSs). This allows users to predict the rotational barrier and [LaPlante atropisomer class](https://pubs.acs.org/doi/10.1021/jm200584g) of the identified bonds using quantum mechanics and probe the temperature- and solvent-dependence of the racemization kinetics. The core class, `Atropisomers` (contained in `atropisomers.py`), operates from a SMILES string input and proceeds through:
 
  - **Substructure detection**: Screens the input structure for predefined SMARTS motifs associated with atropisomerism to identify rotational bonds.
  - **Steric filtering**: Evaluates the local steric environment of rotational bonds to capture hindered systems.
@@ -13,8 +13,7 @@ This repository contains an atropisomer risk assessment workflow that identifies
  - **TS validation**: Parses Gaussian TS optimization logs to confirm dihedrals remain consistent with the intended rotational mode.
  - **Barrier correction**: Applies linear corrections derived from experimental benchmark regressions.
  - **Class assignment**: Assigns the LaPlante atropisomer class of the computed barrier.
- - **Visualization**: Visualizes identified atropisomeric bonds with the computed barrier.
- - **Interpretation**: Visualizes temperature-dependance of the interconversion half-life.
+ - **Interpretation**: Visualizes the temperature-dependance of the interconversion half-life.
 
 A full, step-by-step interactive demonstration of the code, including a worked example, is available in `demo.ipynb`.
 

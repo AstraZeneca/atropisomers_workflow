@@ -5,7 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from IPython.display import SVG
-from itertools import combinations
+from itertools import combinations, product
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem import AllChem as Chem
 from rdkit.Chem import Draw
@@ -43,51 +43,10 @@ class Atropisomers():
         # Initialize a dictionary to hold the substructure pattern for each identified rotatable bond
         self.substructures: dict = {}
 
-        # Initialize an attribute to hold central atom for diaryls
+        # Initialize an attribute to hold central atoms for coupled torsions
         self.central_atoms: dict = {}
       
     # Cheminformatics helper functions
-
-    def get_bond_index_dict(self, mol, atom_index_sets):
-
-        """
-        Given an RDKit molecule and a list of atom index sets corresponding to a specific substucture, return a dictionary
-        mapping the RDKit bond objects (for bonds between atoms in the substructure) to tuples of atom indices in the bond.
-
-        Parameters:
-            mol (rdkit.Chem.Mol): the RDKit molecule object.
-            atom_index_sets (list): a list of atom index sets for the atoms of identified substuctures.
-
-        Returns:
-            bond_indexes (dict): {rdkit.Chem.Bond : (idx1, idx2)}
-        """
-
-        # Initialize a dictionary to hold RDkit bond objects and their atom indexes
-        bond_indexes = {}
-
-        # Loop through the indexes of each atom index set
-        for atom_indexes in atom_index_sets:
-            motif_set = set(atom_indexes)
-
-            # Loop through each individual atom index
-            for atom_idx in atom_indexes:
-
-                # Get their neighbors
-                atom = mol.GetAtomWithIdx(atom_idx)
-                neighbor_indices = [n.GetIdx() for n in atom.GetNeighbors()]
-
-                for neighbor_idx in neighbor_indices:
-
-                    # If the neighbor is part of the set, store the connecting bond
-                    if neighbor_idx in motif_set:
-
-                        # Ensure (a,b) and (b,a) don't both appear
-                        key = tuple(sorted((atom_idx, neighbor_idx)))
-                        bond = mol.GetBondBetweenAtoms(*key)
-                        if bond not in bond_indexes:
-                            bond_indexes[bond] = key
-
-        return bond_indexes
 
     def discover_ring_axis_atoms(self, mol, neighbors, match_indexes, axis_atoms):
         """
@@ -134,6 +93,33 @@ class Atropisomers():
                 axis_atoms.append(atom.GetIdx())
     
         return axis_atoms, lp_count, proton_count
+
+    def get_ring_sizes(self, mol, atom_or_bond):
+        """
+        Returns the sizes of all rings that a given atom or bond is part of within a molecule.
+
+        Parameters:
+            mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
+            atom_or_bond (rdkit.Chem.Atom or rdkit.Chem.Bond): The atom or bond for which to determine ring membership and sizes.
+
+        Returns:
+            list of int: A list containing the sizes of all rings that include the specified atom or bond.
+        """
+
+        # Get ring information for the molecule to identify which atoms/bonds are part of rings and the size of those rings.
+        ring_info = mol.GetRingInfo()
+        bond_rings = ring_info.BondRings() # tuples of bond indexes per ring (SSSR)
+        atom_rings = ring_info.AtomRings() # tuples of atom indexes per ring (SSSR)
+
+        # Get all ring sizes for rings that the atom/bond is part of
+        if isinstance(atom_or_bond, Chem.Bond):
+            ring_sizes = [len(r) for r in bond_rings if atom_or_bond.GetIdx() in r]
+        elif isinstance(atom_or_bond, Chem.Atom):
+            ring_sizes = [len(r) for r in atom_rings if atom_or_bond.GetIdx() in r]
+        else:
+            raise ValueError("Input must be an RDKit Atom or Bond object")
+
+        return ring_sizes
 
     def count_hydrogens(self, mol, axis_atoms):
         """
@@ -201,18 +187,19 @@ class Atropisomers():
 
     # Cheminformatics functions for each substructure
 
-    def analyze_biaryl(self, mol, match_indexes, non_heavy_limit):
+    def analyze_biring(self, mol, match_indexes, non_heavy_limit):
         """
-        Analyzes a molecular structure with two aryl rings attached to each other to determine the atom
-        indexes of the central rotatable bond, as well as the indexes of their exocyclic second neighbors
-        (two on each ring). These substituents are required for GIC scans of the rotatable bond in both
-        directions. Additionally tracks the number of lone pairs and protons around the rotatable bond
-        and determines whether a GIC scan is necessary or whether atropisomerism is unlikely, for example
-        due to lack of steric hindrance.
+        Analyzes a molecular structure with a rings (aryl or non-aryl) attached to one another to determine
+        the atom indexes of the central rotatable bond, as well as the indexes of the atoms to use for scans.
+        For aryl or aryl-like (consisting of sp2 atoms around the rotatable bond atom) these are the exocyclic
+        second neighbors of the ring. Otherwise, these are the direct neighbors of the rotatable bond atom.
+        These substituents are required for GIC scans of the rotatable bond in both directions. Additionally,
+        this method tracks the number of lone pairs and protons around the rotatable bond and determines whether
+        a GIC scan is necessary or whether atropisomerism is unlikely, for example due to lack of steric hindrance.
 
         Parameters:
             mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
-            match_indexes (list): The atom indices of the matched biaryl SMARTS substructure.
+            match_indexes (list): The atom indices of the matched bi-ring SMARTS substructure.
             max_non_heavy_subs (int): Maximum number of proton or lone pair substituents allowed for atropisomerism.
 
         Returns:
@@ -223,118 +210,60 @@ class Atropisomers():
 
         ### Step 1. Identify the rotatable bond and its neighbors
 
-        # Get a dictionary of RDKit bonds in the matched substructure and tuples of atom indexes corresponding to those bonds
-        bond_indexes = self.get_bond_index_dict(mol, [match_indexes])
+        # Identify all 5, 6 or 7-membered rings in the molecule
+        ring_5_smarts = "[*]1~[*]~[*]~[*]~[*]1"
+        ring_6_smarts = "[*]1~[*]~[*]~[*]~[*]~[*]1"
+        ring_7_smarts = "[*]1~[*]~[*]~[*]~[*]~[*]~[*]1"
+        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_5_smarts))
+        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_6_smarts))
+        smarts_7_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_7_smarts))
+        all_ring_smarts = smarts_5_matches + smarts_6_matches + smarts_7_matches
 
-        # Identify the rotatable bond (the one which is not aromatic in the SMARTS match)
-        non_aromatic_bonds = [
-            bond_indexes[bond]
-            for bond in bond_indexes
-            if not bond.GetIsAromatic()
-        ]
-        rotatable_bond_indexes = list(non_aromatic_bonds[0])
+        # Keep only rings fully contained within the original SMARTS match
+        included_ring_smarts = [m for m in all_ring_smarts if set(m).issubset(match_indexes)]
 
-        # If no rotatable bond is found, return a pattern failure
-        if not rotatable_bond_indexes:
-            print(" - invalid pattern for atropisomerism (no rotatable bond found): skipping the calculation")
-            return False, [], []
+        # Initialize the rotatable bond as empty
+        rotatable_bond_indexes = None
 
-        # Define the neighbors of each atom in the rotatable bond 
-        atom_1 = mol.GetAtomWithIdx(rotatable_bond_indexes[0])
-        atom_2 = mol.GetAtomWithIdx(rotatable_bond_indexes[1])
-        neighbors_1 = [n.GetIdx() for n in atom_1.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes]
-        neighbors_2 = [n.GetIdx() for n in atom_2.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes]
+        # Iterate through every combination of match-included rings
+        for i, j in combinations(range(len(included_ring_smarts)), 2):
+            ring_i = included_ring_smarts[i]
+            ring_j = included_ring_smarts[j]
 
-        ### Step 2. Define the indexes of the axis atoms required for GIC scans
+            # Check if the two rings have an atom each that connect to form a bond between them
+            for atom_i in ring_i:
+                for atom_j in ring_j:
+                    bond = mol.GetBondBetweenAtoms(atom_i, atom_j)
 
-        # Initialize each axis with the relevant ring atom from the rotatable bond
-        axis_1_atoms = [rotatable_bond_indexes[0]]
-        axis_2_atoms = [rotatable_bond_indexes[1]]
-        
-        # Find the exocyclic second substituents of the first ring by searching through the central atom
-        # neighbors and storing the first "exocyclic" (not in the biaryl, but can be in another ring) neighbor
-        # found. If no exocyclic neighbor is found, treat as a possible lone pair site, and include the in-ring atom
-        # (first neighbor). For example, if there is a heteroatom (e.g., O) in the ring, the exocyclic substituent
-        # is the lone-pair and we include the atom index of the oxygen itself. Also count if it's a proton.
-        axis_1_atoms, lp_1, protons_1 = self.discover_ring_axis_atoms(mol, neighbors_1, match_indexes, axis_1_atoms)
-        axis_2_atoms, lp_2, protons_2 = self.discover_ring_axis_atoms(mol, neighbors_2, match_indexes, axis_2_atoms)
-
-        # Count the number of hydrogens on all GIC-defining atoms
-        proton_count = self.count_hydrogens(mol, axis_1_atoms + axis_2_atoms)
-        assert proton_count == (protons_1 + protons_2), "Mismatch in proton count"
-        
-        ### Step 3. Final analysis
-
-        # 1-index the axis atoms
-        axis_1_atoms = [idx + 1 for idx in axis_1_atoms]
-        axis_2_atoms = [idx + 1 for idx in axis_2_atoms]
-
-        # Determine whether an atropisomeric scan is appropriate
-        result = self.is_atropisomeric(lp_1, lp_2, protons_1, protons_2, axis_1_atoms, axis_2_atoms, non_heavy_limit)
-        if result:
-            return result, axis_1_atoms, axis_2_atoms
-        else:
-            return False, [], []
-
-    def analyze_aliphatic(self, mol, match_indexes, non_heavy_limit):
-        """
-        Analyzes a molecular structure with a non-aryl ring attached to a non-aryl or aryl ring and 
-        determines the atom indexes of the central rotatable bond, as well as the indexes of the atoms
-        to use for scans. For aryl or aryl-like (consisting of sp2 atoms around the rotatable bond atom)
-        these are the exocyclic second neighbors of the ring. Otherwise, these are the direct neighbors of
-        the rotatable bond atom. These substituents are required for GIC scans of the rotatable bond in
-        both directions. Additionally tracks the number of lone pairs and protons around the rotatable
-        bond and determines whether a GIC scan is necessary or whether atropisomerism is unlikely, for
-        example due to lack of steric hindrance.
-
-        Parameters:
-            mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
-            match_indexes (list): The atom indices of the matched aliphatic-aryl or bialiphatic SMARTS substructure.
-            max_non_heavy_subs (int): Maximum number of proton or lone pair substituents allowed for atropisomerism.
-
-        Returns:
-            result (bool): True if the bond is considered hindered enough for atropisomerism.
-            axis_1_atoms, axis_2_atoms (tuples): For each ring, these correspond to a tuple of three atom:
-            the atom that is part of the rotatable bond and its two selected exocyclic second neighbors.
-        """
-
-        ### Step 1. Identify the rotatable bond and its neighbors
-
-        # Identify all substructures of the molecule corresponding to a five or six-membered ring with one substituent
-        ring_6_sub_1_smarts = "[*]1~[*]~[*]~[*]~[*]~[*]1-[*]"
-        ring_5_sub_1_smarts = "[*]1~[*]~[*]~[*]~[*]1-[*]"
-        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_6_sub_1_smarts))
-        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_5_sub_1_smarts))
-        all_ring_smarts = smarts_6_matches + smarts_5_matches
-
-        # Get a dictionary of RDKit bonds in the matched substructure and tuples of atom indexes corresponding to those bonds
-        bond_indexes = self.get_bond_index_dict(mol, all_ring_smarts)
-
-        # Identify the rotatable bond by considering any bond not part of the rings and checking which one is within the
-        # indexes of the original SMARTS match, which does not include ring substituents except for the rotatable bond substituent
-        rotatable_bond_indexes = []
-        for bond in bond_indexes.keys():
-            if not bond.IsInRing():   
-                if set(bond_indexes[bond]).issubset(match_indexes):
-                    rotatable_bond_indexes = list(bond_indexes[bond])
-                    break # We only expect one rotatable bond, so we can exit early
+                    # If they do, we have identified the rotatable bond.
+                    if bond is not None:
+                        rotatable_bond_indexes = [atom_i, atom_j]
+                        break
 
         # If no rotatable bond is found, return a pattern failure.
         if not rotatable_bond_indexes:
             print(" - invalid pattern for atropisomerism: skipping the calculation")
             return False, [], []
 
+        # Check if the rotatable bond is part of another ring (e.g., through a fused ring system or macrocycle).
+        # If so, only allow it to be part of larger rings (7-membered or more) as these may be flexible enough
+        # to perform a GIC scan and identify a rotational transition state.
+        ring_sizes = self.get_ring_sizes(mol, mol.GetBondBetweenAtoms(*rotatable_bond_indexes))
+        if any(size <= 6 for size in ring_sizes):
+            print(" - rotatable bond is part of a small fused ring (<= 6 members): skipping the calculation")
+            return False, [], []
+
         # Define each atom in the rotatable bond
         atom_1 = mol.GetAtomWithIdx(rotatable_bond_indexes[0])
         atom_2 = mol.GetAtomWithIdx(rotatable_bond_indexes[1])
 
-        # Identify if there are any non-ring substituents on the rotatable bond atoms
+        # Identify if there are any non-ring substituents on the rotatable bond atoms (for non-aryl rings only)
         non_ring_sub_1, non_ring_sub_2 = None, None
         for neighbor in atom_1.GetNeighbors():
-            if not neighbor.IsInRing():
+            if neighbor.GetIdx() not in match_indexes:
                 non_ring_sub_1 = neighbor.GetIdx()
         for neighbor in atom_2.GetNeighbors():
-            if not neighbor.IsInRing():
+            if neighbor.GetIdx() not in match_indexes:
                 non_ring_sub_2 = neighbor.GetIdx()
 
         # Define the in-ring neighbors for each atom in the rotatable bond
@@ -343,7 +272,9 @@ class Atropisomers():
 
         ### Step 2. Define the indexes of the axis atoms required for GIC scans
         # For each ring, we will check the valence of the in-ring neighbors of the atom in the rotatable bond.
-        # If the neighbor is sp2, we can use the ortho substituent. Otherwise, we use the neighbors itself.
+        # If the neighbor is sp2, we can use the ortho substituent. Otherwise, we use the neighbors itself. If
+        # no exocyclic neighbor is found (e.g. there is a heteroatom in the ring), we treat it as a possible lone
+        # pair site, and use the in-ring atom (first neighbor) instead.
 
         # Initialize each axis with the relevant ring atom from the rotatable bond
         axis_1_atoms = [rotatable_bond_indexes[0]]
@@ -353,12 +284,13 @@ class Atropisomers():
         lp_1, protons_1 = 0, 0
         for neighbor_idx in neighbors_1:
             neighbor = mol.GetAtomWithIdx(neighbor_idx)
-            # If the neighbor is sp2, we can use the ortho substituent
+            # If the neighbor is sp2, we can use the ortho substituent (if it exists)
             if neighbor.GetHybridization() == Chem.rdchem.HybridizationType.SP2:
                 axis_atoms, lp, protons = self.discover_ring_axis_atoms(mol, [neighbor_idx], match_indexes, [])
                 axis_1_atoms.extend(axis_atoms)
                 protons_1 += protons
                 lp_1 += lp
+            # Otherwise, use the neighbor itself
             else:
                 axis_1_atoms.append(neighbor_idx)
                 
@@ -366,12 +298,13 @@ class Atropisomers():
         lp_2, protons_2 = 0, 0
         for neighbor_idx in neighbors_2:
             neighbor = mol.GetAtomWithIdx(neighbor_idx)
-            # If the neighbor is sp2, we can use the ortho substituent
+            # If the neighbor is sp2, we can use the ortho substituent (if it exists)
             if neighbor.GetHybridization() == Chem.rdchem.HybridizationType.SP2:
                 axis_atoms, lp, protons = self.discover_ring_axis_atoms(mol, [neighbor_idx], match_indexes, [])
                 axis_2_atoms.extend(axis_atoms)
                 protons_2 += protons
                 lp_2 += lp
+            # Otherwise, use the neighbor itself
             else:
                 axis_2_atoms.append(neighbor_idx)
 
@@ -396,11 +329,12 @@ class Atropisomers():
         """
         Analyzes a molecular structure with two aryl rings attached to each other via a heteroaatom,
         e.g., O, N, S, S=O or S(=O)(=O) (diaryl ethers, thioethers, amines, sulfoxides and sulfones)
-        to determine the atom indexes of the central rotatable bond, as well as the indexes of their
-        exocyclic second neighbors (two on each ring). These substituents are required for GIC scans
-        of the rotatable bond in both directions. Additionally tracks the number of lone pairs and
-        protons around the rotatable bond and determines whether a GIC scan is necessary or whether
-        atropisomerism is unlikely, for example due to lack of steric hindrance.
+        to determine the atom indexes of the central atom and the two adjacent rotatable bonds in the
+        system, as well as the indexes of their exocyclic second neighbors (two on each ring). These
+        substituents are required for GIC scans of the coupled torsion in both directions. Additionally,
+        this method tracks the number of lone pairs and protons around the rotatable bonds and determines
+        whether a GIC scan is necessary or whether atropisomerism is unlikely, for example due to lack of
+        steric hindrance.
 
         Parameters:
             mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
@@ -415,66 +349,88 @@ class Atropisomers():
 
         ### Step 1. Identify the rotatable bonds, the central atom, and their neighbors
 
-        # Get a dictionary of RDKit bonds in the matched substructure and tuples of atom indexes corresponding to those bonds
-        bond_indexes = self.get_bond_index_dict(mol, [match_indexes])
+        # Identify all 5, 6 or 7-membered rings in the molecule
+        ring_5_smarts = "[*]1~[*]~[*]~[*]~[*]1"
+        ring_6_smarts = "[*]1~[*]~[*]~[*]~[*]~[*]1"
+        ring_7_smarts = "[*]1~[*]~[*]~[*]~[*]~[*]~[*]1"
+        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_5_smarts))
+        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_6_smarts))
+        smarts_7_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(ring_7_smarts))
+        all_ring_smarts = smarts_5_matches + smarts_6_matches + smarts_7_matches
 
-        # Identify the rotatable bonds (the ones which are not aromatic)
-        non_aromatic_bonds = [
-            bond_indexes[bond]
-            for bond in bond_indexes
-            if not bond.GetIsAromatic()
-        ]
+        # Keep only rings fully contained within the original SMARTS match
+        included_ring_smarts = [m for m in all_ring_smarts if set(m).issubset(match_indexes)]
 
-        # Get a list of the atoms and bonds in the rotatable bonds
-        seen_bonds = set()
-        seen_atoms = set()
-        rotatable_bond_indexes = []
+        # Initialize the rotatable atoms/bonds as empty
+        rotatable_bond_indexes = (None, None)
         rotatable_atom_indexes = []
-        for bond in non_aromatic_bonds:
-            if bond not in seen_bonds:
-                seen_bonds.add(bond)
-                rotatable_bond_indexes.append(bond)
-                for atom in bond:
-                    if atom not in seen_atoms:
-                        seen_atoms.add(atom)
-                        rotatable_atom_indexes.append(atom)
-    
+        central_atom_idx = None
+
+        # Iterate through every combination of match-included rings
+        for i, j in combinations(range(len(included_ring_smarts)), 2):
+            ring_i = included_ring_smarts[i]
+            ring_j = included_ring_smarts[j]
+
+            # Check if the two rings have an atom each that connects
+            # to some central atom to form two bonds between them
+            for atom_i in ring_i:
+                for atom_j in ring_j:
+                    for atom_c in match_indexes:
+                        if atom_c != atom_i and atom_c != atom_j:
+                            bond_1 = mol.GetBondBetweenAtoms(atom_i, atom_c)
+                            bond_2 = mol.GetBondBetweenAtoms(atom_j, atom_c)
+
+                            # Ensure both bonds are single bonds
+                            if bond_1 is not None and bond_1.GetBondType() != Chem.rdchem.BondType.SINGLE:
+                                bond_1 = None
+                            if bond_2 is not None and bond_2.GetBondType() != Chem.rdchem.BondType.SINGLE:
+                                bond_2 = None
+
+                            # If they do, we have identified the rotatable bond
+                            if bond_1 is not None and bond_2 is not None:
+                                rotatable_atom_indexes = [atom_i, atom_j, atom_c]
+                                rotatable_bond_indexes = [(atom_i, atom_c), (atom_c, atom_j)]
+                                rotatable_bond_idx = (atom_i, atom_j)
+                                central_atom_idx = atom_c
+                                break
+
         # If two rotatable bonds between three unique atoms are not found, return a pattern failure
         if not rotatable_bond_indexes or len(rotatable_bond_indexes) != 2 or len(rotatable_atom_indexes) !=3:
             print(" - invalid pattern for atropisomerism: skipping the calculation")
             return False, [], []
 
-        # Determine which atom is the central heteroatom (the one not in a ring)
-        central_atom = None
-        for index in rotatable_atom_indexes:
-            atom = mol.GetAtomWithIdx(index)
-            if not atom.IsInRing():
-                central_atom = index
-                break
+        # Check if the rotatable bonds are part of another ring (e.g., through a fused ring system or macrocycle).
+        # If so, only allow it to be part of larger rings (7-membered or more) as these may be flexible enough
+        # to perform a GIC scan and identify a rotational transition state.
+        for bond_idx in rotatable_bond_indexes:
+            bond = mol.GetBondBetweenAtoms(*bond_idx)
+            ring_sizes = self.get_ring_sizes(mol, bond)
+            if any(size <= 6 for size in ring_sizes):
+                print(" - rotatable bond is part of a small fused ring (<= 6 members): skipping the calculation")
+                return False, [], []
 
         # If no central atom is found, return a pattern failure
-        if not central_atom:
+        if central_atom_idx == None:
             print(" - invalid pattern for atropisomerism (no out-of-ring central atom): skipping the calculation")
             return False, [], []
 
-        # Define the two atoms of the rotatable bonds that aren't the central atom
-        rotatable_bond_indexes = [idx for idx in rotatable_atom_indexes if idx != central_atom]
-
         # Store the central atom with respect to the other atoms to use later
-        self.central_atoms[tuple(rotatable_bond_indexes)] = central_atom
+        self.central_atoms[tuple(rotatable_bond_idx)] = central_atom_idx
 
         # Define the in-ring neighbors for each atom in the rotatable bond (excluding the central atom)
-        atom_1 = mol.GetAtomWithIdx(rotatable_bond_indexes[0])
-        atom_2 = mol.GetAtomWithIdx(rotatable_bond_indexes[1])
-        neighbors_1 = [n.GetIdx() for n in atom_1.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom]
-        neighbors_2 = [n.GetIdx() for n in atom_2.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom]
+        atom_1_idx = rotatable_bond_indexes[0][0]
+        atom_2_idx = rotatable_bond_indexes[1][1]
+        atom_1 = mol.GetAtomWithIdx(atom_1_idx)
+        atom_2 = mol.GetAtomWithIdx(atom_2_idx)
+        neighbors_1 = [n.GetIdx() for n in atom_1.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom_idx]
+        neighbors_2 = [n.GetIdx() for n in atom_2.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom_idx]
 
         ### Step 2. Define the indexes of the axis atoms required for GIC scans
 
         # Initialize each axis with the relevant ring atom from the rotatable bond
-        axis_1_atoms = [rotatable_bond_indexes[0]]
-        axis_2_atoms = [rotatable_bond_indexes[1]]
-        
+        axis_1_atoms = [atom_1_idx]
+        axis_2_atoms = [atom_2_idx]
+
         # Find the exocyclic second substituents of the first ring by searching through the central atom
         # neighbors and storing the first "exocyclic" (not in the biaryl, but can be in another ring) neighbor
         # found. If no exocyclic neighbor is found, treat as a possible lone pair site, and include the in-ring atom
@@ -500,20 +456,20 @@ class Atropisomers():
         else:
             return False, [], []
 
-    def analyze_benzamide(self, mol, match_indexes, non_heavy_limit):
+    def analyze_aryl_X(self, mol, match_indexes, non_heavy_limit):
         """
-        Analyzes a molecular structure with an aryl ring attached to specific non-aromatic units; amides
-        (bezamides), thioamide (thiobenzamide), their reversed forms (reversed (thio)benzamides), and
-        S(=O)(=O) (sulfoxides) to determine the atom indexes of the central rotatable bond, as well as the
-        indexes of the two exocyclic second neighbors of the aromatic ring and the two direct neighbors of
-        the out-of-ring atom (e.g., the =O, =S, or R-group). These substituents are required for GIC scans
-        of the rotatable bond in both directions. Additionally tracks the number of lone pairs and protons
-        around the rotatable bond and determines whether a GIC scan is necessary or whether atropisomerism
-        is unlikely, for example due to lack of steric hindrance.
+        Analyzes a molecular structure with an aryl ring attached to specific non-aromatic units; amides (bezamides),
+        thioamides (thiobenzamide), their reversed forms (reversed (thio)benzamides), sulfones/sulfoxides, and
+        sulfonamides/sulfinamides, to determine the atom indexes of the central rotatable bond, as well as the indexes
+        of the two exocyclic second neighbors of the aromatic ring and the two direct neighbors of the out-of-ring atom
+        (e.g., the =O, =S, or R-group). These substituents are required for GIC scans of the rotatable bond in both
+        directions. Additionally, this method tracks the number of lone pairs and protons around the rotatable bond and
+        determines whether a GIC scan is necessary or whether atropisomerism is unlikely, for example due to lack of
+        steric hindrance.
 
         Parameters:
             mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
-            match_indexes (list): The atom indices of the matched benzamide or sulfoxide SMARTS substructure.
+            match_indexes (list): The atom indices of the matched aryl-X SMARTS substructure.
             max_non_heavy_subs (int): Maximum number of proton or lone pair substituents allowed for atropisomerism.
 
         Returns:
@@ -525,42 +481,56 @@ class Atropisomers():
 
         ### Step 1. Identify the rotatable bond and its neighbors
 
-        # Identify all substructures of the molecule corresponding to a 5- or 6-membered aromatic with one substituent. For example,
-        # benzene would return six matches, each consisting of the ring atom indexes and the index of one of the substituents.
-        aryl_6_sub_1_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]"
+        # Identify all substructures of the molecule corresponding to a 5/6/7-membered aromatic ring.
+        aryl_5_smarts = "[*]1:[*]:[*]:[*]:[*]:1"
+        aryl_6_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:1"
+        aryl_7_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1"
+        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_5_smarts))
+        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_6_smarts))
+        smarts_7_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_7_smarts))
+        all_ring_smarts = smarts_5_matches + smarts_6_matches + smarts_7_matches
+
+        # Identify all substructures of the molecule corresponding to a 5/6/7-membered aromatic ring with one substituent.
+        # For example, benzene returns six matches, each consisting of the ring atom indexes and the index of one of the hydrogens.
         aryl_5_sub_1_smarts = "[*]1:[*]:[*]:[*]:[*]:1-[*]"
-        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_6_sub_1_smarts))
-        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_5_sub_1_smarts ))
-        all_ring_smarts = smarts_6_matches + smarts_5_matches
+        aryl_6_sub_1_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]"
+        aryl_7_sub_1_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[*]"
+        smarts_5_sub_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_5_sub_1_smarts))
+        smarts_6_sub_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_6_sub_1_smarts))
+        smarts_7_sub_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_7_sub_1_smarts))
+        all_ring_sub_smarts = smarts_5_sub_matches + smarts_6_sub_matches + smarts_7_sub_matches
 
-        # Get a dictionary of RDKit bonds in the aryl substructures and tuples of atom indexes corresponding to those bonds
-        bond_indexes = self.get_bond_index_dict(mol, all_ring_smarts)
+        # Keep only rings fully contained within the original SMARTS embedding. This should only be one ring for each type.
+        included_ring = [m for m in all_ring_smarts if set(m).issubset(match_indexes)][0]
+        included_sub_ring = [m for m in all_ring_sub_smarts if set(m).issubset(match_indexes)][0]
 
-        # Identify the rotatable bond by considering any bond not part of the aromatic ring
-        # and checking which one is within the indexes of the original SMARTS match, which
-        # does not include ring substituents except for the rotatable bond substituent.
-        rotatable_bond_indexes = []
-        for bond in bond_indexes.keys():
-            if not bond.IsInRing():   
-                if set(bond_indexes[bond]).issubset(match_indexes):
-                    rotatable_bond_indexes = list(bond_indexes[bond])
-                    break # We only expect one rotatable bond, so we can exit early
+        # Find the out-of-ring atom of the rotatable bond by identifying the atom that is in included_sub_ring but not in included_ring.
+        out_ring_atom_idx = list(set(included_sub_ring) - set(included_ring))[0]
+        out_ring_atom = mol.GetAtomWithIdx(out_ring_atom_idx)
 
-        # If no rotatable bond is found, return a pattern failure. This is usually because we have identified
-        # a SMARTS match where the "rotatable bond" is part of a fused ring. For example, a standard benzamide
-        # can have a connection between the NH2 and the 6-membered ring, formingna compound like isoindolin-1-one
-        # (phthalimidine). Although this contains a benzamide substructure, there is no freely rotatable bond.
-        if not rotatable_bond_indexes:
+        # Find the in-ring atom of the rotatable bond by identifying the atom in included_sub_ring that is connected to the out-of-ring atom.
+        in_ring_atom_idx = None
+        for idx in included_sub_ring:
+            if idx != out_ring_atom_idx and mol.GetBondBetweenAtoms(idx, out_ring_atom_idx) is not None:
+                in_ring_atom_idx = idx
+                break
+        in_ring_atom = mol.GetAtomWithIdx(in_ring_atom_idx)
+
+        # If no rotatable bond is found, return a pattern failure
+        if not out_ring_atom_idx or not in_ring_atom_idx:
             print(" - invalid pattern for atropisomerism (no rotatable bond found): skipping the calculation")
             return False, [], []
 
-        # Define which atom in the rotatable bond is in the ring and which isn't (ring atom should be a carbon)
-        for atom_idx in rotatable_bond_indexes:
-            atom = mol.GetAtomWithIdx(atom_idx)
-            if atom.IsInRing() and atom.GetSymbol() == "C":
-                in_ring_atom = atom
-            else:
-                out_ring_atom = atom
+        # Define the rotatable bond indexes
+        rotatable_bond_indexes = [in_ring_atom_idx, out_ring_atom_idx]
+
+        # Check if the rotatable bond is part of another ring (e.g., through a fused ring system or macrocycle).
+        # If so, only allow it to be part of larger rings (7-membered or more) as these may be flexible enough
+        # to perform a GIC scan and identify a rotational transition state.
+        ring_sizes = self.get_ring_sizes(mol, mol.GetBondBetweenAtoms(*rotatable_bond_indexes))
+        if any(size <= 6 for size in ring_sizes):
+            print(" - rotatable bond is part of a small fused ring (<= 6 members): skipping the calculation")
+            return False, [], []
 
         # Define the neighbors for each atom in the rotatable bond 
         atom_in_ring_neighbors = [n.GetIdx() for n in in_ring_atom.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes]
@@ -622,13 +592,172 @@ class Atropisomers():
         else:
             return False, [], []
 
+    def analyze_coupled_aryl_X(self, mol, match_indexes, non_heavy_limit):
+        """
+        Analyzes a molecular structure with an aryl ring attached to specific non-aromatic units; amides
+        (bezamides), thioamides (thiobenzamide), and their reversed forms (reversed (thio)benzamides), to
+        determine the atom indexes of the central atom and the two adjacent rotatable bonds in the system,
+        as well as the indexes of the two exocyclic second neighbors of the aromatic ring and the two direct
+        neighbors of the out-of-ring atom (e.g., the =O or R-group). These substituents are required for
+        GIC scans of the coupled torsion in both directions. Additionally, this method tracks the number of
+        lone pairs and protons around the rotatable bonds and determines whether a GIC scan is necessary or
+        whether atropisomerism is unlikely, for example due to lack of steric hindrance.
+
+        Parameters:
+            mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
+            match_indexes (list): The atom indices of the matched aryl-X SMARTS substructure.
+            max_non_heavy_subs (int): Maximum number of proton or lone pair substituents allowed for atropisomerism.
+
+        Returns:
+            result (bool): True if the bond is considered hindered enough for atropisomerism.
+            in_ring_axis_atoms, out_ring_axis_atoms (tuples): For the aryl ring and non-aromatic unit, these
+            correspond to a tuple of three atoms indexes: the atom that is part of the rotatable bond and its
+            selected first or second neighbors.
+        """
+
+        ### Step 1. Identify the rotatable bonds, the central atom, and their neighbors
+
+        # Identify all substructures of the molecule corresponding to a 5/6/7-membered aromatic ring.
+        aryl_5_smarts = "[*]1:[*]:[*]:[*]:[*]:1"
+        aryl_6_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:1"
+        aryl_7_smarts = "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1"
+        smarts_5_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_5_smarts))
+        smarts_6_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_6_smarts))
+        smarts_7_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(aryl_7_smarts))
+        all_ring_smarts = smarts_5_matches + smarts_6_matches + smarts_7_matches
+
+        # Identify all substructures of the molecule corresponding to an amide or thioamide
+        amide_smarts = "[#7]-[#6](=[#8])"
+        thioamide_smarts = "[#7]-[#6](=[#16])"
+        sulfoxide_smarts = "[*]-[#16](=[#8])"
+        sulfone_smarts = "[*]-[#16](=[#8])(=[#8])"
+        sulfinamide_smarts = "[#16](=[#8])-[#7]"
+        sulfonamide_smarts = "[#16](=[#8])(=[#8])"
+        amide_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(amide_smarts))
+        thioamide_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(thioamide_smarts))
+        sulfoxide_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(sulfoxide_smarts))#
+        sulfone_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(sulfone_smarts))
+        sulfinamide_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(sulfinamide_smarts))
+        sulfonamide_matches = mol.GetSubstructMatches(Chem.MolFromSmarts(sulfonamide_smarts))
+        all_X_smarts = amide_matches + thioamide_matches + sulfoxide_matches + sulfone_matches + sulfinamide_matches + sulfonamide_matches
+
+        # Keep only rings fully contained within the original SMARTS embedding. This should only be one ring for each type.
+        included_ring = [m for m in all_ring_smarts if set(m).issubset(match_indexes)]
+        included_X = [m for m in all_X_smarts if set(m).issubset(match_indexes)]
+    
+        # Initialize the rotatable atoms/bonds as empty
+        rotatable_bond_indexes = (None, None)
+        rotatable_atom_indexes = []
+        in_ring_atom_idx = None
+        out_ring_atom_idx = None
+        central_atom_idx = None
+
+        # Iterate through every combination of ring-X matches
+        for ring, X in product(included_ring, included_X):
+
+            # Check if the two units have a connection involving one atom from the ring and two from the X group
+            for atom_i in ring:
+                for atom_j in X:
+                    for atom_c in match_indexes:
+                        if atom_c != atom_i != atom_j and atom_c in X:
+                            bond_1 = mol.GetBondBetweenAtoms(atom_i, atom_c)
+                            bond_2 = mol.GetBondBetweenAtoms(atom_j, atom_c)
+
+                            # Ensure both bonds are single bonds, to avoid capturing the C=O or C=S bond
+                            if bond_1 is not None and bond_1.GetBondType() != Chem.rdchem.BondType.SINGLE:
+                                bond_1 = None
+                            if bond_2 is not None and bond_2.GetBondType() != Chem.rdchem.BondType.SINGLE:
+                                bond_2 = None
+
+                            # If they do, we have identified the rotatable bond.
+                            if bond_1 is not None and bond_2 is not None:
+                                rotatable_atom_indexes = [atom_i, atom_j, atom_c]
+                                rotatable_bond_indexes = [(atom_i, atom_c), (atom_c, atom_j)]
+                                rotatable_bond_idx = (atom_i, atom_j)
+                                in_ring_atom_idx = atom_i
+                                out_ring_atom_idx = atom_j
+                                central_atom_idx = atom_c
+                                break
+
+        # If two rotatable bonds between three unique atoms are not found, return a pattern failure
+        if not rotatable_bond_indexes or len(rotatable_bond_indexes) != 2 or len(rotatable_atom_indexes) !=3:
+            print(" - invalid pattern for atropisomerism: skipping the calculation")
+            return False, [], []
+
+        # Check if the rotatable bonds are part of another ring (e.g., through a fused ring system or macrocycle).
+        # If so, only allow it to be part of larger rings (7-membered or more) as these may be flexible enough
+        # to perform a GIC scan and identify a rotational transition state.
+        for bond_idx in rotatable_bond_indexes:
+            bond = mol.GetBondBetweenAtoms(*bond_idx)
+            ring_sizes = self.get_ring_sizes(mol, bond)
+            if any(size <= 6 for size in ring_sizes):
+                print(" - rotatable bond is part of a small fused ring (<= 6 members): skipping the calculation")
+                return False, [], []
+
+        # If no central atom is found, return a pattern failure
+        if central_atom_idx == None:
+            print(" - invalid pattern for atropisomerism (no out-of-ring central atom): skipping the calculation")
+            return False, [], []
+
+        # Store the central atom with respect to the other atoms to use later
+        self.central_atoms[(in_ring_atom_idx, out_ring_atom_idx)] = central_atom_idx
+
+        # Define the neighbors for each atom in the rotatable bond (excluding the central atom)
+        in_ring_atom = mol.GetAtomWithIdx(in_ring_atom_idx)
+        out_ring_atom = mol.GetAtomWithIdx(out_ring_atom_idx)
+        atom_in_ring_neighbors = [n.GetIdx() for n in in_ring_atom.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom_idx]
+        atom_out_ring_neighbors = [n.GetIdx() for n in out_ring_atom.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes and n.GetIdx() != central_atom_idx]
+
+        ### Step 2. Define the indexes of the axis atoms required for GIC scans
+
+        # Initialize each axis with the relevant atom from the rotatable bond
+        in_ring_axis_atoms = [in_ring_atom.GetIdx()]
+        out_ring_axis_atoms = [out_ring_atom.GetIdx()] 
+
+        # Find the exocyclic second neighbours of the ring by searching through the central atom neighbors. If no exocyclic
+        # neighbor is found, treat as a possible lone pair site, and include the in-ring atom. Also count if it's a proton.
+        in_ring_axis_atoms, in_ring_lp, in_ring_protons = self.discover_ring_axis_atoms(mol, atom_in_ring_neighbors, match_indexes, in_ring_axis_atoms)
+
+        # Add the neighbors of the out-of-ring (non-aromatic) unit to the axis. For benzamides and thiobenzamides 
+        # this corresponds to the =O/=S atom and the N(R2) atom. For reverse benzamides and reverse thiobenzamides,
+        # this corresponds to the R-substituent of the N and the carbon of the C=O or C=S bond. For sulfoxides, this
+        # corresponds to the =O and the R-group.
+        out_ring_axis_atoms.extend(atom_out_ring_neighbors)
+
+        # Count how many of the out-of-ring substituents are hydrogens
+        out_ring_protons = self.count_hydrogens(mol, out_ring_axis_atoms)
+
+        # In theory, there cannot be lone pairs on these functional groups, but to be sure we can
+        # approximate the number of lone pairs on the out-of-ring substituents by subtracting the
+        # number of identified substituents from three (since we know we have a benzamide, reverse
+        # benzamide, or sulfoxide, we can assume the out-of-ring atom is a heteroatom (O, S, N) with
+        # up to three bonds)).
+        out_ring_lp = 3 - len(out_ring_axis_atoms)
+
+        # Count the number of hydrogens on all GIC-defining atoms
+        proton_count = self.count_hydrogens(mol, in_ring_axis_atoms + out_ring_axis_atoms)
+        assert proton_count == (in_ring_protons + out_ring_protons), "Mismatch in proton count"
+    
+        ### Step 3. Final analysis
+
+        # 1-index the axis atoms
+        axis_1_atoms = [idx + 1 for idx in in_ring_axis_atoms]
+        axis_2_atoms = [idx + 1 for idx in out_ring_axis_atoms]
+
+        # Determine whether an atropisomeric scan is appropriate
+        result = self.is_atropisomeric(in_ring_lp, out_ring_lp, in_ring_protons, out_ring_protons, axis_1_atoms, axis_2_atoms, non_heavy_limit)
+        if result:
+            return result, axis_1_atoms, axis_2_atoms
+        else:
+            return False, [], []
+
     def analyze_amide(self, mol, match_indexes, non_heavy_limit):
         """
         Analyzes an amide or thioamide and determines the atom indexes of the central rotatable bond,
         as well as the indexes of their four neighbors. These substituents are required for GIC scans
-        of the rotatable bond in both directions. Tracks the number of lone pairs and protons around the
-        rotatable bond and determines whether a GIC scan is necessary or whether atropisomerism is unlikely,
-        for example due to lack of steric hindrance.
+        of the rotatable bond in both directions. Additionally, this method tracks the number of lone
+        pairs and protons around the rotatable bond and determines whether a GIC scan is necessary or
+        whether atropisomerism is unlikely, for example due to lack of steric hindrance.
 
         Parameters:
             mol (rdkit.Chem.Mol): The RDKit molecule object (with explicit hydrogens).
@@ -641,38 +770,7 @@ class Atropisomers():
             indexes: the atom that is part of the rotatable amide bond and its neighbours.
         """
 
-        ### Step 1. Check amide bond status.
-        # Here, we ensure that the amide bond is not part of a ring with 6 atoms or less. Rings greater than
-        # 7 atoms may be flexible enough to perform a GIC scan and identify a rotational transition state.
-
-        # Define SMARTS pattern for (thio)amides in 3 to 6-membered rings
-        ring_amides = [
-            "[#7]-1-[#6](=[#8,#16])~[*]~[*]~[*]~[*]-1", # 6-memebered
-            "[#7]-1-[#6](=[#8,#16])~[*]~[*]~[*]-1", # 5-membered
-            "[#7]-1-[#6](=[#8,#16])~[*]~[*]-1", # 4-membered
-            "[#7]-1-[#6](=[#8,#16])~[*]-1", # 3-membered
-            ]
-
-        # Iterate over the amide-in-ring SMARTS patterns
-        for smarts in ring_amides:
-        
-            # Convert the SMARTS string to a mol object
-            smarts_mol = Chem.MolFromSmarts(smarts)
-
-            # Find all substructures in the parent molecule that match the SMARTS pattern
-            matches = mol.GetSubstructMatches(smarts_mol)
-
-            # If there is a match, see if it corresponds to the amide bond in question
-            if matches:
-                for match in matches:
-                    amide_in_ring = set(match_indexes).issubset(match)
-
-                    # If it does, do not attempt to scan the bond
-                    if amide_in_ring:
-                        print(" - invalid pattern for atropisomerism (amide in ring): skipping the calculation")
-                        return False, [], []
-
-        ### Step 2. Identify the rotatable bond and its neighbors
+        ### Step 1. Identify the rotatable bond and its neighbors
 
         # Identify the rotatable bond by finding the C and N atoms
         rotatable_bond_indexes = []
@@ -682,6 +780,14 @@ class Atropisomers():
                 rotatable_bond_indexes.append(idx)
             elif atom.GetSymbol() == "N":
                 rotatable_bond_indexes.append(idx)
+
+        # Check if the rotatable bond is part of another ring (e.g., through a fused ring system or macrocycle).
+        # If so, only allow it to be part of larger rings (7-membered or more) as these may be flexible enough
+        # to perform a GIC scan and identify a rotational transition state
+        ring_sizes = self.get_ring_sizes(mol, mol.GetBondBetweenAtoms(*rotatable_bond_indexes))
+        if any(size <= 6 for size in ring_sizes):
+            print(" - rotatable bond is part of a small fused ring (<= 6 members): skipping the calculation")
+            return False, [], []
 
         # If no rotatable bond is found, return a pattern failure
         if not rotatable_bond_indexes:
@@ -694,7 +800,7 @@ class Atropisomers():
         neighbors_1 = [n.GetIdx() for n in atom_1.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes]
         neighbors_2 = [n.GetIdx() for n in atom_2.GetNeighbors() if n.GetIdx() not in rotatable_bond_indexes]
 
-        ### Step 3. Define the indexes of the axis atoms required for GIC scans
+        ### Step 2. Define the indexes of the axis atoms required for GIC scans
         
         # Initialize each axis with the relevant ring atom from the rotatable bond
         axis_1_atoms = [rotatable_bond_indexes[0]]
@@ -719,7 +825,7 @@ class Atropisomers():
         proton_count = self.count_hydrogens(mol, axis_1_atoms + axis_2_atoms)
         assert proton_count == (protons_1 + protons_2), "Mismatch in proton count"
 
-        ### Step 4. Final analysis
+        ### Step 3. Final analysis
 
         # 1-index the axis atoms
         axis_1_atoms = [idx + 1 for idx in axis_1_atoms]
@@ -845,7 +951,7 @@ class Atropisomers():
 
     # Main cheminformatics function
 
-    def cheminformatics(self, filter=True):
+    def cheminformatics(self, filter=True, coupled_benzamide=False):
         """
         Identifies potential atropisomeric bonds in the molecule, analyzes the bond and determines the input for subsequent GIC scans,
         one each in a different direction. A GIC scan is defined by one or more dihedrals, while a regular dihedral scan involves only
@@ -862,147 +968,296 @@ class Atropisomers():
 
         Parameters:
             filter (bool): Whether to apply steric filters to determine if a GIC scan is necessary.
+            coupled_benzamide (bool): Whether to parse benzamides and reverse benzamides as coupled torsions.
         """
 
         self.filter = filter
 
-        ### 1. Define SMARTS patterns for identifying potential atropisomeric patterns
-
-        # Biaryl systems (5/6/7-membered rings)
-        biaryl_7_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:[*]:1" # 7- and 6-membered rings joined by a single bond
-        biaryl_6_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:[*]:1" # two 6-membered aromatic rings joined by a single bond
-        biaryl_6_5 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:1"  # 6- and 5-membered rings joined by a single bond
-        biaryl_5_5 = "[*]1:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:1"  # two 5-membered aromatic rings joined by a single bond
-
-        # Diaryl ethers, thioethers (including sulfoxides and sulfones) and amines
-        diaryl_ether_6_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        diaryl_thioether_6_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        diaryl_amine_6_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        diaryl_ether_6_5 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:1"
-        diaryl_thioether_6_5 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:1"
-        diaryl_amine_6_5 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:1"
-        diaryl_ether_5_5 = "[*]1:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:1"
-        diaryl_thioether_5_5 = "[*]1:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:1"
-        diaryl_amine_5_5 = "[*]1:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:1"
-
-        # Joined ring systems where one or both rings are non-aromatic
-        aryl_6_6 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1" # 6-membered aromatic and 6-membered non-aromatic joined by a single bond
-        aryl_6_5 = "[*]1:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]1" # 6-membered aromatic and 5-membered aliphatic joined by a single bond
-        aryl_5_6 = "[*]1:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1" # 5-membered aromatic and 6-membered aliphatic joined by a single bond
-        aryl_5_5 = "[*]1:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]1" # 5-membered aromatic and 5-membered aliphatic joined by a single bond
-        aliphatic_6_6 = "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]~[!a]2" # two 6-membered non-aromatic rings joined by a single bond
-        aliphatic_6_5 = "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]2" # 6- and 5-membered non-aromatic rings joined by a single bond
-        aliphatic_5_5 = "[!a]1~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]2" # two 5-membered non-aromatic rings joined by a single bond
-
-        # Benzamides and reverse benzamideas (5- or 6-membered rings)
-        benzamide_6 = "[#7]-[#6](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1" 
-        thiobenzamide_6 = "[#7]-[#6](=[#16])-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        rev_benzamide_6 = "[#8]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        rev_thiobenzamide_6 = "[#16]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        sulfoxide_6 = "[#16](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        sulfone_6 = "[#16](=[#8])(=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1"
-        benzamide_5 = "[#7]-[#6](=[#8])-[*]1:[*]:[*]:[*]:[*]:1" 
-        thiobenzamide_5 = "[#7]-[#6](=[#16])-[*]1:[*]:[*]:[*]:[*]:1"
-        rev_benzamide_5 = "[#8]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:1"
-        rev_thiobenzamide_5 = "[#16]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:1"
-        sulfoxide_5 = "[#16](=[#8])-[*]1:[*]:[*]:[*]:[*]:1"
-        sulfone_5 = "[#16](=[#8])(=[#8])-[*]1:[*]:[*]:[*]:[*]:1"
-
-        # Amides
-        amide = "[#7]-[#6](=[#8])"
-        thioamide = "[#7]-[#6](=[#16])"
-
-        # Define a formal name for each SMARTS pattern. Some substructures will match multiple patterns
-        # (e.g., many aryl-aliphatics can also be benzamides). The order of this dictionary determines
-        # which pattern is preferred when multiple matches are found. For example, structures that are
-        # classed as both aryl-aliphatics and benzamides will be classed only as benzamides.
-        smarts_patterns = {
-            biaryl_7_6: "Biaryl (7-6)",
-            biaryl_6_6: "Biaryl (6-6)",
-            biaryl_6_5: "Biaryl (6-5)",
-            biaryl_5_5: "Biaryl (5-5)",
-            diaryl_ether_6_6: "Diaryl ether (6-6)",
-            diaryl_thioether_6_6: "Diaryl thioether (6-6)",
-            diaryl_amine_6_6: "Diaryl amine (6-6)",
-            diaryl_ether_6_5: "Diaryl ether (6-5)",
-            diaryl_thioether_6_5: "Diaryl thioether (6-5)",
-            diaryl_amine_6_5: "Diaryl amine (6-5)",
-            diaryl_ether_5_5: "Diaryl ether (5-5)",
-            diaryl_thioether_5_5: "Diaryl thioether (5-5)",
-            diaryl_amine_5_5: "Diaryl amine (5-5)",
-            aryl_6_6: "Aryl-aliphatic (6-6)",
-            aryl_6_5: "Aryl-aliphatic (6-5)",
-            aryl_5_6: "Aryl-aliphatic (5-6)",
-            aryl_5_5: "Aryl-aliphatic (5-5)",
-            aliphatic_6_6: "Bialiphatic (6-6)",
-            aliphatic_6_5: "Bialiphatic (6-5)",
-            aliphatic_5_5: "Bialiphatic (5-5)",
-            benzamide_6: "Benzamide (6)",
-            thiobenzamide_6: "Thiobenzamide (6)",
-            rev_benzamide_6: "Reverse benzamide (6)",
-            rev_thiobenzamide_6: "Reverse thiobenzamide (6)",
-            sulfoxide_6: "Sulfoxide (6)",
-            sulfone_6: "Sulfone (6)",
-            benzamide_5: "Benzamide (5)",
-            thiobenzamide_5: "Thiobenzamide (5)",
-            rev_benzamide_5: "Reverse benzamide (5)",
-            rev_thiobenzamide_5: "Reverse thiobenzamide (5)",
-            sulfoxide_5: "Sulfoxide (5)",
-            sulfone_5: "Sulfone (5)",
-            amide: "Amide",
-            thioamide: "Thioamide",
-        }
-
-        # For each SMARTS pattern, define the maximum number of non-heavy substituents that are allowed around the rotatable bond for
-        # atropisomerism to be likely (based on the approximate steric bulk around the rotatable bond). These rules are based on a
+        ### 1. Define SMARTS patterns and formal names for potential atropisomeric patterns
+        # For each SMARTS pattern, also define the maximum number of non-heavy substituents that are allowed around the rotatable bond
+        # for atropisomerism to be likely (based on the approximate steric bulk around the rotatable bond). These rules are based on a
         # series of reference calculations and are aimed at capturing any barrier above ~12 kcal/mol. Any structures that violate the
-        # rules are deemed to have insufficient bulk for atropisomerism and a barrier < 12 kcal/mol. These structures not worth further
-        # computation and are filtered out. We use 12 kcal/mol as a safe margin to catch as many Class 2 atropisomers as possible. For
-        # aryl rings, we are counting how many of the ortho substituents are lone pairs or protons. For non-ring systems, such as benzamides
-        # or sulfoxides, we are counting the immediate neighbors of the atom in the rotatable bond. For some of these non-aryl systems,
-        # some substituents are heavy by definition (e.g., sulfoxides always have an =O atom). This is taken into account by the rules.
-        non_heavy_limit_dict = {
+        # rules are deemed to have insufficient bulk for atropisomerism and are filtered out. We use 12 kcal/mol as a safe margin to
+        # catch as many Class 2 atropisomers as possible. For aryl rings, we are counting how many of the ortho substituents are lone
+        # pairs or protons. For non-ring systems, such as benzamides or sulfoxides, we are counting the immediate neighbors of the atom
+        # in the rotatable bond. For some of these non-aryl systems, some substituents are heavy by definition (e.g., sulfoxides always
+        # have an =O atom). This is taken into account by the rules.
+        
+        PATTERNS = {
 
-            biaryl_7_6: 3, # minimum of 1/4 possible ring substituents
-            biaryl_6_6: 3, # minimum of 1/4 possible ring substituents
-            biaryl_6_5: 2, # minimum of 2/4 possible ring substituents
-            biaryl_5_5: 1, # minimum of 3/4 possible ring substituents
-    
-            diaryl_ether_6_6: 2, # minimum of 2/4 possible ring substituents
-            diaryl_ether_6_5: 1, # minimum of 3/4 possible ring substituents
-            diaryl_ether_5_5: 1, # minimum of 3/4 possible ring substituents
-            diaryl_thioether_6_6: 2, # as for diaryl ethers
-            diaryl_thioether_6_5: 1, # as for diaryl ethers
-            diaryl_thioether_5_5: 1, # as for diaryl ethers
-            diaryl_amine_6_6: 2, # minimum of 2/4 possible ring substituents
-            diaryl_amine_6_5: 2, # minimum of 2/4 possible ring substituents
-            diaryl_amine_5_5: 1, # minimum of 3/4 possible ring substituents
-    
-            aryl_6_6: 3, # minimum of 1/4 possible ring substituents
-            aryl_6_5: 2, # minimum of 2/4 possible ring substituents
-            aryl_5_6: 2, # minimum of 2/4 possible ring substituents
-            aryl_5_5: 2, # minimum of 2/4 possible ring substituents
-            aliphatic_6_6: 3, # minimum of 1/4 possible ring substituents
-            aliphatic_6_5: 2, # minimum of 2/4 possible ring substituents
-            aliphatic_5_5: 2, # minimum of 2/4 possible ring substituents
-    
-            benzamide_6: 1, # minimum of 3/4 ring and C substituents (both C substituents always heavy by defintion)
-            thiobenzamide_6: 1, # as above
-            benzamide_5: 1, # as above
-            thiobenzamide_5: 1, # as above
-            rev_benzamide_6: 1, # minimum of 3/4 ring and N substituents (one N substituent always heavy by definition)
-            rev_thiobenzamide_6: 1, # as above
-            rev_benzamide_5: 1, # as above
-            rev_thiobenzamide_5: 1, # as above
-    
-            sulfoxide_6: 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
-            sulfone_6: 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
-            sulfoxide_5: 0, # as above
-            sulfone_5: 0, # as above
-    
-            amide: 2, # minimum of 2/4 C and N substituents (one C substituent always heavy by definition)
-            thioamide: 2, # as above
+            # Joined aryl-aryl ring systems
+            "Biaryl (7-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1", # two 7-membered aromatics joined by a single bond
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Biaryl (7-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:[*]:1", # 7- and 6-membered rings joined by a single bond
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Biaryl (7-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:1", # 7- and 5-membered rings joined by a single bond
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Biaryl (6-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:[*]:1", # two 6-membered aromatic rings joined by a single bond
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Biaryl (6-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:1", # 6- and 5-membered rings joined by a single bond
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Biaryl (5-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[*]1:[*]:[*]:[*]:[*]:1", # two 5-membered aromatic rings joined by a single bond
+                "non_heavy_limit": 1, # minimum of 3/4 possible ring substituents
+            },
 
+            # Heteroatom-joined aryl-aryl ring systems
+            # Includes diaryl ethers, thioethers (sulfoxides and sulfones) and amines
+            "Diaryl ether (7-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Diaryl ether (7-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl ether (7-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl ether (6-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl ether (6-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 possible ring substituents
+            },
+            "Diaryl ether (5-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[#8]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 possible ring substituents
+            },
+            "Diaryl thioether (7-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 3, # as for diaryl ethers
+            },
+            "Diaryl thioether (7-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # as for diaryl ethers
+            },
+            "Diaryl thioether (7-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # as for diaryl ethers
+            },
+            "Diaryl thioether (6-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # as for diaryl ethers
+            },
+            "Diaryl thioether (6-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for diaryl ethers
+            },
+            "Diaryl thioether (5-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[#16]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for diaryl ethers
+            },
+            "Diaryl amine (7-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl amine (7-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl amine (7-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl amine (6-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl amine (6-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Diaryl amine (5-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 possible ring substituents
+            },
+
+            # Joined aryl-nonaryl ring systems
+            "Aryl-aliphatic (7-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]~[*]1", # 7-membered aromatic and 7-membered non-aromatic joined by a single bond
+                "non_heavy_limit": 4, # minimum of 0/4 possible ring substituents
+            },
+            "Aryl-aliphatic (7-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1", # 7-membered aromatic and 6-membered non-aromatic joined by a single bond
+                "non_heavy_limit": 4, # minimum of 0/4 possible ring substituents
+            },
+            "Aryl-aliphatic (6-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]~[*]1", # 6-membered aromatic and 7-membered non-aromatic joined by a single bond
+                "non_heavy_limit": 4, # minimum of 0/4 possible ring substituents
+            },
+            "Aryl-aliphatic (7-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1", # 7-membered aromatic and 5-membered non-aromatic joined by a single bond
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Aryl-aliphatic (5-7)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]~[*]1", # 5-membered aromatic and 7-membered non-aromatic joined by a single bond
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Aryl-aliphatic (6-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1",
+                "non_heavy_limit": 3, # minimum of 1/4 possible ring substituents
+            },
+            "Aryl-aliphatic (6-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Aryl-aliphatic (5-6)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]~[*]1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+            "Aryl-aliphatic (5-5)": {
+                "smarts": "[*]1:[*]:[*]:[*]:[*]:1-[!a]1~[*]~[*]~[*]~[*]1",
+                "non_heavy_limit": 2, # minimum of 2/4 possible ring substituents
+            },
+
+            # Joined nonaryl-nonaryl ring systems
+            "Bialiphatic (7-7)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 4, # as for aryl-nonaryls
+            },
+            "Bialiphatic (7-6)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 4, # as for aryl-nonaryls
+            },
+            "Bialiphatic (7-5)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 3, # as for aryl-nonaryls
+            },
+            "Bialiphatic (6-6)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 3, # as for aryl-nonaryls
+            },
+            "Bialiphatic (6-5)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 2, # as for aryl-nonaryls
+            },
+            "Bialiphatic (5-5)": {
+                "smarts": "[!a]1~[!a]~[!a]~[!a]~[!a]1-[!a]2~[!a]~[!a]~[!a]~[!a]2",
+                "non_heavy_limit": 2, # as for aryl-nonaryls
+            },
+
+            # Aryl-X systems
+            # Includes benzamides, reverse benzamides, etc
+            "Benzamide (7)": {
+                "smarts": "[#7]-[#6](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 ring and C substituents (both C substituents always heavy by defintion)
+            },
+            "Benzamide (6)": {
+                "smarts": "[#7]-[#6](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 ring and C substituents (both C substituents always heavy by defintion)
+            },
+            "Benzamide (5)": {
+                "smarts": "[#7]-[#6](=[#8])-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 ring and C substituents (both C substituents always heavy by defintion)
+            },
+            "Thiobenzamide (7)": {
+                "smarts": "[#7]-[#6](=[#16])-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for benzamides
+            },
+            "Thiobenzamide (6)": {
+                "smarts": "[#7]-[#6](=[#16])-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for benzamides
+            },
+            "Thiobenzamide (5)": {
+                "smarts": "[#7]-[#6](=[#16])-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for benzamides
+            },
+            "Reverse benzamide (7)": {
+                "smarts": "[#8]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 ring and N substituents (one N substituent always heavy by definition)
+            },
+            "Reverse benzamide (6)": {
+                "smarts": "[#8]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 ring and N substituents (one N substituent always heavy by definition)
+            },
+            "Reverse benzamide (5)": {
+                "smarts": "[#8]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # minimum of 3/4 ring and N substituents (one N substituent always heavy by definition)
+            },
+            "Reverse thiobenzamide (7)": {
+                "smarts": "[#16]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # minimum of 2/4 ring and N substituents (one N substituent always heavy by definition)
+            },
+            "Reverse thiobenzamide (6)": {
+                "smarts": "[#16]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Reverse thiobenzamide (5)": {
+                "smarts": "[#16]=[#6]-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Sulfinamide (7)": {
+                "smarts": "[#16](=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # as for reverse benzamides
+            },
+            "Sulfinamide (6)": {
+                "smarts": "[#16](=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Sulfinamide (5)": {
+                "smarts": "[#16](=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Sulfonamide (7)": {
+                "smarts": "[#16](=[#8])(=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 2, # as for reverse benzamides
+            },
+            "Sulfonamide (6)": {
+                "smarts": "[#16](=[#8])(=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Sulfonamide (5)": {
+                "smarts": "[#16](=[#8])(=[#8])-[#7]-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 1, # as for reverse benzamides
+            },
+            "Sulfoxide (7)": {
+                "smarts": "[#16](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+            "Sulfoxide (6)": {
+                "smarts": "[#16](=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+            "Sulfoxide (5)": {
+                "smarts": "[#16](=[#8])-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+            "Sulfone (7)": {
+                "smarts": "[#16](=[#8])(=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+            "Sulfone (6)": {
+                "smarts": "[#16](=[#8])(=[#8])-[*]1:[*]:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+            "Sulfone (5)": {
+                "smarts": "[#16](=[#8])(=[#8])-[*]1:[*]:[*]:[*]:[*]:1",
+                "non_heavy_limit": 0, # minimum of 4/4 ring and S substituents (one S substituent always heavy by definition)
+            },
+
+            # Amides
+            "Amide": {
+                "smarts": "[#7]-[#6](=[#8])",
+                "non_heavy_limit": 2, # minimum of 2/4 C and N substituents (one C substituent always heavy by definition)
+            },
+            "Thioamide": {
+                "smarts": "[#7]-[#6](=[#16])",
+                "non_heavy_limit": 2, # as for amides
+            },
         }
 
         ### 2. Identify and analyze potential atropisomeric bonds
@@ -1011,11 +1266,11 @@ class Atropisomers():
         protonated_mol = Chem.AddHs(self.mol)
 
         # Iterate over each SMARTS pattern
-        for smarts in smarts_patterns.keys():
+        for pattern_name in PATTERNS.keys():
 
-            # Define the pattern name and non-heavy atom limit
-            pattern = smarts_patterns[smarts]
-            non_heavy_limit = non_heavy_limit_dict[smarts]
+            # Define the pattern and non-heavy atom limit
+            smarts = PATTERNS[pattern_name]["smarts"]
+            non_heavy_limit = PATTERNS[pattern_name]["non_heavy_limit"]
 
             # Convert the SMARTS string to a mol object
             smarts_mol = Chem.MolFromSmarts(smarts)
@@ -1029,29 +1284,27 @@ class Atropisomers():
             # function to analyze the substituent pattern and its local steric environment to determine if appropriate
             # for atropisomerism. The match will be processed differently depending on the type of matched pattern.
             for match_indexes in matches:
-                print(f"{pattern} match identified:")
+                print(f"{pattern_name} match identified:")
 
-                # Analyze biaryl matches (5/6/7)
-                if smarts in [biaryl_7_6, biaryl_6_6, biaryl_6_5, biaryl_5_5]:
-                    result, axis_1, axis_2 = self.analyze_biaryl(protonated_mol, match_indexes, non_heavy_limit)
+                # Analyze biaryl, aryl-aliphatic and bialiphatic matches
+                if "Biaryl" in pattern_name or "Aryl-aliphatic" in pattern_name or "Bialiphatic" in pattern_name:
+                    result, axis_1, axis_2 = self.analyze_biring(protonated_mol, match_indexes, non_heavy_limit)
 
                 # Analyze diaryl ethers, thioethers and amines matches (also captures diaryl sulfoxides and sulfones)
-                elif smarts in [diaryl_ether_6_6, diaryl_thioether_6_6, diaryl_amine_6_6,
-                                diaryl_ether_6_5, diaryl_thioether_6_5, diaryl_amine_6_5,
-                                diaryl_ether_5_5, diaryl_thioether_5_5, diaryl_amine_5_5]:
+                elif "Diaryl" in pattern_name:
                     result, axis_1, axis_2 = self.analyze_diaryl(protonated_mol, match_indexes, non_heavy_limit)
                 
-                # Analyze aryl-aliphatic and bialiphatics matches (sometimes includes benzamides and reverse benzamides)
-                elif smarts in [aryl_6_6, aryl_6_5, aryl_5_6, aryl_5_5, aliphatic_6_6, aliphatic_6_5, aliphatic_5_5]:
-                    result, axis_1, axis_2 = self.analyze_aliphatic(protonated_mol, match_indexes, non_heavy_limit)
+                # If enabled, analyze (thio)benzamides and reversed (thio)benzamides as coupled torsions
+                elif coupled_benzamide and ("Benzamide" in pattern_name or "Thiobenzamide" in pattern_name or "Reverse benzamide" in pattern_name or "Reverse thiobenzamide" in pattern_name):
+                    # The non-heavy limit is determined for single-bond benzamides, so we set it to 5 to allow all coupled benzamides
+                    result, axis_1, axis_2 = self.analyze_coupled_aryl_X(protonated_mol, match_indexes, non_heavy_limit=5)
 
-                # Analyze (thio)benzamide, reversed (thio)benzamide and aryl sulfoxide matches
-                elif smarts in [benzamide_6, thiobenzamide_6, rev_benzamide_6, rev_thiobenzamide_6, sulfoxide_6, sulfone_6,
-                                benzamide_5, thiobenzamide_5, rev_benzamide_5, rev_thiobenzamide_5, sulfoxide_5, sulfone_5]:
-                    result, axis_1, axis_2 = self.analyze_benzamide(protonated_mol, match_indexes, non_heavy_limit)
+                # Analyze (thio)benzamide, reversed (thio)benzamide, aryl sulfoxide and sulfonamide matches
+                elif "Benzamide" in pattern_name or "Thiobenzamide" in pattern_name or "Reverse benzamide" in pattern_name or "Reverse thiobenzamide" in pattern_name or "Sulfinamide" in pattern_name or "Sulfonamide" in pattern_name or "Sulfoxide" in pattern_name or "Sulfone" in pattern_name:
+                    result, axis_1, axis_2 = self.analyze_aryl_X(protonated_mol, match_indexes, non_heavy_limit)
 
                 # Analyze amides and thioamide matches
-                elif smarts in [amide, thioamide]:
+                elif pattern_name in ["Amide", "Thioamide"]:
                     result, axis_1, axis_2 = self.analyze_amide(protonated_mol, match_indexes, non_heavy_limit)
 
                 # Flag unknown SMARTS patterns
@@ -1073,11 +1326,11 @@ class Atropisomers():
                     else:
                         central_bond = f"{axis_2[0]}_{axis_1[0]}"
 
-                    # Record the GICs and substructures
+                    # Record the GICs and pattern name
                     gic_1, gic_2 = self.get_gics(axis_1, axis_2)
                     self.all_gic_1[central_bond] = gic_1
                     self.all_gic_2[central_bond] = gic_2
-                    self.substructures[central_bond] = smarts_patterns[smarts]
+                    self.substructures[central_bond] = pattern_name
 
                     # Show bonds on the molecule
                     for atom in self.mol.GetAtoms():
@@ -1592,30 +1845,30 @@ class Atropisomers():
 
             # Apply overall correction if requested
             if overall:
-                return 0.98*barrier + 1.48
+                return 0.980*barrier + 1.458
 
             # Else, get the substructure of the index
             substructure = self.substructures[ts_index]
 
             # Apply substructure-specific correction
             if "Biaryl" in substructure:
-                return 1.00*barrier + 0.66
+                return 0.997*barrier + 0.658
             elif "Diaryl" in substructure:
-                return 1.24*barrier - 3.38
+                return 1.238*barrier - 3.377
             elif "Benzamide" in substructure or "Thiobenzamide" in substructure:
-                return 1.04*barrier + 0.45
+                return 1.041*barrier + 0.453
             elif "Reverse benzamide" in substructure or "Reverse thiobenzamide" in substructure:
-                return 0.92*barrier + 2.73
+                return 0.918*barrier + 2.776
             elif "Sulfoxide" in substructure or "Sulfone" in substructure:
-                return 0.85*barrier + 4.29
+                return 0.852*barrier + 4.286
             elif substructure in ["Amide", "Thioamide"]:
-                return 0.87*barrier + 3.11
+                return 0.867*barrier + 3.107
             elif "Aryl-aliphatic" in substructure or "Bialiphatic" in substructure:
-                return 1.23*barrier - 3.08
+                return 1.230*barrier - 3.080
 
             # Apply overall correction if no specific one exists
             else:
-                return 0.98*barrier + 1.48
+                return 0.980*barrier + 1.458
 
     def visualize_barrier(self, bond_index, barrier):
         """
@@ -1675,7 +1928,7 @@ class Atropisomers():
         Returns:
             int: The assigned class.
         """
-        return 3 if barrier > 30 else 1 if updated_barrier < 20 else 2
+        return 3 if barrier > 30 else 1 if barrier < 20 else 2
         
     # Plotting functions
 

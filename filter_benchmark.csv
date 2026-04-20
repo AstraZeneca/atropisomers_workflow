@@ -1,109 +1,190 @@
 Index,Entry Name,Substructure,Number of tBu,SMILES,Charge,Computation solvent,Computed barrier (kcal/mol),Computed class
-1,biaryl_76_4,Biaryl,4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,68.59,3
-2,biaryl_76_3,Biaryl,3,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,51.12,3
-3,biaryl_76_2_opp,Biaryl,2,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1,0,Gas,24.35,2
-4,biaryl_76_2_7m,Biaryl,2,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1-c1ccccc1,0,Gas,13.72,1
-5,biaryl_76_2_6m,Biaryl,2,c1ccC(=O)ccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,26.31,2
-6,biaryl_76_1_7m,Biaryl,1,CC(C)(C)c1ccC(=O)ccc1-c1ccccc1,0,Gas,18.35,1
-7,biaryl_76_1_6m,Biaryl,1,c1ccC(=O)ccc1-c1ccccc1C(C)(C)C,0,Gas,19.41,1
-8,biaryl_76_0,Biaryl,0,c1ccC(=O)ccc1-c1ccccc1,0,Gas,4.35,1
-9,biaryl_66_4,Biaryl,4,CC(C)(C)c1cccc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,116.91,3
-10,biaryl_66_3,Biaryl,3,CC(C)(C)c1ccccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,61.9,3
-11,biaryl_66_2_opp,Biaryl,2,CC(C)(C)c1ccccc1-c1ccccc1C(C)(C)C,0,Gas,37.46,3
-12,biaryl_66_2_same,Biaryl,2,c1ccccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,26.5,2
-13,biaryl_66_1,Biaryl,1,c1ccccc1-c1ccccc1C(C)(C)C,0,Gas,15.61,1
-14,biaryl_65_4,Biaryl,4,CC(C)(C)c1cccc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,73.84,3
-15,biaryl_65_3,Biaryl,3,CC(C)(C)c1ccccc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,63.42,3
-16,biaryl_65_2_opp,Biaryl,2,CC(C)(C)c1ccccc1-c1ccoc1C(C)(C)C,0,Gas,21.42,2
-17,biaryl_65_2_6m,Biaryl,2,c1cocc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,22.15,2
-18,biaryl_65_2_5m,Biaryl,2,c1ccccc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,19.19,1
-19,biaryl_65_1_6m,Biaryl,1,c1cocc1-c1ccccc1C(C)(C)C,0,Gas,6.8,1
-20,biaryl_65_1_5m,Biaryl,1,c1ccccc1-c1ccoc1C(C)(C)C,0,Gas,5.9,1
-21,biaryl_55_4,Biaryl,4,CC(C)(C)c1coc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,83.58,3
-22,biaryl_55_3,Biaryl,3,CC(C)(C)c1cocc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,48.32,3
-23,biaryl_55_2_opp,Biaryl,2,CC(C)(C)c1cocc1-c1ccoc1C(C)(C)C,0,Gas,12.55,1
-24,biaryl_55_2_same,Biaryl,2,c1cocc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,11.85,1
-25,diaryl_ether_66_4,Diaryl,4,CC(C)(C)c1cccc(C(C)(C)C)c1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,51.14,3
-26,diaryl_ether_66_3,Diaryl,3,CC(C)(C)c1ccccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,35.01,3
-27,diaryl_ether_66_2_opp,Diaryl,2,CC(C)(C)c1ccccc1Oc1ccccc1C(C)(C)C,0,Gas,24.66,2
-28,diaryl_ether_66_2_same,Diaryl,2,c1ccccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,16.49,1
-29,diaryl_ether_66_1,Diaryl,1,c1ccccc1Oc1ccccc1C(C)(C)C,0,Gas,8.64,1
-30,diaryl_ether_65_3,Diaryl,3,CC(C)(C)c1ccccc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,31.27,3
-31,diaryl_ether_65_2_opp,Diaryl,2,CC(C)(C)c1ccccc1Oc1ccoc1C(C)(C)C,0,Gas,11.97,1
-32,diaryl_ether_65_2_6m,Diaryl,2,c1cocc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,12,1
-33,diaryl_ether_65_2_5m,Diaryl,2,c1ccccc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,13.75,1
-34,diaryl_ether_55_4,Diaryl,4,CC(C)(C)c1coc(C(C)(C)C)c1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,48.58,3
-35,diaryl_ether_55_3,Diaryl,3,CC(C)(C)c1cocc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,25.36,2
-36,diaryl_ether_55_2_opp,Diaryl,2,CC(C)(C)c1cocc1Oc1ccoc1C(C)(C)C,0,Gas,5.33,1
-37,diaryl_ether_55_2_same,Diaryl,2,c1cocc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.65,1
-38,diaryl_thioether_66_4,Diaryl,4,CC(C)(C)c1cccc(C(C)(C)C)c1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,28.81,2
-39,diaryl_thioether_66_3,Diaryl,3,CC(C)(C)c1ccccc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,21.92,2
-40,diaryl_thioether_66_2_opp,Diaryl,2,CC(C)(C)c1ccccc1Sc1ccccc1C(C)(C)C,0,Gas,14.73,1
-41,diaryl_thioether_66_2_same,Diaryl,2,c1ccccc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,13.08,1
-42,diaryl_thioether_65_4,Diaryl,4,CC(C)(C)c1cccc(C(C)(C)C)c1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,25.02,2
-43,diaryl_thioether_65_3,Diaryl,3,CC(C)(C)c1ccccc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,20.73,2
-44,diaryl_thioether_65_2_opp,Diaryl,2,CC(C)(C)c1ccccc1Sc1ccoc1C(C)(C)C,0,Gas,7.57,1
-45,diaryl_thioether_65_2_6m,Diaryl,2,c1cocc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,7.87,1
-46,diaryl_thioether_65_2_5m,Diaryl,2,c1ccccc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.66,1
-47,diaryl_thioether_55_4,Diaryl,4,CC(C)(C)c1coc(C(C)(C)C)c1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,27.06,2
-48,diaryl_thioether_55_3,Diaryl,3,CC(C)(C)c1cocc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,16.17,1
-49,diaryl_thioether_55_2_opp,Diaryl,2,CC(C)(C)c1cocc1Sc1ccoc1C(C)(C)C,0,Gas,5.15,1
-50,diaryl_thioether_55_2_same,Diaryl,2,c1cocc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,5.22,1
-51,diaryl_amine_66_3,Diaryl,3,CC(C)(C)c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,28.71,2
-52,diaryl_amine_66_2_opp,Diaryl,2,CC(C)(C)c1ccccc1N(C(C)(C)C)c1ccccc1C(C)(C)C,0,Gas,16.07,1
-53,diaryl_amine_66_2_same,Diaryl,2,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,27.35,2
-54,diaryl_amine_66_1,Diaryl,1,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1,0,Gas,8.34,1
-55,diaryl_amine_65_3,Diaryl,3,CC(C)(C)c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,15.14,1
-56,diaryl_amine_65_2_6m,Diaryl,2,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,16.97,1
-57,diaryl_amine_65_2_5m,Diaryl,2,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,12.78,1
-58,diaryl_amine_65_1_6m,Diaryl,1,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1,0,Gas,5.19,1
-59,diaryl_amine_65_1_5m,Diaryl,1,c1ccccc1N(C(C)(C)C)c1ccoc1C(C)(C)C,0,Gas,4.67,1
-60,diaryl_amine_55_4,Diaryl,4,CC(C)(C)c1coc(C(C)(C)C)c1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,27.35,2
-61,diaryl_amine_55_3,Diaryl,3,CC(C)(C)c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,15.4,1
-62,diaryl_amine_55_2_same,Diaryl,2,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.86,1
-63,benzamide_6_2,Benzamide,2,CC(C)(C)N(C(C)(C)C)C(=O)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,23.79,2
-64,benzamide_6_1,Benzamide,1,CC(C)(C)N(C(C)(C)C)C(=O)c1ccccc1C(C)(C)C,0,Gas,4.98,1
-65,benzamide_5_2,Benzamide,2,CC(C)(C)N(C(C)(C)C)C(=O)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,10.91,1
-66,benzamide_5_1,Benzamide,1,CC(C)(C)N(C(C)(C)C)C(=O)c1cocc1C(C)(C)C,0,Gas,9.24,1
-67,thiobenzamide_6_1,Benzamide,1,CC(C)(C)N(C(C)(C)C)C(=S)c1ccccc1C(C)(C)C,0,Gas,9.91,1
-68,thiobenzamide_6_0,Benzamide,0,CC(C)(C)N(C(C)(C)C)C(=S)c1ccccc1,0,Gas,14.73,1
-69,thiobenzamide_5_2,Benzamide,2,CC(C)(C)N(C(C)(C)C)C(=S)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,18.73,1
-70,thiobenzamide_5_1,Benzamide,1,CC(C)(C)N(C(C)(C)C)C(=S)c1cocc1C(C)(C)C,0,Gas,14.92,1
-71,reverse_benzamide_6_2,Reverse benzamide,2,CC(C)(C)c1cccc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,55.16,3
-72,reverse_benzamide_5_1,Reverse benzamide,1,c1coc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,33.35,3
-73,reverse_thiobenzamide_6_2,Reverse benzamide,2,CC(C)(C)c1cccc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,52.31,3
-74,reverse_thiobenzamide_5_1,Reverse benzamide,1,c1coc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,30.02,3
-75,sulfoxide_6_1,Sulfoxide,1,CC(C)(C)c1ccccc1S(=O)C(C)(C)(C),0,Gas,10.69,1
-76,sulfoxide_5_2,Sulfoxide,2,CC(C)(C)c1coc(C(C)(C)C)c1S(=O)C(C)(C)(C),0,Gas,19.21,1
-77,sulfoxide_5_1,Sulfoxide,1,CC(C)(C)c1cocc1S(=O)C(C)(C)(C),0,Gas,4.46,1
-78,sulfone_6_1,Sulfone,1,CC(C)(C)c1ccccc1S(=O)(=O)C(C)(C)(C),0,Gas,7.83,1
-79,sulfone_5_2,Sulfone,2,CC(C)(C)c1coc(C(C)(C)C)c1S(=O)(=O)C(C)(C)(C),0,Gas,18.44,1
-80,sulfone_5_1,Sulfone,1,CC(C)(C)c1cocc1S(=O)(=O)C(C)(C)(C),0,Gas,5.55,1
-81,amide_3,Amide,3,CC(C)(C)N(C(C)(C)C)C(=O)C(C)(C)C,0,Gas,19.39,1
-82,amide_2_opp,Amide,2,N(C(C)(C)C)C(=O)C(C)(C)C,0,Gas,19.06,1
-83,amide_2_same,Amide,2,CC(C)(C)N(C(C)(C)C)C(=O),0,Gas,13.9,1
-84,amide_1_CO,Amide,1,NC(=O)C(C)(C)C,0,Gas,15.02,1
-85,amide_0,Amide,0,NC(=O)C,0,Gas,16.36,1
-86,thioamide_3,Amide,3,CC(C)(C)N(C(C)(C)C)C(=S)C(C)(C)C,0,Gas,28.47,2
-87,thioamide_2_opp,Amide,2,N(C(C)(C)C)C(=S)C(C)(C)C,0,Gas,21.39,2
-88,thioamide_2_same,Amide,2,CC(C)(C)N(C(C)(C)C)C(=S),0,Gas,17.01,1
-89,thioamide_1_N,Amide,1,N(C(C)(C)C)C(=S),0,Gas,24.93,2
-90,thioamide_1_CO,Amide,1,NC(=S)C(C)(C)C,0,Gas,18.32,1
-91,thioamide_0,Amide,0,NC(=S)C,0,Gas,19.43,1
-92,aryl_aliphatic_66_2_aliphatic,Aryl-aliphatic,2,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2ccccc2,0,Gas,22.91,2
-93,aryl_aliphatic_66_2_opp,Aryl-aliphatic,2,C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,43.73,3
-94,aryl_aliphatic_65_3_aryl,Aryl-aliphatic,3,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2C(C)(C)C,0,Gas,15.99,1
-95,aryl_aliphatic_65_3_aliphatic,Aryl-aliphatic,3,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,36.45,3
-96,aryl_aliphatic_65_2_aryl,Aryl-aliphatic,2,C1CCCC(C(C)(C)C)1c2c(C(C)(C)C)cccc2C(C)(C)C,0,Gas,27.09,2
-97,aryl_aliphatic_65_2_aliphatic,Aryl-aliphatic,2,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2ccccc2,0,Gas,15.05,1
-98,aryl_aliphatic_65_2_opp,Aryl-aliphatic,2,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,20.63,2
-99,aryl_aliphatic_56_4,Aryl-aliphatic,4,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,66.49,3
-100,aryl_aliphatic_56_3_aliphatic,Aryl-aliphatic,3,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,49.66,3
-101,aryl_aliphatic_56_2_aryl,Aryl-aliphatic,2,C1CCCCC(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,20.86,2
-102,aryl_aliphatic_56_2_aliphatic,Aryl-aliphatic,2,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2ccoc2,0,Gas,10.19,1
-103,aryl_aliphatic_56_2_opp,Aryl-aliphatic,2,C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,12.07,1
-104,aryl_aliphatic_55_4,Aryl-aliphatic,4,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,39.39,3
-105,aryl_aliphatic_55_3_aryl,Aryl-aliphatic,3,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,33.81,3
-106,aryl_aliphatic_55_3_aliphatic,Aryl-aliphatic,3,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,19.74,1
-107,aryl_aliphatic_55_2_aryl,Aryl-aliphatic,2,C1CCCC(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,17.27,1
-108,aryl_aliphatic_55_2_aliphatic,Aryl-aliphatic,2,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2ccoc2,0,Gas,18.34,1
+1,biaryl_77_3,Biaryl (7-7),3,CC(C)(C)c1ccC(=O)ccc1-c1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,43.58,3
+2,biaryl_77_2_opp,Biaryl (7-7),2,CC(C)(C)c1ccC(=O)ccc1-c1cccC(=O)cc1C(C)(C)C,0,Gas,22.35,3
+3,biaryl_77_2_same,Biaryl (7-7),2,c1ccC(=O)ccc1-c1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,15.17,2
+4,biaryl_77_1,Biaryl (7-7),1,c1ccC(=O)ccc1-c1cccC(=O)cc1C(C)(C)C,0,Gas,15.58,2
+5,biaryl_77_0,Biaryl (7-7),0,c1ccC(=O)ccc1-c1cccC(=O)cc1,0,Gas,6.35,1
+6,biaryl_76_4,Biaryl (7-6),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,68.59,3
+7,biaryl_76_3,Biaryl (7-6),3,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,51.12,3
+8,biaryl_76_2_opp,Biaryl (7-6),2,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1,0,Gas,24.35,3
+9,biaryl_76_2_7m,Biaryl (7-6),2,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1-c1ccccc1,0,Gas,13.72,2
+10,biaryl_76_2_6m,Biaryl (7-6),2,c1ccC(=O)ccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,26.31,3
+11,biaryl_76_1_7m,Biaryl (7-6),1,CC(C)(C)c1ccC(=O)ccc1-c1ccccc1,0,Gas,18.35,2
+12,biaryl_76_1_6m,Biaryl (7-6),1,c1ccC(=O)ccc1-c1ccccc1C(C)(C)C,0,Gas,19.41,2
+13,biaryl_76_0,Biaryl (7-6),0,c1ccC(=O)ccc1-c1ccccc1,0,Gas,4.35,1
+14,biaryl_75_3,Biaryl (7-5),3,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,43.27,3
+15,biaryl_75_2_opp,Biaryl (7-5),2,c1ccC(=O)cc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1,0,Gas,17.29,2
+16,biaryl_75_2_7m,Biaryl (7-5),2,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1-c1cocc1,0,Gas,9.6,1
+17,biaryl_75_2_5m,Biaryl (7-5),2,c1ccC(=O)ccc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,20.78,3
+18,biaryl_75_1_7m,Biaryl (7-5),1,CC(C)(C)c1ccC(=O)ccc1-c1cocc1,0,Gas,10.53,2
+19,biaryl_75_1_5m,Biaryl (7-5),1,c1ccC(=O)ccc1-c1ccoc1C(C)(C)C,0,Gas,7.36,1
+20,biaryl_75_0,Biaryl (7-5),0,c1ccC(=O)ccc1-c1ccoc1,0,Gas,3.72,1
+21,biaryl_66_4,Biaryl (6-6),4,CC(C)(C)c1cccc(C(C)(C)C)c1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,116.91,3
+22,biaryl_66_3,Biaryl (6-6),3,CC(C)(C)c1ccccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,61.9,3
+23,biaryl_66_2_opp,Biaryl (6-6),2,CC(C)(C)c1ccccc1-c1ccccc1C(C)(C)C,0,Gas,37.46,3
+24,biaryl_66_2_same,Biaryl (6-6),2,c1ccccc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,26.5,3
+25,biaryl_66_1,Biaryl (6-6),1,c1ccccc1-c1ccccc1C(C)(C)C,0,Gas,15.61,2
+26,biaryl_65_4,Biaryl (6-5),4,CC(C)(C)c1cccc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,73.84,3
+27,biaryl_65_3,Biaryl (6-5),3,CC(C)(C)c1ccccc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,63.42,3
+28,biaryl_65_2_opp,Biaryl (6-5),2,CC(C)(C)c1ccccc1-c1ccoc1C(C)(C)C,0,Gas,21.42,3
+29,biaryl_65_2_6m,Biaryl (6-5),2,c1cocc1-c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,22.15,3
+30,biaryl_65_2_5m,Biaryl (6-5),2,c1ccccc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,19.19,2
+31,biaryl_65_1_6m,Biaryl (6-5),1,c1cocc1-c1ccccc1C(C)(C)C,0,Gas,6.8,1
+32,biaryl_65_1_5m,Biaryl (6-5),1,c1ccccc1-c1ccoc1C(C)(C)C,0,Gas,5.9,1
+33,biaryl_55_4,Biaryl (5-5),4,CC(C)(C)c1coc(C(C)(C)C)c1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,83.58,3
+34,biaryl_55_3,Biaryl (5-5),3,CC(C)(C)c1cocc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,48.32,3
+35,biaryl_55_2_opp,Biaryl (5-5),2,CC(C)(C)c1cocc1-c1ccoc1C(C)(C)C,0,Gas,12.55,2
+36,biaryl_55_2_same,Biaryl (5-5),2,c1cocc1-c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,11.85,2
+37,diaryl_ether_77_4,Diaryl ether (7-7),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Oc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,30.34,3
+38,diaryl_ether_77_3,Diaryl ether (7-7),3,CC(C)(C)c1ccC(=O)ccc1Oc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,19.85,2
+39,diaryl_ether_77_2_opp,Diaryl ether (7-7),2,CC(C)(C)c1ccC(=O)ccc1Oc1ccC(=O)ccc1C(C)(C)C,0,Gas,27.14,3
+40,diaryl_ether_77_2_same,Diaryl ether (7-7),2,c1ccC(=O)ccc1Oc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,13.08,2
+41,diaryl_ether_77_1,Diaryl ether (7-7),1,c1ccC(=O)ccc1Oc1ccC(=O)ccc1C(C)(C)C,0,Gas,13.79,2
+42,diaryl_ether_76_4,Diaryl ether (7-6),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,35.28,3
+43,diaryl_ether_76_3,Diaryl ether (7-6),3,CC(C)(C)c1ccC(=O)ccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,38.12,3
+44,diaryl_ether_76_2_opp,Diaryl ether (7-6),2,CC(C)(C)c1ccC(=O)ccc1Oc1ccccc1C(C)(C)C,0,Gas,23.15,3
+45,diaryl_ether_76_2_7m,Diaryl ether (7-6),2,c1ccccc1Oc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,13.23,2
+46,diaryl_ether_76_2_6m,Diaryl ether (7-6),2,c1ccC(=O)ccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,18.79,2
+47,diaryl_ether_76_1_7m,Diaryl ether (7-6),1,c1ccccc1Oc1cccC(=O)cc1C(C)(C)C,0,Gas,9.48,1
+48,diaryl_ether_76_1_6m,Diaryl ether (7-6),1,c1ccC(=O)ccc1Oc1c(C(C)(C)C)cccc1,0,Gas,9.72,1
+49,diaryl_ether_76_0,Diaryl ether (7-6),0,c1ccC(=O)ccc1Oc1ccccc1,0,Gas,8.09,1
+50,diaryl_ether_75_4,Diaryl ether (7-5),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,33.66,3
+51,diaryl_ether_75_3,Diaryl ether (7-5),3,CC(C)(C)c1ccC(=O)ccc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,33.95,3
+52,diaryl_ether_75_2_opp,Diaryl ether (7-5),2,CC(C)(C)c1ccC(=O)ccc1Oc1ccoc1C(C)(C)C,0,Gas,15.27,2
+53,diaryl_ether_75_2_7m,Diaryl ether (7-5),2,c1cocc1Oc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,10.13,2
+54,diaryl_ether_66_4,Diaryl ether (6-6),2,CC(C)(C)c1cccc(C(C)(C)C)c1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,51.14,3
+55,diaryl_ether_66_3,Diaryl ether (6-6),3,CC(C)(C)c1ccccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,35.01,3
+56,diaryl_ether_66_2_opp,Diaryl ether (6-6),2,CC(C)(C)c1ccccc1Oc1ccccc1C(C)(C)C,0,Gas,24.66,3
+57,diaryl_ether_66_2_same,Diaryl ether (6-6),2,c1ccccc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,16.49,2
+58,diaryl_ether_66_1,Diaryl ether (6-6),1,c1ccccc1Oc1ccccc1C(C)(C)C,0,Gas,8.64,1
+59,diaryl_ether_65_3,Diaryl ether (6-5),3,CC(C)(C)c1ccccc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,31.27,3
+60,diaryl_ether_65_2_opp,Diaryl ether (6-5),2,CC(C)(C)c1ccccc1Oc1ccoc1C(C)(C)C,0,Gas,11.97,2
+61,diaryl_ether_65_2_6m,Diaryl ether (6-5),2,c1cocc1Oc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,12,2
+62,diaryl_ether_65_2_5m,Diaryl ether (6-5),2,c1ccccc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,13.75,2
+63,diaryl_ether_55_4,Diaryl ether (5-5),4,CC(C)(C)c1coc(C(C)(C)C)c1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,48.58,3
+64,diaryl_ether_55_3,Diaryl ether (5-5),3,CC(C)(C)c1cocc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,25.36,3
+65,diaryl_ether_55_2_opp,Diaryl ether (5-5),2,CC(C)(C)c1cocc1Oc1ccoc1C(C)(C)C,0,Gas,5.33,1
+66,diaryl_ether_55_2_same,Diaryl ether (5-5),2,c1cocc1Oc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.65,1
+67,diaryl_thioether_77_4,Diaryl thioether (7-7),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Sc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,18.01,2
+68,diaryl_thioether_77_3,Diaryl thioether (7-7),3,CC(C)(C)c1ccC(=O)ccc1Sc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,14.15,2
+69,diaryl_thioether_77_2_opp,Diaryl thioether (7-7),2,CC(C)(C)c1ccC(=O)ccc1Sc1ccC(=O)ccc1C(C)(C)C,0,Gas,13.86,2
+70,diaryl_thioether_77_2_same,Diaryl thioether (7-7),2,c1ccC(=O)ccc1Sc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,9.31,1
+71,diaryl_thioether_77_1,Diaryl thioether (7-7),1,c1ccC(=O)ccc1Sc1ccC(=O)ccc1C(C)(C)C,0,Gas,7.76,1
+72,diaryl_thioether_66_4,Diaryl thioether (6-6),4,CC(C)(C)c1cccc(C(C)(C)C)c1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,28.81,3
+73,diaryl_thioether_66_3,Diaryl thioether (6-6),3,CC(C)(C)c1ccccc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,21.92,3
+74,diaryl_thioether_66_2_opp,Diaryl thioether (6-6),2,CC(C)(C)c1ccccc1Sc1ccccc1C(C)(C)C,0,Gas,14.73,2
+75,diaryl_thioether_66_2_same,Diaryl thioether (6-6),2,c1ccccc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,13.08,2
+76,diaryl_thioether_65_4,Diaryl thioether (6-5),4,CC(C)(C)c1cccc(C(C)(C)C)c1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,25.02,3
+77,diaryl_thioether_65_3,Diaryl thioether (6-5),3,CC(C)(C)c1ccccc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,20.73,3
+78,diaryl_thioether_65_2_opp,Diaryl thioether (6-5),2,CC(C)(C)c1ccccc1Sc1ccoc1C(C)(C)C,0,Gas,7.57,1
+79,diaryl_thioether_65_2_6m,Diaryl thioether (6-5),2,c1cocc1Sc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,7.87,1
+80,diaryl_thioether_65_2_5m,Diaryl thioether (6-5),2,c1ccccc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.66,1
+81,diaryl_thioether_55_4,Diaryl thioether (5-5),4,CC(C)(C)c1coc(C(C)(C)C)c1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,27.06,3
+82,diaryl_thioether_55_3,Diaryl thioether (5-5),3,CC(C)(C)c1cocc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,16.17,2
+83,diaryl_thioether_55_2_opp,Diaryl thioether (5-5),2,CC(C)(C)c1cocc1Sc1ccoc1C(C)(C)C,0,Gas,5.15,1
+84,diaryl_thioether_55_2_same,Diaryl thioether (5-5),2,c1cocc1Sc1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,5.22,1
+85,diaryl_amine_77_4,Diaryl amine (7-7),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Nc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,32.46,3
+86,diaryl_amine_77_3,Diaryl amine (7-7),3,CC(C)(C)c1ccC(=O)ccc1Nc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,15.93,2
+87,diaryl_amine_77_2_opp,Diaryl amine (7-7),2,CC(C)(C)c1ccC(=O)ccc1Nc1ccC(=O)ccc1C(C)(C)C,0,Gas,18,2
+88,diaryl_amine_77_2_same,Diaryl amine (7-7),2,c1ccC(=O)ccc1Nc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,13.85,2
+89,diaryl_amine_77_1,Diaryl amine (7-7),1,c1ccC(=O)ccc1Nc1ccC(=O)ccc1C(C)(C)C,0,Gas,10.32,2
+90,diaryl_amine_76_4,Diaryl amine (7-6),4,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1Nc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,33.87,3
+91,diaryl_amine_76_3,Diaryl amine (7-6),3,CC(C)(C)c1ccC(=O)ccc1Nc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,34.03,3
+92,diaryl_amine_76_2_opp,Diaryl amine (7-6),2,CC(C)(C)c1ccC(=O)ccc1Nc1ccccc1C(C)(C)C,0,Gas,16.31,2
+93,diaryl_amine_76_2_7m,Diaryl amine (7-6),2,c1ccccc1Nc1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,10.98,2
+94,diaryl_amine_76_2_6m,Diaryl amine (7-6),2,c1ccC(=O)ccc1Nc1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,23.35,3
+95,diaryl_amine_76_1_7m,Diaryl amine (7-6),1,c1ccccc1Nc1cccC(=O)cc1C(C)(C)C,0,Gas,4.81,1
+96,diaryl_amine_76_1_6m,Diaryl amine (7-6),1,c1ccC(=O)ccc1Nc1c(C(C)(C)C)cccc1,0,Gas,8.68,1
+97,diaryl_amine_66_3,Diaryl amine (6-6),3,CC(C)(C)c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,28.71,3
+98,diaryl_amine_66_2_opp,Diaryl amine (6-6),2,CC(C)(C)c1ccccc1N(C(C)(C)C)c1ccccc1C(C)(C)C,0,Gas,16.07,2
+99,diaryl_amine_66_2_same,Diaryl amine (6-6),2,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,27.35,3
+100,diaryl_amine_66_1,Diaryl amine (6-6),1,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1,0,Gas,8.34,1
+101,diaryl_amine_65_3,Diaryl amine (6-5),3,CC(C)(C)c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,15.14,2
+102,diaryl_amine_65_2_6m,Diaryl amine (6-5),2,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,16.97,2
+103,diaryl_amine_65_2_5m,Diaryl amine (6-5),2,c1ccccc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,12.78,2
+104,diaryl_amine_65_1_6m,Diaryl amine (6-5),1,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)cccc1,0,Gas,5.19,1
+105,diaryl_amine_65_1_5m,Diaryl amine (6-5),1,c1ccccc1N(C(C)(C)C)c1ccoc1C(C)(C)C,0,Gas,4.67,1
+106,diaryl_amine_55_4,Diaryl amine (5-5),4,CC(C)(C)c1coc(C(C)(C)C)c1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,27.35,3
+107,diaryl_amine_55_3,Diaryl amine (5-5),3,CC(C)(C)c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,15.4,2
+108,diaryl_amine_55_2_same,Diaryl amine (5-5),2,c1cocc1N(C(C)(C)C)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,9.86,1
+109,benzamide_7_2,Benzamide (7),2,CC(C)(C)N(C(C)(C)C)C(=O)c1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,19.28,2
+110,benzamide_7_1,Benzamide (7),1,CC(C)(C)N(C(C)(C)C)C(=O)c1ccC(=O)ccc1C(C)(C)C,0,Gas,10.26,2
+111,benzamide_7_0,Benzamide (7),0,CC(C)(C)N(C(C)(C)C)C(=O)c1ccC(=O)ccc1,0,Gas,2.96,1
+112,benzamide_6_2,Benzamide (6),2,CC(C)(C)N(C(C)(C)C)C(=O)c1c(C(C)(C)C)cccc1C(C)(C)C,0,Gas,23.79,3
+113,benzamide_6_1,Benzamide (6),1,CC(C)(C)N(C(C)(C)C)C(=O)c1ccccc1C(C)(C)C,0,Gas,4.98,1
+114,benzamide_5_2,Benzamide (5),2,CC(C)(C)N(C(C)(C)C)C(=O)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,10.91,2
+115,benzamide_5_1,Benzamide (5),1,CC(C)(C)N(C(C)(C)C)C(=O)c1cocc1C(C)(C)C,0,Gas,9.24,1
+116,thiobenzamide_7_2,Thiobenzamide (7),2,CC(C)(C)N(C(C)(C)C)C(=S)c1c(C(C)(C)C)ccC(=O)cc1C(C)(C)C,0,Gas,14.4,2
+117,thiobenzamide_7_1,Thiobenzamide (7),1,CC(C)(C)N(C(C)(C)C)C(=S)c1ccC(=O)ccc1C(C)(C)C,0,Gas,15.34,2
+118,thiobenzamide_7_0,Thiobenzamide (7),0,CC(C)(C)N(C(C)(C)C)C(=S)c1ccC(=O)ccc1,0,Gas,11.65,2
+119,thiobenzamide_6_1,Thiobenzamide (6),1,CC(C)(C)N(C(C)(C)C)C(=S)c1ccccc1C(C)(C)C,0,Gas,9.91,1
+120,thiobenzamide_6_0,Thiobenzamide (6),0,CC(C)(C)N(C(C)(C)C)C(=S)c1ccccc1,0,Gas,14.73,2
+121,thiobenzamide_5_2,Thiobenzamide (5),2,CC(C)(C)N(C(C)(C)C)C(=S)c1c(C(C)(C)C)coc1C(C)(C)C,0,Gas,18.73,2
+122,thiobenzamide_5_1,Thiobenzamide (5),1,CC(C)(C)N(C(C)(C)C)C(=S)c1cocc1C(C)(C)C,0,Gas,14.92,2
+123,reverse_benzamide_7_2,Reverse benzamide (7),2,c1ccC(=O)cc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,34.44,3
+124,reverse_benzamide_7_1,Reverse benzamide (7),1,c1ccC(=O)ccc1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,7.13,1
+125,reverse_benzamide_6_3,Reverse benzamide (6),3,CC(C)(C)c1cccc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,55.16,3
+126,reverse_benzamide_5_2,Reverse benzamide (5),2,c1coc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=O,0,Gas,33.35,3
+127,reverse_thiobenzamide_7_2,Reverse thiobenzamide (7),2,c1ccC(=O)cc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,26.07,3
+128,reverse_thiobenzamide_7_1,Reverse thiobenzamide (7),1,c1ccC(=O)ccc1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,13.87,2
+129,reverse_thiobenzamide_6_3,Reverse thiobenzamide (6),3,CC(C)(C)c1cccc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,52.31,3
+130,reverse_thiobenzamide_5_2,Reverse thiobenzamide (5),2,c1coc(C(C)(C)C)c1N(C(C)(C)C)C(C(C)(C)C)=S,0,Gas,30.02,3
+131,sulfoxide_7_2,Sulfoxide (7),2,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1S(=O)C(C)(C)(C),0,Gas,23.61,3
+132,sulfoxide_7_1,Sulfoxide (7),1,CC(C)(C)c1ccC(=O)ccc1S(=O)C(C)(C)(C),0,Gas,10.89,2
+133,sulfoxide_6_1,Sulfoxide (6),1,CC(C)(C)c1ccccc1S(=O)C(C)(C)(C),0,Gas,10.69,2
+134,sulfoxide_5_2,Sulfoxide (5),2,CC(C)(C)c1coc(C(C)(C)C)c1S(=O)C(C)(C)(C),0,Gas,19.21,2
+135,sulfoxide_5_1,Sulfoxide (5),1,CC(C)(C)c1cocc1S(=O)C(C)(C)(C),0,Gas,4.46,1
+136,sulfone_7_2,Sulfone (7),2,CC(C)(C)c1ccC(=O)cc(C(C)(C)C)c1S(=O)(=O)C(C)(C)(C),0,Gas,17.73,2
+137,sulfone_7_1,Sulfone (7),1,CC(C)(C)c1ccC(=O)ccc1S(=O)(=O)C(C)(C)(C),0,Gas,8.76,1
+138,sulfone_6_1,Sulfone (6),1,CC(C)(C)c1ccccc1S(=O)(=O)C(C)(C)(C),0,Gas,7.83,1
+139,sulfone_5_2,Sulfone (5),2,CC(C)(C)c1coc(C(C)(C)C)c1S(=O)(=O)C(C)(C)(C),0,Gas,18.44,2
+140,sulfone_5_1,Sulfone (5),1,CC(C)(C)c1cocc1S(=O)(=O)C(C)(C)(C),0,Gas,5.55,1
+141,amide_3,Amide,3,CC(C)(C)N(C(C)(C)C)C(=O)C(C)(C)C,0,Gas,19.39,2
+142,amide_2_opp,Amide,2,N(C(C)(C)C)C(=O)C(C)(C)C,0,Gas,19.06,2
+143,amide_2_same,Amide,2,CC(C)(C)N(C(C)(C)C)C(=O),0,Gas,13.9,2
+144,amide_1_CO,Amide,1,NC(=O)C(C)(C)C,0,Gas,15.02,2
+145,amide_0,Amide,0,NC(=O)C,0,Gas,16.36,2
+146,thioamide_3,Thioamide,3,CC(C)(C)N(C(C)(C)C)C(=S)C(C)(C)C,0,Gas,28.47,3
+147,thioamide_2_opp,Thioamide,2,N(C(C)(C)C)C(=S)C(C)(C)C,0,Gas,21.39,3
+148,thioamide_2_same,Thioamide,2,CC(C)(C)N(C(C)(C)C)C(=S),0,Gas,17.01,2
+149,thioamide_1_N,Thioamide,1,N(C(C)(C)C)C(=S),0,Gas,24.93,3
+150,thioamide_1_CO,Thioamide,1,NC(=S)C(C)(C)C,0,Gas,18.32,2
+151,thioamide_0,Thioamide,0,NC(=S)C,0,Gas,19.43,2
+152,aryl_aliphatic_77_4,Aryl-aliphatic (7-7),4,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)ccC(=O)cc2C(C)(C)C,0,Gas,23.03,3
+153,aryl_aliphatic_77_3_aliphatic,Aryl-aliphatic (7-7),3,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)ccC(=O)cc2,0,Gas,36.54,3
+154,aryl_aliphatic_77_2_aliphatic,Aryl-aliphatic (7-7),2,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2ccC(=O)ccc2,0,Gas,19.9,2
+155,aryl_aliphatic_77_0,Aryl-aliphatic (7-7),0,C1CCCCCC(C(C)(C)C)1c2cccC(=O)cc2,0,Gas,15.3,2
+156,aryl_aliphatic_76_3_aliphatic,Aryl-aliphatic (7-5),3,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)ccC(=O)cc2,0,Gas,48.03,3
+157,aryl_aliphatic_76_2_aryl,Aryl-aliphatic (7-5),2,C1CCCCC(C(C)(C)C)1c2c(C(C)(C)C)ccC(=O)cc2C(C)(C)C,0,Gas,17.33,2
+158,aryl_aliphatic_76_2_aliphatic,Aryl-aliphatic (7-5),2,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2cccC(=O)cc2,0,Gas,29.05,3
+159,aryl_aliphatic_76_1_aliphatic,Aryl-aliphatic (7-5),1,C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2cccC(=O)cc2,0,Gas,27.44,3
+160,aryl_aliphatic_76_0,Aryl-aliphatic (7-5),0,C1CCCCC(C(C)(C)C)1c2cccC(=O)cc2,0,Gas,16.41,2
+161,aryl_aliphatic_67_3_aliphatic,Aryl-aliphatic (6-7),3,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,72.26,3
+162,aryl_aliphatic_67_2_aliphatic,Aryl-aliphatic (6-7),2,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2ccccc2,0,Gas,15.73,2
+163,aryl_aliphatic_67_2_opp,Aryl-aliphatic (6-7),2,C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,10,2
+164,aryl_aliphatic_67_1_aliphatic,Aryl-aliphatic (6-6),1,CC(C)(C)C1CCCCC(C(C)(C)C)1c2ccccc2,0,Gas,10.52,2
+165,aryl_aliphatic_67_0,Aryl-aliphatic (6-7),0,C1CCCCCC(C(C)(C)C)1c2ccccc2,0,Gas,13.21,2
+166,aryl_aliphatic_57_3_aryl,Aryl-aliphatic (5-7),3,C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,45.49,3
+167,aryl_aliphatic_57_3_aliphatic,Aryl-aliphatic (5-7),3,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,31.33,3
+168,aryl_aliphatic_57_2_aliphatic,Aryl-aliphatic (5-7),2,CC(C)(C)C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2ccoc2,0,Gas,14.64,2
+169,aryl_aliphatic_57_2_opp,Aryl-aliphatic (5-7),2,C1CCCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,18.52,2
+170,aryl_aliphatic_57_1_aryl,Aryl-aliphatic (5-7),1,C1CCCCCC(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,14.22,2
+171,aryl_aliphatic_57_1_aliphatic,Aryl-aliphatic (5-7),1,CC(C)(C)C1CCCCCC(C(C)(C)C)1c2ccoc2,0,Gas,6.83,1
+172,aryl_aliphatic_57_0,Aryl-aliphatic (5-7),0,C1CCCCCC(C(C)(C)C)1c2ccoc2,0,Gas,10.37,2
+173,aryl_aliphatic_66_2_aliphatic,Aryl-aliphatic (6-6),2,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2ccccc2,0,Gas,22.91,3
+174,aryl_aliphatic_66_2_opp,Aryl-aliphatic (6-6),2,C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,43.73,3
+175,aryl_aliphatic_65_3_aryl,Aryl-aliphatic (6-5),3,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2C(C)(C)C,0,Gas,15.99,2
+176,aryl_aliphatic_65_3_aliphatic,Aryl-aliphatic (6-5),3,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,36.45,3
+177,aryl_aliphatic_65_2_aryl,Aryl-aliphatic (6-5),2,C1CCCC(C(C)(C)C)1c2c(C(C)(C)C)cccc2C(C)(C)C,0,Gas,27.09,3
+178,aryl_aliphatic_65_2_aliphatic,Aryl-aliphatic (6-5),2,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2ccccc2,0,Gas,15.05,2
+179,aryl_aliphatic_65_2_opp,Aryl-aliphatic (6-5),2,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)cccc2,0,Gas,20.63,3
+180,aryl_aliphatic_56_4,Aryl-aliphatic (5-6),4,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,66.49,3
+181,aryl_aliphatic_56_3_aliphatic,Aryl-aliphatic (5-6),3,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,49.66,3
+182,aryl_aliphatic_56_2_aryl,Aryl-aliphatic (5-6),2,C1CCCCC(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,20.86,3
+183,aryl_aliphatic_56_2_aliphatic,Aryl-aliphatic (5-6),2,CC(C)(C)C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2ccoc2,0,Gas,10.19,2
+184,aryl_aliphatic_56_2_opp,Aryl-aliphatic (5-6),2,C1CCCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,12.07,2
+185,aryl_aliphatic_55_3_aryl,Aryl-aliphatic (5-5),3,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,39.39,3
+186,aryl_aliphatic_55_3_aliphatic,Aryl-aliphatic (5-5),3,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,33.81,3
+187,aryl_aliphatic_55_2_aryl,Aryl-aliphatic (5-5),2,C1CCCC(C(C)(C)C)1c2c(C(C)(C)C)coc2C(C)(C)C,0,Gas,19.74,2
+188,aryl_aliphatic_55_2_aliphatic,Aryl-aliphatic (5-5),2,CC(C)(C)C1CCC(C(C)(C)C)C(C(C)(C)C)1c2ccoc2,0,Gas,17.27,2
+189,aryl_aliphatic_55_2_opp,Aryl-aliphatic (5-5),2,C1CCC(C(C)(C)C)C(C(C)(C)C)1c2c(C(C)(C)C)coc2,0,Gas,18.34,2

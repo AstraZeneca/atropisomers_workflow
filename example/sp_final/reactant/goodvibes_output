@@ -1,0 +1,21 @@
+   GoodVibes v3.2 2026/07/23 14:47:27
+   Citation: Luchini, G.; Alegre-Requena, J. V.; Funes-Ardoiz, I.; Paton, R. S. F1000Research, 2020, 9, 291.
+   GoodVibes version 3.2 DOI: 10.12688/f1000research.22758.1
+
+o  Requested: --qs Grimme -v 1.0 --temp 298.15 --spc sp 
+
+   Temperature = 298.15 Kelvin   Pressure = 1 atm
+   All energetic values below shown in Hartree unless otherwise specified.
+
+   User-defined vibrational scale factor 1.0 for BP86/def2SVP level of theory
+
+   Entropic quasi-harmonic treatment: frequency cut-off value of 100.0 wavenumbers will be applied.
+   QS = Grimme: Using a mixture of RRHO and Free-rotor vibrational entropies.
+   REF: Grimme, S. Chem. Eur. J. 2012, 18, 9955-9964
+
+   Combining final single point energy with thermal corrections.
+
+   Structure                                       E_SPC             E        ZPE         H_SPC        T.S     T.qh-S      G(T)_SPC   qh-G(T)_SPC
+   **********************************************************************************************************************************************
+o  g_opt_react                               -777.583486   -775.800292   0.191823   -777.377064   0.054880   0.053510   -777.431944   -777.430575
+   **********************************************************************************************************************************************

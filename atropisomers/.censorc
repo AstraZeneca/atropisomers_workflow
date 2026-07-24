@@ -1,0 +1,81 @@
+$CENSO global configuration file: .censorc
+$VERSION:1.2.0
+
+# xTB and CREST binaries
+GFN-xTB: /projects/cp/mirror/tools/programs/xtb/default/bin/xtb
+CREST: /projects/cp/mirror/tools/programs/crest/default/crest
+
+#COSMO-RS
+ctd = BP_TZVPD_FINE_C30_1601.ctd cdir = "/opt/scp/apps/system/software/COSMOtherm/25.0.0/COSMOtherm/CTDATA-FILES/OLDPARAM" ldir = "/opt/scp/apps/system/software/COSMOtherm/25.0.0/licensefiles"
+$ENDPROGRAMS
+
+$CRE SORTING SETTINGS:
+$GENERAL SETTINGS:
+nconf: all                       # ['all', 'number e.g. 10 up to all conformers'] 
+charge: 0                        # ['number e.g. 0'] 
+unpaired: 0                      # ['number e.g. 0'] 
+solvent: gas                     # ['gas', 'acetone', 'acetonitrile', 'aniline', 'benzaldehyde', 'benzene', 'ccl4', '...'] 
+prog_rrho: xtb                   # ['xtb'] 
+temperature: 298.15              # ['temperature in K e.g. 298.15'] 
+trange: [273.15, 378.15, 5]      # ['temperature range [start, end, step]'] 
+multitemp: off                   # ['on', 'off'] 
+evaluate_rrho: on                # ['on', 'off'] 
+consider_sym: on                 # ['on', 'off'] 
+bhess: on                        # ['on', 'off'] 
+imagthr: automatic               # ['automatic or e.g., -100    # in cm-1'] 
+sthr: automatic                  # ['automatic or e.g., 50     # in cm-1'] 
+scale: automatic                 # ['automatic or e.g., 1.0 '] 
+rmsdbias: off                    # ['on', 'off'] 
+sm_rrho: alpb                    # ['alpb', 'gbsa'] 
+progress: off                    # ['on', 'off'] 
+check: on                        # ['on', 'off'] 
+prog: tm                         # ['tm', 'orca'] 
+func: r2scan-3c                  # ['b3-lyp', 'b3lyp', 'b3lyp-3c', 'b3lyp-d3', 'b3lyp-d3(0)', 'b3lyp-d4', 'b3lyp-nl', '...'] 
+basis: automatic                 # ['automatic', 'def2-TZVP', 'def2-mSVP', 'def2-mSVP', 'def2-mSVP', 'def2-mSVP', '...'] 
+maxthreads: 8                    # ['number of threads e.g. 2'] 
+omp: 8                           # ['number cores per thread e.g. 4'] 
+balance: off                     # ['on', 'off'] 
+cosmorsparam: automatic          # ['automatic', '12-fine', '12-normal', '13-fine', '13-normal', '14-fine', '...'] 
+
+$PART0 - CHEAP-PRESCREENING - SETTINGS:
+part0: on                        # ['on', 'off'] 
+func0: b97-d                     # ['b3-lyp', 'b3lyp', 'b3lyp-3c', 'b3lyp-d3', 'b3lyp-d3(0)', 'b3lyp-d4', '...'] 
+basis0: def2-SV(P)               # ['automatic', 'def2-SV(P)', 'def2-TZVP', 'def2-mSVP', 'def2-mSVP', 'def2-mSVP', '...'] 
+part0_gfnv: gfn2                 # ['gfn1', 'gfn2', 'gfnff'] 
+part0_threshold: 5.0             # ['number e.g. 4.0'] 
+
+$PART1 - PRESCREENING - SETTINGS:
+# func and basis is set under GENERAL SETTINGS
+part1: on                        # ['on', 'off'] 
+smgsolv1: cosmors                # ['alpb_gsolv', 'cosmo', 'cosmors', 'cosmors-fine', 'cpcm', 'dcosmors', '...'] 
+part1_gfnv: gfn2                 # ['gfn1', 'gfn2', 'gfnff'] 
+part1_threshold: 4.0             # ['number e.g. 5.0'] 
+
+$PART2 - OPTIMIZATION - SETTINGS:
+# func and basis is set under GENERAL SETTINGS
+part2: on                        # ['on', 'off'] 
+prog2opt: tm                     # ['tm', 'orca', 'prog', 'automatic'] 
+part2_threshold: 3.0             # ['number e.g. 4.0'] 
+sm2: default                     # ['cosmo', 'cpcm', 'dcosmors', 'default', 'smd'] 
+smgsolv2: cosmors                # ['alpb_gsolv', 'cosmo', 'cosmors', 'cosmors-fine', 'cpcm', 'dcosmors', '...'] 
+part2_gfnv: gfn2                 # ['gfn1', 'gfn2', 'gfnff'] 
+ancopt: on                       # ['on'] 
+hlow: 0.01                       # ['lowest force constant in ANC generation, e.g. 0.01'] 
+opt_spearman: on                 # ['on', 'off'] 
+part2_P_threshold: 99            # ['Boltzmann sum threshold in %. e.g. 95 (between 1 and 100)'] 
+optlevel2: automatic             # ['crude', 'sloppy', 'loose', 'lax', 'normal', 'tight', 'vtight', 'extreme', '...'] 
+optcycles: 8                     # ['number e.g. 5 or 10'] 
+spearmanthr: -4.0                # ['value between -1 and 1, if outside set automatically'] 
+radsize: 10                      # ['number e.g. 8 or 10'] 
+crestcheck: off                  # ['on', 'off'] 
+
+$PART3 - REFINEMENT - SETTINGS:
+part3: off                       # ['on', 'off'] 
+prog3: tm                        # ['tm', 'orca', 'prog'] 
+func3: pw6b95-d4                 # ['b3-lyp', 'b3lyp', 'b3lyp-3c', 'b3lyp-d3', 'b3lyp-d3(0)', 'b3lyp-d4', 'b3lyp-nl', '...'] 
+basis3: def2-TZVPD               # ['DZ', 'QZV', 'QZVP', 'QZVPP', 'SV(P)', 'SVP', 'TZVP', 'TZVPP', 'aug-cc-pV5Z', '...'] 
+smgsolv3: cosmors                # ['alpb_gsolv', 'cosmo', 'cosmors', 'cosmors-fine', 'cpcm', 'dcosmors', '...'] 
+part3_gfnv: gfn2                 # ['gfn1', 'gfn2', 'gfnff'] 
+part3_threshold: 99              # ['Boltzmann sum threshold in %. e.g. 95 (between 1 and 100)'] 
+
+$END CENSORC

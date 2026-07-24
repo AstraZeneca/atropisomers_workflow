@@ -1,0 +1,3 @@
+index,file_idx,mol,confs,exported_confs,stable_xyz,substructure,E (hartree),E_SP (hartree),G_SP (hartree),QH_G_SP (hartree),ΔG activation (kcal/mol),ΔG activation_r (kcal/mol),crest_exists,crest_equivalent,censo_part1_exists,censo_part1_equivalent,censo_part2_exists,censo_part2_equivalent,Class
+1,reactant,<rdkit.Chem.rdchem.Mol object at 0x7f7579b6e880>,,[],,reactant,-775.800292,-777.583486,-777.431944,-777.430575,,,,,,,,,
+2,ts 8_9,,,[],,Biaryl (6-6),-775.751004,-777.527507,-777.373925,-777.373256,35.97,36.71,,,,,,,3.0

@@ -1,0 +1,84 @@
+2026-07-23 12:55:10  | reactant_cen | export       | Exported 20 molecule conformers to /path/to/
+                     | so           |              | atropisomers_workflow/example  
+2026-07-23 12:55:10  | reactant_cen | xtb_react    | 1 job(s) added with 20 conformers.                          
+                     | so           |              |                                                             
+2026-07-23 12:55:52  | reactant_cen | xtb_react    | All jobs done.                                              
+                     | so           |              |                                                             
+2026-07-23 12:55:52  | ALL          | xtb_react    | All jobs done.                                              
+2026-07-23 12:55:53  | reactant_cen | xtb_react    | Lowest energy xTB conformer: /path/to/atropisomers_workflow/
+                     | so           |              | example/reactant_censo/xtb/2/
+                     |              |              | xtbopt.xyz                                                  
+2026-07-23 12:55:53  | reactant_cen | crest_react  | 1 job(s) added.                                             
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | reactant_cen | crest_react  | All jobs done.                                              
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | ALL          | crest_react  | All jobs done.                                              
+2026-07-23 12:57:40  | reactant_cen | crest        | Connectivity ok.                                            
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | reactant_cen | elim_react   | Number of conformers acceptable - no elimination performed. 
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | reactant_cen | elim_react   | All jobs done.                                              
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | ALL          | elim_react   | All jobs done.                                              
+2026-07-23 12:57:40  | reactant_cen | censo_react  | Running CENSO job from crest_conformers.xyz.                
+                     | so           |              |                                                             
+2026-07-23 12:57:40  | reactant_cen | censo_react  | 1 job(s) added.                                             
+                     | so           |              |                                                             
+2026-07-23 13:18:54  | reactant_cen | censo_react  | All jobs done.                                              
+                     | so           |              |                                                             
+2026-07-23 13:18:54  | ALL          | censo_react  | All jobs done.                                              
+2026-07-23 13:18:54  | reactant_cen | censo_part1  | Connectivity ok.                                            
+                     | so           |              |                                                             
+2026-07-23 13:18:54  | reactant_cen | censo_part2  | Connectivity ok.                                            
+                     | so           |              |                                                             
+2026-07-23 13:18:54  | ALL          | ALL          | Removed temporary job directory.                            
+2026-07-23 13:18:54  |              | g_opt_react  | g_opt_react written successfully.                           
+2026-07-23 13:18:54  | reactant_gau | g_opt_react  | 1 job(s) added.                                             
+                     | ssian        |              |                                                             
+2026-07-23 13:18:54  |              | g_scan       | g_scan_gic(s) written successfully.                         
+2026-07-23 13:18:54  | 8_9          | g_scan       | 2 job(s) added.                                             
+2026-07-23 13:29:45  | ALL          | g_opt_react  | All jobs done.                                              
+2026-07-23 14:18:57  | ALL          | g_scan       | All jobs done.                                              
+2026-07-23 14:18:57  | 8_9          | g_opt_ts_fro | 3 job(s) added.                                             
+                     |              | zen          |                                                             
+2026-07-23 14:22:51  | ALL          | g_opt_frozen | All jobs done.                                              
+2026-07-23 14:22:51  | 8_9          | g_opt_ts     | 3 job(s) added.                                             
+2026-07-23 14:32:41  | ALL          | g_opt_ts     | All jobs done.                                              
+2026-07-23 14:32:41  | 8_9          | crest_ts_xco | 1 job(s) added.                                             
+                     |              | ntrol        |                                                             
+2026-07-23 14:33:23  | 8_9          | crest_ts     | 1 job(s) added.                                             
+2026-07-23 14:35:09  | ALL          | crest_ts     | All jobs done.                                              
+2026-07-23 14:35:09  | 8_9          | elim_ts      | Number of conformers acceptable - no elimination performed. 
+2026-07-23 14:35:09  | 8_9          | elim_ts      | All jobs done.                                              
+2026-07-23 14:35:09  | ALL          | elim_ts      | All jobs done.                                              
+2026-07-23 14:35:09  | 8_9          | g_sp_ts_conf | Running CENSO job from crest_conformers.xyz.                
+                     |              | s            |                                                             
+2026-07-23 14:35:09  | 8_9          | g_sp_ts_conf | 2 job(s) added.                                             
+                     |              | s            |                                                             
+2026-07-23 14:36:23  | ALL          | g_sp_ts_conf | All jobs done.                                              
+                     |              | s            |                                                             
+2026-07-23 14:36:23  | 8_9          | g_opt_ts_con | 2 job(s) added.                                             
+                     |              | fs_frozen    |                                                             
+2026-07-23 14:41:53  | ALL          | g_opt_ts_con | All jobs done.                                              
+                     |              | fs           |                                                             
+2026-07-23 14:41:53  | 8_9          | g_opt_ts_con | No TS conformers within 0.002 Hartree of the scan TS,       
+                     |              | fs           | skipping.                                                   
+2026-07-23 14:41:53  | 8_9          | g_opt_ts_con | Output exists, skipping.                                    
+                     |              | fs           |                                                             
+2026-07-23 14:41:53  | ALL          | g_opt_ts_con | All jobs done.                                              
+                     |              | fs           |                                                             
+2026-07-23 14:41:53  | 8_9          | Final        | Lowest energy TS at /path/to/atropisomers_workflow/
+                     |              | conformers   | example/8_9/opt_ts/plus1              
+2026-07-23 14:41:53  | reactant_gau | Final        | Lowest energy reactant at reactant_gaussian                 
+                     | ssian        | conformers   |                                                             
+2026-07-23 14:41:53  | ALL          | Final        | All final structures identified.                            
+                     |              | conformers   |                                                             
+2026-07-23 14:41:54  | reactant_gau | g_sp_final   | 1 job(s) added.                                             
+                     | ssian        |              |                                                             
+2026-07-23 14:41:54  | 8_9          | g_sp_final   | 1 job(s) added.                                             
+2026-07-23 14:47:24  | ALL          | g_sp_final   | All jobs done.                                              
+2026-07-23 14:47:24  | reactant_gau | goodvibes    | Running Goodvibes on g_opt_react.log                        
+                     | ssian        |              |                                                             
+2026-07-23 14:47:24  | 8_9          | goodvibes    | Running Goodvibes on g_opt_ts.log                           
+2026-07-23 14:47:27  | ALL          | goodvibes    | All jobs done.                                              
+2026-07-23 14:47:27  | ALL          | ALL          | All jobs done.                                              

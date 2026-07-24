@@ -1,7 +1,14 @@
+CairoSVG==2.7.1
 goodvibes==3.2
 ipykernel==6.29.5
+ipywidgets==8.1.0
+jupyterlab==2.2.5
 matplotlib==3.9.2
 nbformat==5.9.2
+numexpr==2.10.2
 numpy==1.26.4
+pandas==2.3.1
 plotly==5.24.1
 rdkit==2024.3.2
+spyrmsd==0.8.0
+tqdm==4.65.0

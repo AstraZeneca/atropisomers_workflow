@@ -1,0 +1,69 @@
+Index,Substructure,SMILES,Charge,Literature barrier (kcal/mol),Literature class,Computation solvent,Computed barrier (kcal/mol),Computed class,QRNN-TB/DFT barrier (kcal/mol),QRNN-TB/DFT class
+V185105,Benzamide (6),CCN(CC)C(=O)c1ccccc1C=O,0,13.5,1,Gas,12.85,1,11.5,1
+V185103,Benzamide (6),CCc1ccccc1C(=O)N(CC)CC,0,14.2,1,Gas,12.99,1,15.8,1
+V185106,Benzamide (6),CCN(CC)C(=O)c1cccc2ccccc12,0,15.1,1,Gas,13.66,1,14.3,1
+V185128,Reverse benzamide (6),Cc1ccccc1N(Cc1ccccc1)C(=O)Nc1ccccc1,0,15.1,1,Gas,17.01,1,12.2,1
+V185107,Benzamide (6),O=C(c1cccc2ccccc12)N(Cc1ccccc1)Cc1ccccc1,0,15.3,1,Gas,14.03,1,14,1
+V185104,Benzamide (6),CCN(CC)C(=O)c1ccccc1C(C)C,0,15.6,1,Gas,16.02,1,16.3,1
+V185129,Amide,CC(C)(C)c1ccccc1N(Cc1ccccc1)C(=O)Nc1ccccc1,0,16.7,1,Gas,17.3,1,19,1
+V185098,Amide,COC(=O)Cc1c(C)n(C(=O)c2c(Cl)cc(Cl)cc2Cl)c2ccc(OC)cc12,0,17,1,Gas,17.58,1,17.5,1
+V185210,Biaryl (6-5),C=CC(=O)N1CCN(c2nc(=O)n(-c3scnc3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,17.5,1,Gas,17.5,1,18.7,1
+V185101,Amide,CC(C)N(C(=O)c1cccc2ccccc12)C(C)C,0,17.9,1,Gas,17.47,1,18.9,1
+V185209,Biaryl (6-5),C=CC(=O)N1CCN(c2nc(=O)n(-c3ccnn3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,21.5,2,Gas,18.47,1,17.8,1
+V185102,Benzamide (6),CC(C)N(C(=O)c1c(C=O)ccc2ccccc12)C(C)C,0,21.6,2,Gas,23.66,2,23.4,2
+V185223,Biaryl (6-6),O=c1c2c(n(-c3cccc(Cl)c3)c3ncccc13)CCCC2,0,21.6,2,Gas,19.5,1,19.8,1
+V185228,Reverse thiobenzamide (6),CC1(C)SC(=S)N(c2ccccc2F)C1=O,0,21.7,2,Gas,20.77,2,22.9,2
+V185231,Biaryl (6-6),COc1c(C)n(-c2ccccc2C#N)ccc1=O,0,22.3,2,Gas,18.75,1,20,2
+V185127,Reverse benzamide (6),COc1ccc(C(=O)Nc2ccc(Oc3ccc(N(C(=O)[C@H]4CC[C@H](C)CC4)C(C)C)c(C(=O)O)c3)cc2)cc1,0,22.6,2,Gas,24.23,2,16.5,1
+V185232,Biaryl (6-6),COc1ccccc1-n1ccc(=O)c(OC)c1C,0,22.6,2,Gas,23.01,2,23.6,2
+VIR2438420,Biaryl (6-6),Cc1c(-c2ccc(C(N)=O)c3[nH]c4c(c23)CC[C@H](C(C)(C)O)C4)cccc1-n1cnc2ccccc2c1=O,0,23.2,2,Gas,25.67,2,23.2,2
+LIT-0044629,Biaryl (6-6),COc1cccc(-c2c(C)n(Cc3c(F)cccc3C(F)(F)F)c(=O)n(C[C@H](NCCCC(=O)O)c3ccccc3)c2=O)c1F,0,23.3,2,Gas,20.83,2,23.2,2
+V185208,Reverse benzamide (6),C=CC(=O)N1CCN([C]2[N]C(=O)N(c3ncccc3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc32)[C@@H](C)C1,0,23.5,2,Gas,16.27,1,27.7,2
+V185100_C-N,Amide,CO/N=C(\c1ccccc1)C1CCN(C2(C)CCN(C(=O)c3c(C)cc[n+]([O-])c3C)CC2)CC1,0,23.7,2,Gas,25.49,2,23,2
+V185100_C-C,Benzamide (6),CO/N=C(\c1ccccc1)C1CCN(C2(C)CCN(C(=O)c3c(C)cc[n+]([O-])c3C)CC2)CC1,0,24.5,2,Gas,25.49,2,22.9,2
+V185225,Biaryl (6-6),O=c1ccccn1-c1ccccc1C(O)(c1ccccc1)c1ccccc1,0,24.7,2,Gas,26.26,2,24.9,2
+V185204,Biaryl (6-6),C=CC(=O)N1CCN(c2nc(=O)n(-c3ccccc3C3CC3)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,25,2,Gas,22.78,2,26.5,2
+LIT-0043949_C-N,Amide,CC(C)Cn1c(=O)n(C)c(=O)c2c(C(=O)N3CC[C@@H](O)C3)c(Cc3ccnc4ccc(F)cc34)sc21,0,23.4,2,Gas,25.82,2,19.3,2
+LIT-0043949_C-C,Benzamide (5),CC(C)Cn1c(=O)n(C)c(=O)c2c(C(=O)N3CC[C@@H](O)C3)c(Cc3ccnc4ccc(F)cc34)sc21,0,25.1,2,Gas,27.81,2,26.6,2
+V185211,Biaryl (6-5),C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)cnn3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,25.8,2,Gas,23.16,2,25.1,2
+V185199,Biaryl (6-6),C=CC(=O)N1CCN(c2nc(=O)n(-c3ccccc3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,26,2,Gas,26.31,2,25.7,2
+V185222,Biaryl (6-5),Cc1[nH]c2ccccc2c1-c1c(O)ccc2ccccc12,0,26,2,Gas,32.55,3,30.6,3
+V185229,Aryl-aliphatic (6-6),CO[C]1[C](C)N(c2ccccc2Cl)C=CC1=O,0,26.2,2,Gas,26.36,2,26.5,2
+V185224,Biaryl (6-6),CC(C)(O)c1ccccc1-n1ccccc1=O,0,26.3,2,Gas,26.31,2,25.7,2
+V187501,Reverse benzamide (6),CC(C)c1cccc([C@@H](C)O)c1N(C)C(=O)Nc1ccccc1,0,26.5,2,Gas,29.4,2,22.3,2
+V185230,Aryl-aliphatic (6-6),CO[C]1[C](C)N(c2ccccc2C)C=CC1=O,0,26.6,2,Gas,26.82,2,26.4,2
+V185202,Biaryl (6-5),COc1ccc(Cl)c(-c2c3c(n(C4CCCC4)c2Cl)[N]C=N[C]3N)c1,0,27.2,2,Gas,27.48,2,28.2,2
+LIT-0039777_C-N,Amide,Cc1c(-c2c(F)cc(C(N)=O)c3[nH]c4c(c23)CC[C@H](C(C)(C)O)C4)cccc1-n1c(=O)c2cccc(F)c2n(C)c1=O,0,>27.4,2,Gas,27.59,2,31.4,3
+LIT-0039777_C-C,Biaryl (6-6),Cc1c(-c2c(F)cc(C(N)=O)c3[nH]c4c(c23)CC[C@H](C(C)(C)O)C4)cccc1-n1c(=O)c2cccc(F)c2n(C)c1=O,0,>35,3,Gas,31.59,3,28.8,2
+V185239,Biaryl (6-6),Cc1cc(C)n(-c2ccccc2C)c(=O)n1,0,27.9,2,Gas,26.39,2,27.7,2
+V185214,Biaryl (6-6),Clc1ncnc(Sc2ccccc2)c1-c1ccccc1OCc1ccccc1,0,28,2,Gas,28.59,2,28.1,2
+V185219,Biaryl (6-5),CC(C)n1c(Cl)c(-c2cccc3ccccc23)c2c1[N]C=N[C]2N,0,28,2,Gas,32.62,3,29.1,2
+V185237,Reverse benzamide (6),Cc1cccc(C(=O)O)c1N1C(=O)C[C@H](c2ccccc2)C1=O,0,28,2,Gas,27.68,2,24.3,2
+V185097,Amide,COc1ccc(-c2cccc3ccc(OCc4ccccc4)c(C(=O)N(C(C)C)C(C)C)c23)cc1,0,28.7,2,Gas,28.71,2,31.4,3
+V185125,Reverse benzamide (6),CCC(=O)N(C)c1ccccc1C(C)(C)C,0,28.9,2,Gas,30.16,3,28.2,2
+V65335,Biaryl (6-5),Cn1ncc(-c2ccc3c(=O)[nH]nc(CN)c3c2)c1-c1c(F)c(Cl)cc(OC2CC2)c1C#N,0,28.9,2,Gas,29.07,2,28.5,2
+V185242,Reverse thiobenzamide (6),CC1(C)SC(=S)N(c2ccccc2Cl)C1=O,0,29,2,Gas,26.67,2,29.8,2
+V185241,Biaryl (6-5),Cc1ccccc1-n1c(C)csc1=O,0,29.2,2,Gas,28.22,2,29.7,2
+V185226,Biaryl (6-6),CC(C)(C)c1ccccc1-n1ccccc1=O,0,29.9,2,Gas,27.33,2,29.6,2
+V185205,Biaryl (6-6),C=CC(=O)N1CCN(c2nc(=O)n(-c3ccccc3C(C)(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,>30,3,Gas,34.27,3,37.1,3
+V185206,Biaryl (6-6),C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)cccc3C(C)C)c3nc(-c4c(O)cccc4F)c(Cl)cc23)[C@@H](C)C1,0,>30,3,Gas,38.51,3,37.3,3
+V185234,Reverse benzamide (6),C=CCc1cccc(C)c1N1C=CCCC1=O,0,30.2,3,Gas,28.03,2,29.3,3
+V185200,Reverse benzamide (6),Cc1cc(Oc2ccccc2)ccc1N1C(=O)Nc2c(C(=O)N[C@@H]3CCCN(C)C3)sc3nccc1c23,0,30.3,3,Gas,28.86,2,30.1,3
+V185236,Reverse benzamide (6),CC(C)(C)c1ccc(C(C)(C)C)c(N2C(=O)NCc3ccccc32)c1,0,30.7,3,Gas,28.71,2,29.3,2
+V185201,Biaryl (6-5),Cc1c(C2(C(F)(F)F)CC2)nc(C2CC2)n1-c1c(Cl)ccc(N2CC3(CC(C(=O)O)C3)C2)c1Cl,0,>31,3,Gas,50.67,3,62.5,3
+V185218,Biaryl (6-5),CC(C)n1c(Cl)c(-c2ccccc2C(F)(F)F)c2c1[N]C=N[C]2N,0,31,3,Gas,30.64,3,31.8,3
+V82596,Biaryl (6-6),C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)ccnc3C(C)C)c3nc(-c4c(O)cccc4F)c(F)cc23)[C@@H](C)C1,0,>31,3,Gas,34.67,3,34.5,3
+V185220,Biaryl (6-5),CCc1nnc(-c2ccc(-c3ccccc3)nc2)n1-c1cccc(C#N)c1C,0,31.2,3,Gas,32.16,3,31.5,3
+V185096,Benzamide (6),CC(C)N(C(=O)c1c(OCc2ccccc2)ccc2ccc3ccccc3c12)C(C)C,0,31.3,3,Gas,33.24,3,31.9,3
+V185221,Biaryl (6-6),COc1cc(-c2cccc(F)c2)c(F)cc1-n1c(=O)ccc2cc(S(=O)(=O)Nc3ccon3)ccc21,0,31.6,3,Gas,30.16,3,28.9,2
+V185240,Biaryl (6-6),C[C@H](NC(=O)OC(C)(C)C)c1nc2ccccc2c(=O)n1-c1cccnc1Cl,0,31.6,3,Gas,29.05,2,31.6,3
+V185215,Biaryl (6-6),Cc1cc(Oc2nccc3occc23)ccc1-c1c(C)ncc2nccn12,0,31.8,3,Gas,34.1,3,36.5,3
+V185213,Aryl-aliphatic (6-6),COc1ccc2ccccc2c1C1=C(OCc2ccccc2)CCc2ccccc21,0,32,3,Gas,30.21,3,32,3
+V185233,Biaryl (6-6),COc1c(C)n(-c2c(C)cccc2Cl)ccc1=O,0,>32,3,Gas,43.61,3,42.2,3
+V185216,Biaryl (6-5),CC(C)n1c(Cl)c(-c2ccccc2C(F)(F)F)c2c1[N]C=N[C]2Cl,0,33,3,Gas,32.95,3,34.2,3
+V185217,Biaryl (6-5),CC(C)n1c(Cl)c(-c2ccccc2C(F)(F)F)c2c1[N]C=N[C]2Sc1ccccc1,0,33,3,Gas,31.58,3,33.8,3
+V185235,Reverse benzamide (6),CC(C)(C)c1ccc(C(C)(C)C)c(N2C(=O)CCc3ccccc32)c1,0,33.1,3,Gas,30.39,3,31.7,3
+V185238,Reverse benzamide (6),Cc1ccc2cccnc2c1N1C(=O)C[C@H](c2ccccc2)C1=O,0,33.2,3,Gas,30.2,3,31.3,3
+LIT-0042570,Biaryl (6-5),Cc1nc2c(-c3nnc[nH]3)cc(-c3ccnc(C#N)c3)cc2n1-c1ccnc2c(F)ccc(F)c12,0,35,3,Gas,34.58,3,34.5,3
+V185203,Aryl-aliphatic (5-6),COC1=C[C](C)[C](n2c3ccccc3c3cc(C)cc(OC)c32)c2c1[nH]c1ccccc21,0,>38.2,3,Gas,49.5,3,58.1,3
+V185212,Biaryl (6-5),CC(C)(C)c1[nH]c2ccccc2c1-c1c(O)ccc2ccccc12,0,38.3,3,Gas,43.23,3,42.8,3

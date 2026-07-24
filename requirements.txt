@@ -11,4 +11,4 @@ pandas==2.3.1
 plotly==5.24.1
 rdkit==2024.3.2
 spyrmsd==0.8.0
-tqdm==4.65.0
+tqdm==4.66.3
